@@ -1,0 +1,103 @@
+<div class="pag-container">
+  <div class="container transformY  bordere roundede border-2e w-sm">
+    <div class="flex js mt-2">
+      <div class="title  pt-3">Les journales</div>
+      <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div>
+    </div>
+    <form action="" class="selectIns mt-3">
+      <div class="row mt-4 ">
+        <div class="col-6 col-md-3">
+        <select [(ngModel)]="textRechercheType" name="textRechercheType" class="form-select">
+          <option value="">-- Choisir type --</option>
+          <option value="Débit">Débit</option>
+          <option value="Crédit">Crédit</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3">
+          <select  [(ngModel)]="textRechercheCompte" name="textRechercheCompte"  class="form-select"   >
+            <option value="">-- Choisir le Compte --</option>
+            <option value={{comptes.id}} *ngFor="let comptes of compte">{{comptes.nomCompte}}</option>
+            </select>
+          </div>
+        </div>
+    </form>
+
+
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="me-2 flex js mt-4">
+
+              <nav aria-label="...">
+                <ul class="pagination pagination-md-lg">
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">1</span>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                </ul>
+              </nav>
+                <!-- <button type="search" class="ms-4 btn">Imprimer</button> -->
+                <form action="" class="row g-3">
+
+                  <div class="col-12 col-md-12">
+                    <div class="form-group flex">
+                      <div class="title ms-5  mt-2 d-none d-md-block">Rechercher</div>
+                      <input [(ngModel)]="textRecherche" name="textRecherche" type="search" class="form-control ms-2" placeholder="Search"
+                      style="border-radius: 15px;"
+                      >
+
+                    </div>
+                   </div>
+                </form>
+            </div>
+
+            <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+            <div class="table-responsive text-center">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Date et Heure</th>
+                        <th scope="col">Evenement</th>
+                        <th class="text-success" scope="col">Compte</th>
+                        <th scope="col">Montant</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let journals of journalList | filtreJournal:textRecherche:textRechercheCompte:textRechercheType; let i = index">
+                          <td >{{i+1}}</td>
+                          <td style="text-align: left;">{{journals.date}}</td>
+                          <td style="text-align: left;">{{journals.evenement}}</td>
+                          <td >{{journals.nomCompte}}</td>
+                          <td class="text-danger" style="min-width: 8rem;">{{journals.montant | number:'1.2-2'}} FG</td>
+                      </tr>
+                    </tbody>
+                </table>
+                <nav>
+                  <ul class="pagination justify-content-center">
+                      <li class="page-item disabled">
+                          <a class="page-link" style="background-color: #fff;">&laquo;</a>
+                      </li>
+                      <li class="page-item" style="background-color: #2ecc71;">
+                          <a class="page-link" style="background-color: #fff;">1</a>
+                      </li>
+                      <li class="page-item active" style="background-color: #2ecc71;">
+                          <a class="page-link" style="background-color: #2ecc71;">2</a>
+                      </li>
+                      <li class="page-item" style="background-color: #fff;">
+                          <a class="page-link" style="background-color: #fff;">3</a>
+                      </li>
+                      <li class="page-item">
+                          <a class="page-link" style="background-color: #fff;">&raquo;</a>
+                      </li>
+                  </ul>
+              </nav>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+

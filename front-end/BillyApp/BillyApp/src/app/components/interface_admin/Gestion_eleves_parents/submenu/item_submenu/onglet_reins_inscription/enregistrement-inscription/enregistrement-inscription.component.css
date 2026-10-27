@@ -1,0 +1,137 @@
+
+
+.profil-reinscriptionF img{
+  border-radius: 10px;
+  width: 75px;
+  height: 75px;
+  border: 0.1px solid #27ae60;
+  margin-left: 4rem;
+}
+
+.fichierImage_mTop{
+
+  width: 24rem;
+}
+
+input, select {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.btn-danger{
+  background-color: #FF3877 !important;
+  border-color: none;
+  transition: background-color 0.1s ease;
+    border: none !important;
+
+}
+
+.btn-danger:hover{
+  background-color: #e61759 !important;
+}
+
+.btn-success{
+  background-color: #2ecc71 !important;
+  border-color: none;
+  transition: background-color 0.3s ease;
+
+    border: none !important;
+}
+
+.btn-success:hover{
+ background-color: #0ebb56 !important;
+}
+
+
+.btn1, .btn2{
+  width: 50px;
+  height: 40px;
+  border-radius: 35px;
+  /* background: linear-gradient( #FF3877 50%, #2ecc71 ); */
+  border: none;
+  background-color: #fff;
+  /* background: linear-gradient(135deg,  #2ecc71, #2ecc71); */
+  border: 1px solid #2ecc71;
+  color: #111;
+  font-weight: 600;
+  transition: 0.5s;
+  /* opacity: 0.5; */
+  font-size: 0.9em;
+  transition: backgroud 0.3s ease;
+}
+.btn1:hover {
+    /* background: #08c758; */
+    background: #2ecc71;
+    color: #fff;
+}
+.btn2{
+
+  color: red;
+
+}
+.btn2:hover {
+    background: #FF3877;
+    color: #fff;
+    border: none;
+}
+.title , strong, input, select, .selectIns, span , .btn{
+  font-size: 0.95em;
+}
+.rotate-icon {
+  transition: transform 0.3s ease;
+}
+
+.collapse.show + .btn .rotate-icon {
+  transform: rotate(180deg);
+}
+
+
+
+@media (max-width: 768px) {
+    input, select{
+      margin-top: 1rem;
+      padding: 9px;
+      width: 100%;
+    }
+    .mt-sm-2{
+      margin-top: 1rem;
+    }
+    .mt-sm-2 .btn{
+      /* border-radius: 36px; */
+    }
+   .selectIns input, select{
+      margin-top: 1rem;
+      padding: 9px;
+      width: 100%;
+    }
+
+    .col-md-1 .btn{
+      margin-top: 1rem;
+    }
+    .form-control:focus{
+      /* border-color: #FF3877;  */
+      /* outline: none; */
+
+    }
+    .title , strong, input, select, span{
+      /* font-size: 1em; */
+    }
+    .btn1, .btn2{
+      width: 40px;
+      height: 35px;
+      font-size: 0.8em;
+      line-height: 1;
+    }
+    .profil-reinscriptionF img{
+      width: 45px;
+      height: 45px;
+      margin-top: 0;
+      margin-left: 0px;
+    }
+    .fichierImage_mTop{
+
+      width: 28.5rem;
+    }
+
+
+}

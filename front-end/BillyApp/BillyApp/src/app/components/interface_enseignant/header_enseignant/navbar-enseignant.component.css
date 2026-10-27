@@ -1,0 +1,239 @@
+body{
+    font-family: Montserrat;
+}
+header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 75px;
+    padding: 0 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    /* background: linear-gradient(135deg, #ff6347, #ffd700, #90ee90); */
+}
+.img-logo {
+    display: flex;
+    align-items: center; /* Centre verticalement */
+    gap: 15px; /* Espace entre logo et texte */
+  }
+.img-logo .message-souhait img{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 0.1px solid #27ae60;
+}
+.message-souhait span{
+    margin: 5px;
+}
+  .img-logo .menu-bar{
+    padding: 2px;
+    /* background: linear-gradient(135deg, #ff4500, #ffa500, #008000); */
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.1s;
+    display: none;
+
+}
+.img-logo .menu-bar:hover{
+    border-radius: 30%;
+}
+/* .img-logo .message-souhait span{
+    margin: 10px;
+} */
+ .nav-bar ul{
+    display: flex;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    align-items: center;
+
+}
+
+.nav-bar li {
+    display: inline-block;
+  }
+nav a{
+   text-decoration: none;
+   /* margin: 10px; */
+   padding: 10px 15px;
+   color: white;
+   font-weight: 600;
+   font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+   /* transition: 0.1s ease;  */
+   text-align: center;
+   border-radius: 30px;
+}
+
+.active-link{
+    background-color:#27ae60;
+    transform: scale(1.07);
+    font-weight: bold;
+}
+
+nav a:hover{
+    background-color:#27ae60;
+    transform: scale(1.07);
+}
+
+/* .btn{
+    padding: 10px 7px;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background: linear-gradient(135deg,  #FFD700, #FF6347, #008000);
+    cursor: pointer;
+} */
+ /* .btn{
+    width: 105px;
+        height: 40px;
+        border-radius: 25px;
+        border: none;
+        color: #fff;
+        background-color: #FF3877;
+        font-weight: 600;
+        line-height: 1;
+        font-size: 0.8rem;
+ }
+ .btn:hover {
+
+    background: #ed195c;
+    transform: scale(1.05);
+  } */
+  .btn-outline-success:hover {
+    background-color: #db1d5a !important;
+    /* border-color: #FF3877 !important; */
+    color: #fff !important;
+  }
+
+/* Respnsive mobile */
+@media screen and (max-width: 1370px) {
+    header .nav-bar ul{
+        display: none;
+    }
+    .img-logo .menu-bar{
+        display: block;
+    }
+    .img-logo {
+        gap:50px
+    }
+}
+@media screen and (max-width: 1150px) {
+    header .nav-bar ul{
+        display: none;
+    }
+    .img-logo .menu-bar{
+        /* display: block; */
+    }
+    .img-logo {
+        gap:50px
+    }
+}
+@media screen and (max-width: 1200px) {
+    header .nav-bar ul{
+        /* display: none; */
+    }
+    .img-logo .menu-bar{
+        /* display: block; */
+    }
+    .img-logo {
+        gap:50px
+    }
+}
+@media screen and (max-width: 1100px) {
+    header .nav-bar ul{
+        /* display: none; */
+    }
+    .img-logo .menu-bar{
+        /* display: block; */
+    }
+    .img-logo {
+        gap:50px
+    }
+}
+@media screen and (max-width: 1080px) {
+    header .nav-bar ul{
+        /* display: none; */
+    }
+    .img-logo .menu-bar{
+        /* display: block; */
+    }
+    .img-logo {
+        gap:50px
+    }
+}
+@media screen and (max-width: 990px) {
+    header .nav-bar ul{
+        /* display: none; */
+    }
+    .img-logo .menu-bar{
+        /* display: block; */
+    }
+    .btn{
+        font-size: 8px;
+        font-weight: bold;
+        /* text-transform: uppercase; */
+    }
+     .img-logo {
+        gap:20px
+    }
+}
+@media screen and (max-width: 896px) {
+    header .nav-bar ul{
+        /* display: none; */
+    }
+    .img-logo .menu-bar{
+        /* display: block; */
+    }
+    .img-logo .message-souhait span{
+        /* display: none; */
+    }
+    .btn{
+        font-size: 0.8rem;
+        font-weight: bold;
+        /* text-transform: uppercase; */
+    }
+     .img-logo {
+        gap:20px
+    }
+}
+@media screen and (max-width: 500px) {
+    header .nav-bar ul{
+        display: none;
+    }
+    .img-logo .menu-bar{
+        display: block;
+    }
+    .img-logo .message-souhait span{
+        display: none;
+        /* font-size: 0.5rem; */
+    }
+    .menu-bar img{
+        /* width: 30px; */
+        /* height: 30px; */
+    }
+    .img-logo .message-souhait img{
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        border: 0.1px solid #27ae60;
+    }
+
+    .btn{
+        /* padding: 3px 2px; */
+        /* font-size: 0.5rem; */
+        font-weight: bold;
+        /* width: 70px; */
+        /* height: 30px; */
+    }
+     .img-logo {
+        gap:20px
+    }
+}

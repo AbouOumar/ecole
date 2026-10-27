@@ -1,0 +1,177 @@
+<div class="pag-container">
+  <div class="container">
+    <div class="flex js mt-3">
+      <h3 class="text-rouge">Année Scolaire</h3>
+      <button class="btn btn-outline-success"
+        type="button" data-bs-toggle="collapse" data-bs-target="#formAjoutDepenses"
+        aria-expanded="false" aria-controls="formAjoutDepenses"
+      >
+      <i class="fa fa-arrow-down rotate-icon"></i>
+      </button>
+    </div>
+    <form [formGroup]="AnneeScolaireForm" (ngSubmit)="onSubmit()">
+      <div class="collapse" id="formAjoutDepenses">
+        <div class="row">
+          <div class="col-12 col-md-12">
+            <label for="dateDebut" class="text-medut d-none d-md-block">Date début</label>
+            <input formControlName="dateDebut"   type="date" id="dateDebut" class="form-control" placeholder="Entre le libellé">
+            <small class="text-danger" *ngIf="AnneeScolaireForm.controls['dateDebut'].invalid && AnneeScolaireForm.controls['dateDebut'].touched">
+              La date du debut est obligatoire.
+            </small>
+          </div>
+          <div class="col-12 col-md-12">
+            <label for="DateFin" class="text-medut d-none d-md-block">Date fin</label>
+            <input formControlName="DateFin"   type="date" id="DateFin" class="form-control" placeholder="Entre le libellé">
+            <small class="text-danger" *ngIf="AnneeScolaireForm.controls['DateFin'].invalid && AnneeScolaireForm.controls['DateFin'].touched">
+              La date de fin est obligatoire.
+            </small>
+            <small class="text-danger" *ngIf="AnneeScolaireForm.errors?.['dureeMinimale'] && AnneeScolaireForm.controls['DateFin'].touched">
+              Une année scolaire doit avoir minimum 8 mois.
+            </small>
+            <small class="text-danger" *ngIf="AnneeScolaireForm.errors?.['dureeMax'] && AnneeScolaireForm.controls['DateFin'].touched">
+              Une année scolaire doit avoir maximum 9 mois.
+            </small>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12 col-md-4">
+            <button type="submit" class="btn btn-success"><i class="fa fa-add"></i> Enregistrer</button>
+          </div>
+        </div>
+      </div>
+      <span class="text-primary" *ngIf="message" > {{message}}</span>
+    </form>
+
+    <div class="flex jend mt-2">
+      <nav aria-label="...">
+        <ul class="pagination pagination-md-lg">
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">1</span>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+         <tr>
+          <th scope="col">N°</th>
+          <th scope="col">Année scolaire</th>
+          <th scope="col">Date début</th>
+          <th scope="col">Date fin</th>
+          <th>Action</th>
+         </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let annee of AnneeScolaires; let i= index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</td>
+            <td>{{annee.dateDebut|date:'dd/MM/yyyy'}}</td>
+            <td> {{annee.DateFin|date:'dd/MM/yyyy'}}</td>
+            <td width="105">
+
+              <button type="button" class="btnI-v  btn-vert btn-sm-v me-2"
+                data-bs-toggle="modal" data-bs-target="#modifierTypeDepence" (click)="ouvreModal(annee.id)">
+                <i class="fa fa-edit" title="Modifier"></i>
+              </button>
+              <button type="button" class="btnI-v  btn-vert btn-sm-v me-2  " style="color: red;"
+              data-bs-toggle="modal" data-bs-target="#supprimerTypeDepence" (click)="ouvreModal(annee.id)">
+              <i class="fa fa-trash" title="Supprimer"></i>
+            </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" style="background-color: #fff;">&laquo;</a>
+                    </li>
+                    <li class="page-item" style="background-color: #2ecc71;">
+                        <a class="page-link" style="background-color: #fff;">1</a>
+                    </li>
+                    <li class="page-item active" style="background-color: #2ecc71;">
+                        <a class="page-link" style="background-color: #2ecc71;">2</a>
+                    </li>
+                    <li class="page-item" style="background-color: #fff;">
+                        <a class="page-link" style="background-color: #fff;">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" style="background-color: #fff;">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+    </div>
+  </div>
+
+
+    <!-- modifier un typeDepense -->
+    <div class="modal" tabindex="-1"  id="modifierTypeDepence">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title title" style="color: #2ecc71;">Modification d'un type de depence</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form [formGroup]="UpdateAnneeForm" (ngSubmit)="onSubmitUpdate()">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 col-md-12">
+                  <label for="dateDebut" class="text-medut d-none d-md-block">Date début</label>
+                  <input formControlName="dateDebut"   type="date" id="dateDebut" class="form-control" placeholder="Entre le libellé">
+                  <small class="text-danger" *ngIf="UpdateAnneeForm.controls['dateDebut'].invalid && UpdateAnneeForm.controls['dateDebut'].touched">
+                    La date du debut est obligatoire.
+                  </small>
+                </div>
+                <div class="col-12 col-md-12">
+                  <label for="DateFin" class="text-medut d-none d-md-block">Date fin</label>
+                  <input formControlName="DateFin"   type="date" id="DateFin" class="form-control" placeholder="Entre le libellé">
+                  <small class="text-danger" *ngIf="UpdateAnneeForm.controls['DateFin'].invalid && UpdateAnneeForm.controls['DateFin'].touched">
+                    La date de fin est obligatoire.
+                  </small>
+                  <small class="text-danger" *ngIf="UpdateAnneeForm.errors?.['dureeMinimale'] && UpdateAnneeForm.controls['DateFin'].touched">
+                    Une année scolaire doit avoir minimum 8 mois.
+                  </small>
+                  <small class="text-danger" *ngIf="UpdateAnneeForm.errors?.['dureeMax'] && UpdateAnneeForm.controls['DateFin'].touched">
+                    Une année scolaire doit avoir maximum 9 mois.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-edit"></i> Modifier</button>
+          </div>
+          </form>
+          <span class="text-primary p-3" *ngIf="messageUpdate">{{messageUpdate}}</span>
+          <div style="height: 1rem;"></div>
+        </div>
+      </div>
+    </div>
+    <!-- End modifier typedepense -->
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="supprimerTypeDepence" tabindex="-1" aria-labelledby="supprimerTypeDepenceLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="supprimerTypeDepenceLabel">Voulez-vous vraiment supprimer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <input class="d-none" [(ngModel)]="idSelected" type="number">
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" (click)="deleteAnneeScolaire(idSelected)" class="btn btn-sm btn-primary">Supprimer</button>
+      </div>
+      <span class="text-primary p-3" *ngIf="messaged">{{messaged}}</span>
+    </div>
+  </div>
+</div>
+     <!-- En suppression -->
+</div>

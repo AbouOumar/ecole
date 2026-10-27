@@ -1,0 +1,128 @@
+
+<div class="container transformY  bordere roundede border-2e w-sm">
+  <div class="flex js mt-2">
+  </div>
+      <div class="row mt-2 selectIns">
+        <div class="col-6 col-md-3">
+          <select [(ngModel)]="selectedAnneeId" name="annee" id="annee" class="form-select">
+            <option  value={{annee.id}} *ngFor="let annee of annees">{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</option>
+            <!-- <option value=2>2023-2024</option> -->
+            </select>
+          </div>
+          <div class="col-6 col-md-3">
+            <select [(ngModel)]="selectedSemestre" name="semestre" id="semestre" class="form-select">
+              <option value="">Choisir le semestre</option>
+              <option value=1>Semestre 1</option>
+              <option value=2>Semestre 2</option>
+              </select>
+          </div>
+
+          <div class="col-6 col-md-3 ">
+            <select [(ngModel)]="selectedClasseId" (change)="chargerNotesClasse()"  id="maListe" class="form-select formStyle   fs-sm " name="selectedClasseId">
+              <option value="">-- Choisir la classe --</option>
+              <option *ngFor="let classe of classes" value="{{classe.id}}">{{classe.nom_classe}}</option>
+            </select>
+        </div>
+        <div class="col-6 col-md-3">
+          <button type="search" class="btn btn-outline-success float-end"
+          ngxPrint
+          (click)="imprimer()"
+          [style.marginBottom.px]="10"
+          alt="Imprimer le resultat"
+          >
+           <i class="fa fa-print me-1"></i> Imprimer
+         </button>
+       </div>
+
+      </div>
+
+
+
+
+  <div class="row">
+      <div class="col-12 col-lg-12">
+          <div class="me-2 flex js mt-4">
+
+            <nav aria-label="...">
+              <ul class="pagination pagination-md-lg d-none">
+                <li class="page-item active" aria-current="page">
+                  <span class="page-link" style="background-color: white; color: green; border-color: green;">1</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#" style="background-color: white; color: green;">2</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="background-color: white; color: green;">3</a></li>
+              </ul>
+            </nav>
+              <div *ngIf="notes.length >0" class="row g-3">
+                    <div class=" col-4 col-md-2 title  mt-4 d-none d-md-block">Rechercher</div>
+                    <div  class="col-9 col-md-7 ms-5">
+                      <div class="form-group mb-3">
+                        <input type="search" id="eleve" class="form-control" placeholder="Rechercher un élève"
+                        [(ngModel)]="textRecherche" name="textRecherche" style="border-radius: 15px;"
+                        >
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="" id="section-a-imprimerNote">
+            <div class="dNone">
+              <app-entete-etat-imp></app-entete-etat-imp>
+            </div>
+              <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+              <div *ngIf="notes.length >0" class="table-responsivePas mt-3 text-center mt-">
+                <table class="table table-bordered text-center align-middle">
+                <thead >
+                  <tr>
+                    <th scope="col" rowspan="2">N°</th>
+                    <th scope="col" rowspan="2">MATRICULE</th>
+                    <th scope="col" rowspan="2">RANG</th>
+                    <th scope="col"  rowspan="2" style="min-width: 15rem;">PRENOMS &amp; NOMS</th>
+                    <th scope="col" colspan="2">NOTES</th>
+                    <th scope="col" rowspan="2">MOYENNE</th>
+                    <th scope="col" rowspan="2">APPRECIATION</th>
+                    <th scope="col" rowspan="2" style="min-width: 7rem;">ADMIS</th>
+                  </tr>
+                  <tr>
+                    <th scope="col" >COURS</th>
+                    <th scope="col" >COMPOSITION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  *ngFor="let eleve of notes|filtreNote:textRecherche; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{eleve.matricule_eleve}}</td>
+                    <td>{{eleve.Rang}}</td>
+                    <td>{{eleve.prenom_eleve+" "+eleve.nom_eleve}}</td>
+                    <td>{{eleve.MoyenneGeneraleCours}}</td>
+                    <td>{{eleve.MoyenneGeneraleComposition}}</td>
+                    <td class="">{{eleve.MoyenneSemestrielle}}</td>
+                    <td>{{eleve.Appreciation}}</td>
+                    <td class="">{{eleve.Decision}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+                  <div class="flex jen dNonePage">
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination paginattion-md-lg justify-content-center">
+                        <li class="page-item disabled">
+                          <a class="page-link" style="background-color: white; color: green;">Précédent</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#" style="background-color: white; color: #111;">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#" style="background-color: white; color: #111;">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#" style="background-color: white; color: #111;">3</a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="#" style="background-color: white; color: green;">Suivant</a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+              </div>
+
+                <div class="dNone mt-5">
+                    <app-footer-signation></app-footer-signation>
+              </div>
+            </div>
+
+      </div>
+  </div>
+</div>

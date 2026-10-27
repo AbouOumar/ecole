@@ -1,0 +1,48 @@
+
+<div class="container  shadow border rounded border-2 w-smc" style="margin-top: 7rem;">
+  <small class="" style="color: #2ecc71;">Information du parent avec ses enfants</small>
+  <!-- Carte du père -->
+    <div class="row gap">
+        <div class="col-11 col-md-6">
+          <img src="#" alt="Pas de photo" class="no-photo" />
+          <div class="info-container">
+            <div class="flex js">
+              <h2 style="color: #FF3877;">Information du parent</h2>
+            </div>
+            <p><strong>Prénom et Nom :</strong><span *ngIf="parent?.prenom_parent">{{(parent?.prenom_parent+" "+parent?.nom_parent)}}</span> <span *ngIf="parent?.prenom_personnel">{{(parent?.prenom_personnel+" "+parent?.nom_personnel)}}</span></p>
+            <p><strong>Profession :</strong> {{(parent?.profession) || (parent?.fonction_personnel[0]?.fonction?.libelle_fonction)}}</p>
+            <p><strong>Téléphone :</strong> {{(parent?.telephone_parent) || (parent?.tel_personnel)}}</p>
+            <p><strong>Ville/Quartier :</strong> {{(parent?.adresse_parent) || (parent?.adresse_personnel)}}</p>
+            <p><strong>Email :</strong> {{(parent?.Email_parent) || (parent?.mail_personnel)}}</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 ">
+          <img src="/assets/images/affiche.jpg" alt="affiche" class="student-affiche d-none d-md-block" />
+        </div>
+    </div>
+
+
+    <div class="row gap-3">
+              <!-- Carte de l'élève -->
+        <div *ngFor="let eleve of eleves;" class="card-section col-11 col-md-5 ms-md-4 transformY ">
+          <img  [src]="adresseIp+':8000/storage/images/profile/' + (eleve.photo ||'avatar.png')   || adresseIp+':8000/storage/images/profile/avatar.png'" alt="Photo de l'élève" class="student-photo" />
+          <div class="info-container">
+            <h2>Information de l'enfant</h2>
+            <p><strong>Matricule :</strong> {{eleve?.matricule_eleve}}</p>
+            <p><strong>Prénom et Nom :</strong> {{eleve?.prenom_eleve+" "+eleve?.nom_eleve}}</p>
+            <p><strong>Sexe :</strong> {{eleve?.genre_eleve}}</p>
+            <p><strong>Né le :</strong> {{eleve?.Date_naiss}}</p>
+            <p><strong>Classe :</strong> {{eleve?.classe?.nom_classe|| 'non renseigner'}} <strong>Statut :</strong> {{eleve?.statut_scolaire || 'non renseigner'}}</p>
+          </div>
+        </div>
+    </div>
+
+  <div class="separateur mt-2"></div>
+
+
+
+
+</div>
+
+

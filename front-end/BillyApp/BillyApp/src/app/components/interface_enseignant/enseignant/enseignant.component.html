@@ -1,0 +1,11 @@
+<app-navbar-enseignant [user]="user"></app-navbar-enseignant>
+
+<div class="pag-container" *ngIf="isEmplois(); else showRouterOulet">
+  <app-profils></app-profils>
+</div>
+
+<ng-template #showRouterOulet>
+  <router-outlet></router-outlet>
+</ng-template>
+
+<!-- <app-footer></app-footer> -->

@@ -1,0 +1,203 @@
+
+
+<div class="container transformY  bordere roundede border-2e w-sm">
+  <div class="flex js mt-2">
+    <!-- <div class="t h5 pt-3" style="color: yellowgreen;">Salaire Responsable</div> -->
+    <!-- <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div> -->
+  </div>
+ <form action="" class="selectIns mt-3">
+  <!-- <div class="mt-4 flex ms-2 mt-2"> -->
+      <div class="row mt-2">
+        <div class="col-4 col-md-3">
+          <select [(ngModel)]="textRechercheAnnee"  id="annee"  class="form-select " name="textRechercheAnnee">
+            <option value=""> Choisir l'année</option>
+            <option   value={{annee.id}} *ngFor="let annee of annees" >{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</option>
+            <option value="2"> 2023-2024 </option>
+          </select>
+        </div>
+        <div class="col-4 col-md-3 ">
+            <select  [(ngModel)]="textRechercheMois" id="maListe" class="form-select ms-3" name="textRechercheMois">
+              <option value="">Sélectionnez un mois</option>
+              <option value="Octobre">Octobre</option>
+              <option value="Novembre">Novembre</option>
+              <option value="Décembre">Décembre</option>
+              <option value="Janvier">Janvier</option>
+              <option value="Février">Février</option>
+              <option value="Mars">Mars</option>
+              <option value="Avril">Avril</option>
+              <option value="Main">Main</option>
+              <option value="Juin">Juin</option>
+              <option value="Juillet">Juillet</option>
+          </select>
+        </div>
+      </div>
+  <!-- </div> -->
+ </form>
+
+
+
+  <div class="row">
+      <div class="col-12 col-lg-12">
+        <div class="me-2 flex js mt-4">
+
+          <nav aria-label="...">
+            <ul class="pagination pagination-md-lg">
+              <li class="page-item active" aria-current="page">
+                <span class="page-link">1</span>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+            </ul>
+          </nav>
+            <!-- <button type="search" class="ms-4 btn">Imprimer</button> -->
+            <form action="" class="row g-3">
+
+              <div class="col-12 col-md-12">
+                <div class="form-group flex">
+                  <div class="title ms-5  mt-2 d-none d-md-block">Rechercher</div>
+                  <input [(ngModel)]="textRecherche" type="search" class="form-control ms-2" name="textRecherche" placeholder="Entrer un matricule"
+                  style="border-radius: 15px;"
+                  >
+                </div>
+               </div>
+            </form>
+        </div>
+
+          <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+          <div class="table-responsive mt text-center mt-4">
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th scope="col">N°</th>
+                      <th scope="col">Matricule</th>
+                      <th scope="col">Nom et Prénom</th>
+                      <th scope="col">Fonction</th>
+                      <th scope="col">Salaire Brute</th>
+                      <th scope="col">Ecolage</th>
+                      <th scope="col">Avance sur Salaire</th>
+                      <!-- <th scope="col">Prime</th> -->
+                      <th scope="col">Affaire Sociale</th>
+                      <th scope="col">Salaire Net</th>
+                      <!-- <th scope="col">Voir</th> -->
+                      <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr *ngFor="let salaireRes of salaire_responsable|filtreResponsable:textRecherche:textRechercheAnnee:anneEncoursId:textRechercheMois:moisEncours; let i = index ">
+                      <th scope="row">{{i+1}}</th>
+                      <td>{{salaireRes.matricule}}</td>
+                      <td>{{salaireRes.nomPrenom}}</td>
+                      <td>{{salaireRes.fonction}}</td>
+                      <td>{{salaireRes.salaire_brut}} FG</td>
+                      <td>{{salaireRes.ecolage || 0}} FG</td>
+                      <td>{{salaireRes.avance_salaire}} FG</td>
+                      <td>{{salaireRes.affaire_sociale || 0}} FG</td>
+                      <td>
+                        <span class="text-success" *ngIf="salaireRes.statut=='payé' ">{{salaireRes.salaire_net}} FG</span>
+                        <span class="text-danger" *ngIf="salaireRes.statut!='payé' ">{{salaireRes.salaire_net}} FG</span>
+                      </td>
+
+                      <td width="105">
+                            <a class="btnI-r  btn-rouge btn-sm-r me-2" href="#">
+                                <i class="fa fa-eye" title="Voire"></i>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-outline-danger minW-sm-6  me-2" (click)="ouvreModal(salaireRes?.salaire_id)"
+                            data-bs-toggle="modal" data-bs-target="#AnnulerSalaireResponsable" >
+                            <i class="fa fa-trash" title="Supprimer"></i>
+                          </button>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="flex jen">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination paginattion-md-lg justify-content-center">
+                    <li class="page-item disabled">
+                      <a class="page-link">Précédent</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Suivant</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+  <div class="modal" tabindex="-1"  id="modal_modifier_eleve">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modification des information de l'élèves</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <label for="prenom" class="form-label  d-none d-md-block text-muted">Prénom <span style="color: red;"> *</span></label>
+                <input type="text" class="form-control  " id="prenom" placeholder="Entrez le prénom" >
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="nom" class="form-label d-none d-md-block">Nom <span style="color: red;"> *</span></label>
+                <input type="text" class="form-control  " id="nom" placeholder="Entrez le nom" >
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-3">
+                <label for="sexe" class="form-label d-none d-md-block text-muted mt-3">Sexe <span style="color: red;"> *</span></label>
+                <select name="sexe" id="sexe" class="form-select">
+                <option value="">Choisir le sexe </option>
+                <option value="h">H</option>
+                <option value="f">F</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-3">
+                <label for="date" class="form-label d-none d-md-block text-muted mt-3">Date de nais <span style="color: red;"> *</span></label>
+                <input type="date" class="form-control   "  aria-label=" date">
+              </div>
+              <div class="col-8 col-md-4">
+                  <label for="formFileLg" class="form-label d-none d-md-block text-muted mt-3">choisir une image <span style="color: red;"> *</span></label>
+                  <input class="form-control   fichierImage_mTop" id="formFileLg" type="file">
+              </div>
+              <div class="col-4 col-md-1 profil-reinscription mt-2">
+                  <img src="/assets/images/photoEn.jpg" class="mt-1" alt="Image élève"  width="">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-outline-success">Modifier</button>
+            <button type="button" class="btn btn-outline-danger">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+       <!-- Modal -->
+       <div class="modal fade" id="AnnulerSalaireResponsable"  tabindex="-1" aria-labelledby="AnnulerPaiementSalaireL abel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="AnnulerPaiementSalaireL abel text-rouge">Voulez-vous vraiment Annuler</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <input class="d-none"  type="number">
+          <button type="button" (click)="annulerSalaire()" class="btn btn-sm btn-outline-danger">Supprimer le salaire</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+        <span class="text-primary p-3" *ngIf="messaged">{{messaged}}</span>
+        </div>
+        </div>
+        </div>
+        <!-- En suppression -->

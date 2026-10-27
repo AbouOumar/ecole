@@ -1,0 +1,38 @@
+<div class="pag-container">
+ <div class="container mt-3">
+     <ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#etatSaliareEnseignant" data-bs-toggle="tab">
+        <i class="fas fa-chart-bar "></i>Salaire enseignant
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#etatSalaireResponsable" data-bs-toggle="tab">
+        <i class="fas fa-chart-bar "></i>  Salaire chefs services
+
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#etatSalaireMasseSalariale" data-bs-toggle="tab">
+        <i class="fas fa-chart-bar "></i> Masse salariale
+
+      </a>
+    </li>
+  </ul>
+
+ <div class="container">
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="etatSaliareEnseignant">
+     <app-etat-de-salaire-enseignant></app-etat-de-salaire-enseignant>
+    </div>
+    <div class="tab-pane fade" id="etatSalaireResponsable">
+      <app-etat-de-salaire-responsable></app-etat-de-salaire-responsable>
+    </div>
+    <div class="tab-pane fade" id="etatSalaireMasseSalariale">
+      <app-etat-salaire-masse-salariale></app-etat-salaire-masse-salariale>
+    </div>
+  </div>
+ </div>
+ </div>
+
+</div>

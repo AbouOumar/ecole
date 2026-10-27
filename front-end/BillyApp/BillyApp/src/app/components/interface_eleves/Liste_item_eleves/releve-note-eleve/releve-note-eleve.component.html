@@ -1,0 +1,144 @@
+<div class="container">
+    <div class="row mt-3 flex js">
+
+        <div class="col-12 col-lg-12">
+          <div class="me-2 flex js mt-4">
+        
+            <nav aria-label="...">
+              <ul class="pagination pagination-md-lg">
+                <li class="page-item active" aria-current="page">
+                  <span class="page-link">1</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+              </ul>
+            </nav>
+              <div  class="row g-3">
+                    <div class=" col-4 col-md-2 title  mt-4 d-none d-md-block ms-5">Rechercher</div>
+                    <div  class="col-9 col-md-7 ms-5">
+                      <div class="form-group mb-3">
+                        <input type="search" id="eleve" class="form-control" placeholder="Rechercher un élève"
+                        [(ngModel)]="textRecherche" name="textRecherche" style="border-radius: 15px;"
+                        >
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        </div>
+        <div class="table-responsive text-center mt-3">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+        
+                <th  scope="col">N°</th>
+                <th  scope="col" style="min-width: 186px;">Matricule</th>
+                <th  scope="col">Prénom et nom</th>
+                <th  scope="col">Classe</th>
+                <th  scope="col">Année Scolaire</th>
+                <th  scope="col" >Semestre</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bulletin of bulletins; let i=index">
+                <td>{{i+1}}</td>
+                <td>{{bulletin?.eleve.matricule_eleve}}</td>
+                <td>{{bulletin?.eleve.prenom_eleve}} {{bulletin?.eleve.nom_eleve}}</td>
+                <td>{{bulletin?.classe.nom_classe}}</td>
+                <td>{{bulletin?.annee_scolaire.dateDebut|date:'yyyy'}} - {{bulletin?.annee_scolaire.DateFin|date:'yyyy'}}</td>
+                <td>Semestre {{bulletin?.semestre}}</td>
+                <td>
+                      <button type="button" class=" btn-sm  btnI-v  btn-vert btn-sm-v me-2"
+                      data-bs-toggle="modal" data-bs-target="#voirBulletin">
+                        <i class="fa fa-eye" title="" (click)="onOuvreModal(bulletin?.classe.id, bulletin?.annee_scolaire.id, bulletin?.semestre, bulletin?.eleve.id)" > </i>
+                      </button>
+                </td>
+            </tr>    
+          </tbody>
+        </table>
+        <nav>
+          <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                  <a class="page-link" style="background-color: #fff;">&laquo;</a>
+              </li>
+              <li class="page-item" style="background-color: #2ecc71;">
+                  <a class="page-link" style="background-color: #fff;">1</a>
+              </li>
+              <li class="page-item active" style="background-color: #2ecc71;">
+                  <a class="page-link" style="background-color: #2ecc71;">2</a>
+              </li>
+              <li class="page-item" style="background-color: #fff;">
+                  <a class="page-link" style="background-color: #fff;">3</a>
+              </li>
+              <li class="page-item">
+                  <a class="page-link" style="background-color: #fff;">&raquo;</a>
+              </li>
+          </ul>
+        </nav>
+        </div>
+        
+        
+        
+        
+        
+        <!-- voir le bulletin-->
+        <div class="modal" tafandex="-1"  id="voirBulletin">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title title" style="color: #2ecc71;">Bulletin de {{ bulletinEleve?.eleve.prenom_eleve }} {{ bulletinEleve?.eleve.nom_eleve }} Matricule: {{bulletinEleve?.eleve.matricule_eleve}}</h3><br>
+            <p class="modal-title title" style="color: #2ecc71;">Classe : {{ bulletinEleve?.classe.nom_classe }} | Année : {{ bulletinEleve?.annee_scolaire }} Semestre {{ bulletinEleve?.semestre }}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <div class="modal-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>MATIÈRE</th>
+                    <th>COEF</th>
+                    <th *ngFor="let mois of moisDynamiques">{{mois}}</th>
+                    <th>Composition</th>
+                    <th>Moy. Matière</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let mat of bulletinEleve?.matieres">
+                    <td>{{ mat.libelle_matiere }}</td>
+                    <td>{{ mat.coefficient }}</td>
+                    <td *ngFor="let mois of moisDynamiques">{{ mat.notes[mois]?.orale || '0' }} | {{ mat.notes[mois]?.ecrit || '0' }}</td>
+                    <td>{{ mat.notes['composition'] || '0' }}</td>
+                    <td>{{ mat.moyenne_matiere }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6"><strong>Moyenne Générale Cours</strong></td>
+                    <td><strong>{{ bulletinEleve?.MoyenneGeneraleCours }}</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="6"><strong>Moyenne Générale Composition</strong></td>
+                    <td><strong>{{ bulletinEleve?.MoyenneGeneraleComposition }}</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="6"><strong>Moyenne Semestrielle</strong></td>
+                    <td><strong>{{ bulletinEleve?.MoyenneSemestrielle }}</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="6"><strong>Appréciation</strong></td>
+                    <td><strong>{{ bulletinEleve?.appreciation }}</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="6"><strong>Observation</strong></td>
+                    <td><strong>{{ bulletinEleve?.decision }}</strong></td>
+                </tr>
+                </tbody>
+            </table>  
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- End voir le bulletin -->
+</div>
+

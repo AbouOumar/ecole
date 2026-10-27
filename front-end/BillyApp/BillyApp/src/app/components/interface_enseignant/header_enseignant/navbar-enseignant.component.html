@@ -1,0 +1,54 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Plate-frome Enseignant</title>
+  </head>
+  <body>
+    <!-- Entête -->
+    <header class="navbar-gradient box-shadow ">
+
+      <div class="img-logo flex aic gap">
+        <div class="menu-bar box-shadow" (click)="handleDisplayMobileNav()"
+        (mouseenter)="handleDisplayMobileNav()"
+        >
+          <img src="/assets/images/icones/menu.png" alt="menu bar" width="40">
+      </div>
+      <div class="message-souhait">
+        <img [src]="user?.photosUser" alt="Photo-user">
+        <span>Bienvenu, {{user?.prenomUser +' '+ user?.nomUser}}</span>
+      </div>
+      </div>
+      <nav class="nav-bar">
+          <ul>
+            <li
+            *ngFor="let item of navs_data">
+            <a (click)="secureRouteService.navigateTo(item?.path)"
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{ exact: true }" >
+              {{item?.name}}
+            </a>
+            </li>
+          </ul>
+      </nav>
+      <div class="button">
+
+      </div>
+      <a  routerLink="" role="button" (click)="deconnexion()" class="btn btn1 btn-outline-success rounded-4 p-2 border-danger bg-rouge text-white">
+        <i class="fas fa-sign-out-alt me-2"></i> Se Deconnecter
+      </a>
+      <!-- <button class="btn">Deconexion</button> -->
+  </header>
+  <!-- Fin Entête -->
+
+    <!-- Menu mobile -->
+    <app-aside-nav
+    (close)="handleCloseMobileNav()"
+    *ngIf="isDisplayMobileNav"
+    >
+    </app-aside-nav>
+   <!-- Fin Menu mobile -->
+
+  </body>
+</html>

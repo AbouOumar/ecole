@@ -1,0 +1,11 @@
+<div class="aside-nav mobile-nav"
+(mouseleave)="handleClose()"
+>
+        <ul class="inslisted "style="margin-top: 5rem;" >
+            <li *ngFor="let item of navs_data"            >
+                <a
+                (click)="handleClose()"
+                [routerLink]="item?.path" (click)="secureRouteService.navigateTo(item?.path)">{{item?.name}}</a>
+            </li>
+        </ul>
+</div>

@@ -1,0 +1,57 @@
+<div class="pag-container">
+  <div class="container mt-3">
+      <ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <a class="nav-link active "  href="#noterEleve" data-bs-toggle="tab">
+        <i class="fas fa-file-pen  "></i> Noter un Elève
+
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#resultatTrimestriel" data-bs-toggle="tab">
+        <i class="fas fa-chart-bar "></i> Résultat Semestriele
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#resultatFinDannee" data-bs-toggle="tab">
+        <i class="fas fa-trophy  "></i> Résultat fin D'année
+
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="#organiserEva" data-bs-toggle="tab">
+        <i class="fas fa-calendar-check  "></i>  Billetin des notes
+
+      </a>
+    </li>
+
+  </ul>
+
+ <div class="container">
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade  show active" id="noterEleve">
+      <h3 class=" h6 d-none d-md-block  text-rouge">Notation de l'élève</h3>
+      <app-noter-eleve-cen></app-noter-eleve-cen>
+    </div>
+
+    <div class="tab-pane fade " id="resultatTrimestriel">
+
+      <h3 class=" h6 d-none d-md-block  text-rouge">Résultat Semestriele</h3>
+
+      <app-resultat-trimestriel-censeur></app-resultat-trimestriel-censeur>
+    </div>
+    <div class="tab-pane fade " id="resultatFinDannee">
+      <!-- <h3 class=" h6 d-none d-md-block text-rouge">Résultat annuel</h3> -->
+      <app-resultat-fin-dannee-cen></app-resultat-fin-dannee-cen>
+    </div>
+
+    <div class="tab-pane fade " id="organiserEva">
+      <!-- <h3 class="text-rouge h6">Billetin des notes</h3> -->
+     <app-organiser-eva-senceur></app-organiser-eva-senceur>
+    </div>
+  </div>
+ </div>
+  </div>
+
+</div>

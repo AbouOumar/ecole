@@ -1,0 +1,235 @@
+<div class="pag-container">
+  <div class="container transformY  bordere roundede border-2e w-sm">
+    <div class="flex js mt-2">
+      <div class="title h3 pt-3" style="color: #FF3877;">Fonction Personnel</div>
+      <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div>
+    </div>
+    <div class="col-8 col-md-5 mt-3 ">
+      <button class="btn btn-outline-success "><i class="fa fa-plus-circle text-success"></i>  Ajouter une nouvelle fonction</button>
+  </div>
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="me-2 flex js mt-4">
+
+              <nav aria-label="...">
+                <ul class="pagination pagination-md-lg">
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">1</span>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                </ul>
+              </nav>
+                <!-- <button type="search" class="ms-4 btn">Imprimer</button> -->
+                <form action="" class="row g-3">
+
+                  <div class="col-12 col-md-12">
+                    <div class="form-group flex">
+                      <div class="title ms-5  mt-2 d-none d-md-block">Rechercher</div>
+                      <input [(ngModel)]="textRechercheFp" type="search" class="form-control ms-2"
+                       placeholder="Entrer une date"
+                      style="border-radius: 15px;"
+                      id="textRechercheFp"
+                      name="textRechercheFp"
+                      >
+                    </div>
+                   </div>
+                </form>
+            </div>
+
+            <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+            <div class="table-responsive mt text-center mt-">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Nom et prenom</th>
+                        <th scope="col">matricule</th>
+                        <th scope="col">fonction</th>
+                        <th scope="col">Statut</th>
+                        <th scope="col">Salaire de base</th>
+                        <th scope="col">Taux horaire</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr *ngFor="let fonctionPersonnel of fonctionPersonnels ; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>Depuis {{fonctionPersonnel.created_at|date:'dd/MM/yyyy'}}</td>
+                        <td>M. {{fonctionPersonnel.personnel?.nom_personnel}} {{fonctionPersonnel.personnel?.prenom_personnel}}</td>
+                        <td>{{fonctionPersonnel.personnel?.matricule_personnel}}</td>
+                        <td>{{fonctionPersonnel.fonction.libelle_fonction}}</td>
+                        <td>{{fonctionPersonnel.statut_fonction}}</td>
+                        <td>{{fonctionPersonnel.personnel?.salaire_base}}</td>
+                        <td>{{fonctionPersonnel.personnel?.taux_horaire}}</td>
+                        <td width="105">
+                              <a type="button" class="btnI-r  btn-rouge btn-sm-r me-2" data-bs-toggle="modal" data-bs-target="#ajouterNouvelleDepense"
+                              (click)="ouvreModal(fonctionPersonnel.id,fonctionPersonnel.personnel?.id)"
+                              >
+                                  <i class="fa fa-add" title="ajouter"></i>
+                              </a>
+                              <button type="button" class="btnI-v  btn-vert btn-sm-v me-2"
+                                data-bs-toggle="modal" data-bs-target="#modifierNouvelleDepense" (click)="ouvreModal(fonctionPersonnel.id,fonctionPersonnel.personnel?.id)">
+                                <i class="fa fa-edit" title="Modifier"></i>
+                              </button>
+                        </td>
+                    </tr>
+                 </tbody>
+                </table>
+                <div class="flex jen">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination paginattion-md-lg justify-content-center">
+                      <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Ajouter une nouvelle recette -->
+    <div class="modal" tabindex="-1"  id="ajouterNouvelleDepense">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" style="color: yellowgreen;">Attribuer une nouvelle fonction</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form [formGroup]="ajouterFpForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <label for="sexe" class="form-label d-none d-md-block text-muted mt-3">Foction<span style="color: red;"> *</span></label>
+                  <select (change)="affiche(1)" formControlName="fonction_id"   id="fonction_id" name="fonction_id" class="form-select">
+                  <option value="">Choisir une fonction </option>
+                  <option value={{fonction.id}} *ngFor="let fonction of fonctions">{{fonction.libelle_fonction}}</option>
+                  </select>
+                  <small class="text-danger" *ngIf="ajouterFpForm.controls['fonction_id'].invalid && ajouterFpForm.controls['fonction_id'].touched">
+                    La fonction est obligatoire .
+                  </small>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div *ngIf="id_fonction>1">
+                    <label for="salaire_base" class="form-label d-none d-md-block mt-3">Salaire de base <span style="color: red;"> *</span></label>
+                    <input type="number" formControlName="salaire_base" class="form-control"  placeholder="Entrez le salaire de base" aria-label="Last name">
+                    <small class="text-danger"  *ngIf="messageFonction">
+                      {{ messageFonction}}
+                    </small>
+                  </div>
+                  <div *ngIf="id_fonction==1">
+                    <label for="taux_horaire" class="form-label d-none d-md-block mt-3">Taux horaire <span style="color: red;"> *</span></label>
+                    <input type="number" formControlName="taux_horaire" class="form-control"  placeholder="Entrez le contact d'urgence" aria-label="Last name">
+                    <small class="text-danger" *ngIf="messageFonction">
+                      {{ messageFonction}}
+                    </small>
+                  </div>
+          
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <label for="statut_fonction" class="form-label d-none d-md-block text-muted mt-3">Statut<span style="color: red;"> *</span></label>
+                  <select formControlName="statut_fonction"  id="statut_fonction" class="form-select"   name="statut_fonction">
+                    <option value="">-- Choisir le statut --</option>
+                    <option value="En cours">En cours</option>
+                    <option value="Inactif">Inactif</option>
+                    </select>
+                    <small class="text-danger" *ngIf="ajouterFpForm.controls['statut_fonction'].invalid && ajouterFpForm.controls['statut_fonction'].touched">
+                      Le statut est obligatoire .
+                    </small>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-outline-success">Attribuer</button>
+              <button type="button" class="btn btn-outline-danger">Annuler</button>
+            </div>
+          </form>
+          <span *ngIf="message">{{message}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- End ajouter une recette -->
+
+     <!-- Modifier une nouvelle recette -->
+     <div class="modal" tabindex="-1"  id="modifierNouvelleDepense">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" style="color: yellowgreen;">Modification de la fonction du personnel</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form [formGroup]="updateFpForm" (ngSubmit)="onSubmitUpdate()">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <label for="sexe" class="form-label d-none d-md-block text-muted mt-3">Fonction <span style="color: red;"> *</span></label>
+                  <select (change)="affiche(2)" formControlName="fonction_id"   id="fonction_id" name="fonction_id" class="form-select">
+                  <option value="">Choisir une fonction </option>
+                  <option value={{fonction.id}} *ngFor="let fonction of fonctions">{{fonction.libelle_fonction}}</option>
+                  </select>
+                  <small class="text-danger" *ngIf="updateFpForm.controls['fonction_id'].invalid && updateFpForm.controls['fonction_id'].touched">
+                    La fonction est obligatoire .
+                  </small>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div *ngIf="id_fonction>1">
+                    <label for="salaire_base" class="form-label d-none d-md-block mt-3">Salaire de base <span style="color: red;"> *</span></label>
+                    <input type="number" formControlName="salaire_base" class="form-control"  placeholder="Entrez le salaire de base" aria-label="Last name">
+                    <small class="text-danger"  *ngIf="messageFonction">
+                      {{ messageFonction}}
+                    </small>
+                  </div>
+                  <div *ngIf="id_fonction==1">
+                    <label for="taux_horaire" class="form-label d-none d-md-block mt-3">Taux horaire <span style="color: red;"> *</span></label>
+                    <input type="number" formControlName="taux_horaire" class="form-control"  placeholder="Entrez le contact d'urgence" aria-label="Last name">
+                    <small class="text-danger" *ngIf="messageFonction">
+                      {{ messageFonction}}
+                    </small>
+                  </div>
+          
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <label for="statut_fonction" class="form-label d-none d-md-block text-muted mt-3">Statut <span style="color: red;"> *</span></label>
+                  <select formControlName="statut_fonction"  id="statut_fonction" class="form-select"   name="statut_fonction">
+                    <option value="">-- Choisir le statut --</option>
+                    <option value="En cours">En cours</option>
+                    <option value="Inactif">Inactif</option>
+                    </select>
+                    <small class="text-danger" *ngIf="updateFpForm.controls['statut_fonction'].invalid && updateFpForm.controls['statut_fonction'].touched">
+                      Le statut est obligatoire .
+                    </small>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-outline-success">Enregistrer</button>
+              <button type="button" class="btn btn-outline-danger">Annuler</button>
+            </div>
+          </form>
+          <span *ngIf="messageUpdate">{{messageUpdate}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- End Modifier une recette -->
+</div>
+
+
+

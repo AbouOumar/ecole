@@ -1,0 +1,8 @@
+<div class="mtop">
+    <div *ngIf="user?.Droit=='eleve'">
+        <app-releve-note-eleve [user]="user"></app-releve-note-eleve>
+    </div>
+    <div *ngIf="user?.Droit=='parent'">
+        <app-releve-note-parent [user]="user"></app-releve-note-parent>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+.container-footer{
+    /* height: calc(100vh  - 60px - 91vh ); */
+    min-height: 6rem;
+    width: 100%;
+    background-color: #27ae60;
+    opacity: 0.7;
+    z-index: 50;
+    /* border: 1px solid orange; */
+    top: 0;
+}
+.bas-footer{
+    width: 100%;
+    min-height: 3rem;
+    background-color: green;
+    opacity: 0.6;
+    z-index: 30;
+}

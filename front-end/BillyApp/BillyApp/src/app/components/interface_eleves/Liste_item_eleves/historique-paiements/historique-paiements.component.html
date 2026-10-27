@@ -1,0 +1,8 @@
+<div *ngIf="user?.Droit=='parent'">
+  <app-paiement-parents-enfant [user]="user"></app-paiement-parents-enfant>
+
+</div>
+<div *ngIf="user?.Droit=='eleve'" style="margin-top: 7rem;">
+  <app-paiment-eleve-p [user]="user"></app-paiment-eleve-p>
+
+</div>

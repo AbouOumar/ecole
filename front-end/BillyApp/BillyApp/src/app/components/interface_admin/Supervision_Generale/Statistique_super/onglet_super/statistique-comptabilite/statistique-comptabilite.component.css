@@ -1,0 +1,21 @@
+.pag-container{
+  margin-left: -16.9rem;
+}
+
+.col-md-5{
+    width: 15rem;
+}
+
+
+@media screen and (max-width: 1080px){
+  .pag-container{
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: 768px){
+  .pag-container{
+
+    margin-left: 0rem;
+
+  }
+}

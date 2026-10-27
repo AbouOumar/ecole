@@ -1,0 +1,158 @@
+<section class="pag-container mt-3">
+  <div class="container  shadows borderc roundedc border-2c w-smc">
+    <small class="" style="color: #2ecc71;">Information du parent avec ses enfants</small>
+
+
+
+    <!-- Carte du père -->
+      <div class="row gap">
+          <div class="col-11 col-md-6">
+            <img src="#" alt="Pas de photo" class="no-photo" />
+            <div class="info-container">
+              <div class="flex js">
+                <h2 style="color: #FF3877;">Information du parent</h2>
+              </div>
+              <p><strong>Prénom et Nom :</strong><span *ngIf="parent?.prenom_parent">{{(parent?.prenom_parent+" "+parent?.nom_parent)}}</span> <span *ngIf="parent?.prenom_personnel">{{(parent?.prenom_personnel+" "+parent?.nom_personnel)}}</span></p>
+              <p><strong>Profession :</strong> {{(parent?.profession) || (parent?.fonction_personnel[0]?.fonction?.libelle_fonction)}}</p>
+              <p><strong>Téléphone :</strong> {{(parent?.telephone_parent) || (parent?.tel_personnel)}}</p>
+              <p><strong>Ville/Quartier :</strong> {{(parent?.adresse_parent) || (parent?.adresse_personnel)}}</p>
+              <p><strong>Email :</strong> {{(parent?.Email_parent) || (parent?.mail_personnel)}}</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 ">
+            <img src="/assets/images/affiche.jpg" alt="affiche" class="student-affiche d-none d-md-block" />
+          </div>
+      </div>
+
+
+      <div class="row gap-3">
+                <!-- Carte de l'élève -->
+          <div *ngFor="let eleve of eleves;" class="card-section col-11 col-md-5 ms-md-4 transformY ">
+            <img  [src]="adresseIp+':8000/storage/images/profile/' + (eleve.photo ||'avatar.png')   || adresseIp+':8000/storage/images/profile/avatar.png'" alt="Photo de l'élève" class="student-photo" />
+            <div class="info-container">
+              <h2>Information de l'enfant</h2>
+              <p><strong>Matricule :</strong> {{eleve?.matricule_eleve}}</p>
+              <p><strong>Prénom et Nom :</strong> {{eleve?.prenom_eleve+" "+eleve?.nom_eleve}}</p>
+              <p><strong>Sexe :</strong> {{eleve?.genre_eleve}}</p>
+              <p><strong>Né le :</strong> {{eleve?.Date_naiss}}</p>
+              <p><strong>Classe :</strong> {{eleve?.classe?.nom_classe|| 'non renseigner'}} <strong>Statut :</strong> {{eleve?.statut_scolaire || 'non renseigner'}}</p>
+            </div>
+          </div>
+      </div>
+
+    <div class="separateur mt-2"></div>
+
+
+
+<!-- Liste des action -->
+  <div class="row">
+
+      <div class="col-md-12   mx-auto bordere border-roundede border-ligthe bshadow" style="background-color: white;">
+        <div class="mt- flex js">
+          <span class="" style="color: #2ecc71;">Liste des transactions</span>
+          <button class="btn btn-outline-success mb-3" data-bs-toggle="collapse" data-bs-target="#listeDesAction"
+           aria-expanded="false" aria-controls="listeDesAction"
+          >
+            <i class=" fa fa-arrow-down rotate-icon"></i>
+          </button>
+        </div>
+        <div style="height: rem;"></div>
+        <!-- Liste des actions eleve -->
+
+          <section class="mt-2 collapse" id="listeDesAction">
+           <form action="">
+              <div class="mt-4 flex ms-2 mt-2">
+
+                <select [(ngModel)]="textRechercheEnfant" name="enfant" id="maListee" class="m-1 wDateS form-select">
+                    <option value="">-- Choisir un enfant --</option>
+                    <option value={{eleve.id}} *ngFor="let eleve of eleves">{{eleve.prenom_eleve+" "+eleve.nom_eleve}}</option>
+                </select>
+                <div class="btnf ms-3">
+                <button type="search" class="btn">Search</button>
+            </div>
+            </div>
+           </form>
+
+
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="flex js mt-4">
+                      <nav aria-label="...">
+                        <ul class="pagination ">
+                          <li class="page-item active" aria-current="page">
+                            <span class="page-link">1</span>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        </ul>
+                      </nav>
+
+                        <button class="print-button btn-xs" (click)="onPrint()">
+                          <i class="fa fa-print "></i> Imprimer
+                        </button>
+
+                    </div>
+
+
+                    <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+                    <div class="table-responsive mt-3">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">N°</th>
+                              <th scope="col" width="125">Nom complet</th>
+                                <th scope="col">Niveau</th>
+                                <th scope="col">Evenement</th>
+                                <th scope="col">Tranche</th>
+                                <th scope="col">Montant</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Methode</th>
+                                <th>Impression</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                              <tr *ngFor="let action of actions|filtreActionParent:textRechercheEnfant; let i = index">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{action.nomComplet }}</td>
+                                <td>{{action.classe }}</td>
+                                <td>{{action.evenement }}</td>
+                                <td>{{action.tranche || "N/A" }}</td>
+                                <td>{{action.montant }} FG</td>
+                                <td>{{action.date }}</td>
+                                <td>{{action.moyenPayement || "Non spécifié" }}</td>
+                                 <td width="125">
+                                    <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()">
+                                    <i class="fa fa-print"></i>
+                                    </button>
+                                  </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="flex jen">
+                          <nav aria-label="Page navigation example">
+                            <ul class="pagination paginattion-md-lg justify-content-center">
+                              <li class="page-item disabled">
+                                <a class="page-link">Previous</a>
+                              </li>
+                              <li class="page-item"><a class="page-link" href="#">1</a></li>
+                              <li class="page-item"><a class="page-link" href="#">2</a></li>
+                              <li class="page-item"><a class="page-link" href="#">3</a></li>
+                              <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                              </li>
+                            </ul>
+                          </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+         <!-- Fin -->
+      </div>
+  </div>
+</div>
+</section>
+

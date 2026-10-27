@@ -1,0 +1,299 @@
+<div class="pag-container">
+  <div class="container transformY  bordere roundede border-2e w-sm">
+    <div class="flex js mt-2">
+      <div class="title  pt-3" >Tableau de rapprochement pour le mois de Novembre</div>
+      <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div>
+    </div>
+    <div class="row mt-4 selectIns">
+      <div class="flex retourAl">
+        <div class="col-4 col-md-3">
+          <select [(ngModel)]="textRechercheAnnee"  id="annee"  class="form-select " name="textRechercheAnnee">
+            <option value=""> Choisir l'année</option>
+            <option   value={{annee.id}} *ngFor="let annee of annees" >{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</option>
+            <option value="2"> 2023-2024 </option>
+          </select>
+        </div>
+
+
+      <div class="col-4 col-md-3 ">
+          <select  [(ngModel)]="textRechercheMois" id="maListe" class="form-select ms-3" name="textRechercheMois">
+            <option value="">Sélectionnez un mois</option>
+            <option value="Octobre">Octobre</option>
+            <option value="Novembre">Novembre</option>
+            <option value="Décembre">Décembre</option>
+            <option value="Janvier">Janvier</option>
+            <option value="Février">Février</option>
+            <option value="Mars">Mars</option>
+            <option value="Avril">Avril</option>
+            <option value="Main">Main</option>
+            <option value="Juin">Juin</option>
+            <option value="Juillet">Juillet</option>
+        </select>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="me-2 flex js mt-4">
+
+              <nav aria-label="...">
+                <ul class="pagination pagination-md-lg">
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">1</span>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                </ul>
+              </nav>
+                  <div class="row">
+                      <div class="title col-md-3 ms-5  mt-2 d-none d-md-block ">Rechercher</div>
+                      <div class="col-4 col-md-7 ">
+                        <select  [(ngModel)]="textRechercheClasse"  id="classe" class="form-select ms-2"   name="textRechercheClasse"
+                        style="border-radius: 15px; height: 2.5rem;"
+                        >
+                        <option value=""> Choisir la classe  </option>
+                        <option value={{classe.id}} *ngFor="let classe of classes">{{classe.nom_classe}}</option>
+                        </select>
+                      </div>
+                   </div>
+
+            </div>
+
+            <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+            <!-- Table 0 rechercher par mois -->
+            <div class="table-responsive mt  mt-">
+              <table class="table table-bordered text-center ">
+                  <thead class="table-light">
+                      <tr class="hover-effect">
+                          <th scope="col" class="text-center align-middle" >Classe</th>
+                          <th  scope="col"class="text-center" >Effectif Total</th>
+                          <th  scope="col" class="text-center" >Total Gracier</th>
+                          <th scope="col" class="text-center align-middle" >Total Net</th>
+                          <th scope="col" class="text-center align-middle">Classe</th>
+                          <th scope="col" class="text-center align-middle" >Diff</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let stati_eleve of statis_eleve|statistiqueRapproche:textRechercheAnnee:textRechercheClasse||0:anneEncoursId:textRechercheMois:moisEncours:2;">
+                      <td>{{stati_eleve.mois}}</td>
+                      <td>{{stati_eleve.effectif_total}}</td>
+                      <td >{{stati_eleve.nbDepart}}</td>
+                      <td >{{stati_eleve.effectif_total-stati_eleve.nbDepart}}</td>
+                      <td >{{stati_eleve.total_eleveEnClasse}}</td>
+                      <td style="color: red;">{{(stati_eleve.effectif_total-stati_eleve.nbDepart )-stati_eleve.total_eleveEnClasse}}</td>
+                  </tr>
+                  </tbody>
+              </table>
+              <form action="" class="selectIns mt-3">
+                <div class="row mt-4 pb-3">
+                          <div class="col-12 col-md-4 title mt-2">Rapport Economie et Finance par mois</div>
+                          <div class="col-8 col-md-4">
+                            <select  [(ngModel)]="textRechercheMois" id="maListe" class="form-select ms-3" name="textRechercheMois">
+                              <option value="">Sélectionnez un mois</option>
+                              <option value="Octobre">Octobre</option>
+                              <option value="Novembre">Novembre</option>
+                              <option value="Décembre">Décembre</option>
+                              <option value="Janvier">Janvier</option>
+                              <option value="Février">Février</option>
+                              <option value="Mars">Mars</option>
+                              <option value="Avril">Avril</option>
+                              <option value="Main">Main</option>
+                              <option value="Juin">Juin</option>
+                              <option value="Juillet">Juillet</option>
+                          </select>
+                          </div>
+
+                <div class="col-2 col-md-1">
+                  <button type="search" class="btn btn-outline-success ">Excel</button>
+               </div>
+                <div class="col-2 col-md-1">
+                  <button type="search" class="btn btn-outline-danger ">PDF</button>
+               </div>
+              </div>
+              </form>
+              </div>
+            <!-- End Table 0 rechercher par mois -->
+
+
+              <!-- Table 01 recherche par année scolaire -->
+              <div class="table-responsivSSe ">
+                <table *ngFor="let rapportStatis of statistiqueRapport | filtreRapport:textRechercheMois:moisEncours"  class="table table-bordered mt-3  text-center ">
+                 <thead class="table-light">
+                     <tr class="hover-effect">
+                         <th scope="col" class="text-center align-middle" >MOIS</th>
+                         <th scope="col" class="text-center align-middle" style="background-color: #2ecc71; color: #fff; text-transform: uppercase;" >{{rapportStatis.mois}}</th>
+                     </tr>
+                 </thead>
+                 <tbody >
+                     <tr >
+                         <td>Recette Previsionnelles Totales Nettes de L'année De ce Mois</td>
+                          <td>{{rapportStatis.recettePrevisionnelTotal | number:'1.2-2'}} FG</td>
+
+                     </tr>
+                     <tr>
+                        <td>Recette Du Comptable de ce Mois</td>
+                        <td>{{rapportStatis.recetteComptable | number:'1.2-2'}} FG</td>
+                     </tr>
+                     <tr>
+                       <td  style="background-color: red; color:white">Impayé Nette A ce Mois</td>
+                       <td>{{rapportStatis.impayeNetMois | number:'1.2-2'}} FG</td>
+                       </tr>
+                     <tr>
+                       <td  style="background-color: red; color:white ">Taux Impayé Nette %</td>
+                       <td>{{rapportStatis.tauxImpayeNette}}%</td>
+                       </tr>
+                     <tr>
+                       <td>Depense de Fonctionnement Globale A ce Mois</td>
+                       <td>{{rapportStatis.depenseFonctionnementGlobal | number:'1.2-2'}} FG</td>
+                      </tr>
+                      <tr>
+                       <td>Epargne Nette A ce Mois</td>
+                       <td>{{rapportStatis.epargneNetteMois | number:'1.2-2'}} FG</td>
+                       </tr>
+                      <tr>
+                       <td>Epargne Deficitaire</td>
+                       <td>{{rapportStatis.recetteComptable | number:'1.2-2'}} FG</td>
+                       </tr>
+                      <tr>
+                       <td>Taux Deficitaire Nette</td>
+                       <td>{{rapportStatis.epargneDeficitaire | number:'1.2-2'}} FG</td>
+                      </tr>
+                 </tbody>
+             </table>
+
+             <form action="" class="selectIns mt-3">
+               <div class="row mt-4 ">
+                         <div class="col-12 col-md-5 title mt-2">Rapport Economie et Finance par Année Scolaire</div>
+                         <div class="col-8 col-md-4">
+                         <select name="sexe" id="annee" class="form-select">
+                           <option value="">Choisir le mois</option>
+                           <option value="OC">2024-2025</option>
+                           <option value="N0">2024-2025</option>
+                           </select>
+                         </div>
+
+               <div class="col-2 col-md-1">
+                 <button type="search" class="btn btn-outline-success ">Excel</button>
+              </div>
+               <div class="col-2 col-md-1">
+                 <button type="search" class="btn btn-outline-danger ">PDF</button>
+              </div>
+             </div>
+             </form>
+              </div>
+              <!-- End Table 01 recherche par année scolaire  -->
+        </div>
+    </div>
+
+
+
+
+    <!-- Gestion des Rapport 2 -->
+    <div class="separer mt-4"></div>
+
+    <div class="mt- flex js mt-3">
+      <span class="ms-3" >Gestion des Rapport 1</span>
+      <button class="btn btn-outline-success mb-3" data-bs-toggle="collapse" data-bs-target="#gestionRapport1"
+       aria-expanded="false" aria-controls="gestionRapport1" title="Afficher"
+      >
+        <i class=" fa fa-arrow-down rotate-icon"></i>
+      </button>
+    </div>
+
+      <!-- Clique pour ouvrir les deux table -->
+        <div class="collapse table-responsive" id="gestionRapport1">
+                <!-- Table 1 -->
+                  <table class="table table-bordered text-center ">
+                    <thead class="table-light">
+                        <tr class="hover-effect">
+                            <th scope="col" class="text-center align-middle" >MOIS</th>
+                            <th  scope="col"class="text-center" >
+                              Recette Previsionnelles Totales Nettes de L'année A ce Mois
+                            </th>
+                            <th  scope="col" class="text-center" >
+                              Recette de Comptable A ce Mois
+                            </th>
+                            <th scope="col" class="text-center align-middle" style="background-color: red; color: #fff;">
+                              Impayé Nette A ce Mois
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let rapportStatis of statistiqueRapport">
+                            <td>{{rapportStatis.mois}}</td>
+                            <td class="text-center  ">{{rapportStatis.recettePrevisionnelTotal | number:'1.2-2'}} FG</td>
+                            <td  >{{rapportStatis.recetteComptable | number:'1.2-2'}} FG</td>
+                            <td  >{{rapportStatis.impayeNetMois | number:'1.2-2'}} FG</td>
+                        </tr>
+                    </tbody>
+                </table>
+                  <!--End Table 1 -->
+
+                  <!-- Table 2 -->
+                  <table class="table table-bordered text-center ">
+                    <thead class="table-light">
+                        <tr class="hover-effect">
+                            <th scope="col" class="text-center align-middle" >MOIS</th>
+                            <th  scope="col"class="text-center" >
+                              Taux Impaye Nette %
+                            </th>
+                            <th  scope="col"class="text-center" >
+                              Fonctionnement Globale A ce Mois
+                            </th>
+                            <th  scope="col"class="text-center" >
+                              Epargne Nette A ce Mois
+                            </th>
+                            <th  scope="col"class="text-center" >
+                              Epargne Deficitaire
+                            </th>
+                            <th  scope="col"class="text-center" >
+                              Taux Deficitaire Nette
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let rapportStatis of statistiqueRapport">
+                            <td>{{rapportStatis.mois}}</td>
+                            <td class="text-center  ">{{rapportStatis.tauxImpayeNette}}%</td>
+                            <td>{{rapportStatis.depenseFonctionnementGlobal | number:'1.2-2'}} FG</td>
+                            <td >{{rapportStatis.epargneNetteMois | number:'1.2-2'}} FG</td>
+                            <td  >{{rapportStatis.epargneDeficitaire | number:'1.2-2'}} FG</td>
+                            <td >{{rapportStatis.tauxEpargneDeficitaire}}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+      <!-- End Table 2 -->
+        </div>
+      <!-- End Clique pour ouvrir les deux table -->
+
+    <!--End Gestion des Rapport 2 -->
+
+    <!-- Pagination -->
+    <nav>
+      <ul class="pagination justify-content-center mt-3">
+          <li class="page-item disabled">
+              <a class="page-link" style="background-color: #fff;">&laquo;</a>
+          </li>
+          <li class="page-item" style="background-color: #2ecc71;">
+              <a class="page-link" style="background-color: #fff;">1</a>
+          </li>
+          <li class="page-item active" style="background-color: #2ecc71;">
+              <a class="page-link" style="background-color: #2ecc71;">2</a>
+          </li>
+          <li class="page-item" style="background-color: #fff;">
+              <a class="page-link" style="background-color: #fff;">3</a>
+          </li>
+          <li class="page-item">
+              <a class="page-link" style="background-color: #fff;">&raquo;</a>
+          </li>
+      </ul>
+  </nav>
+    <!-- End Pagination -->
+    </div>
+
+
+</div>
+
+
+

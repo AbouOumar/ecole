@@ -1,0 +1,259 @@
+<div class="pag-container">
+  <div class="container transformY    border-2e w-sm">
+ <form action="" class="selectIns mt-3">
+ </form>
+  <div class="flex jend mt-4">
+    <nav aria-label="...">
+      <ul class="pagination pagination-md-lg d-none">
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">1</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <div class="row">
+      <div class="col-12 col-lg-12">
+          <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+          <div class="table-responsive mt-2 text-center rounded-4 shadow">
+              <div class="ms-2 flex js">
+                <span class="ms-1 pt-3 text-vert">Liste génerale du personnel</span>
+            <div class="title ms-5  mt-3 d-none">Rechercher</div>
+
+              <form action="" class="">
+                <div class="col-12 col-md-12">
+                  <div class="form-group">
+                    <input type="search" class="form-control me-5 mt-2 " placeholder="Entrer un matricule"
+                    [(ngModel)]="textRecherche" name="textRecherche"
+                    style="border-radius: 15px; height: 3rem;"
+                    >
+                  </div>
+                 </div>
+              </form>
+          </div>
+              <div class="container">
+                   <table class="table mt-3">
+                  <thead>
+                  <tr>
+                      <th scope="col">N°</th>
+                      <th scope="col">Matricule</th>
+                      <th scope="col">Nom et Prénom</th>
+                      <th scope="col">Téléphone</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Ville/Quartier</th>
+                      <th scope="col">CV</th>
+                      <th scope="col">PièceJointe</th>
+                      <th scope="col">Contact</th>
+                      <th scope="col">Image</th>
+                      <th>Modification</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let personnel of personnels|personnelPipe:textRecherche:textRechercheFonction; let i=index">
+                      <td scope="row">{{i+1}}</td>
+                      <td>{{personnel.matricule_personnel}}</td>
+                      <td>M. {{personnel.nom_personnel}} {{personnel.prenom_personnel}}</td>
+                      <td>{{personnel.tel_personnel}}</td>
+                      <td>{{personnel.mail_personnel}}</td>
+                      <td>{{personnel.adresse_personnel}}</td>
+                      <td>
+                        <a *ngIf="personnel.cv" (click)="userService.ouvrirFichier(personnel.cv)">Ouvrir</a>
+                      </td>
+                      <td>
+                        <a *ngIf="personnel.peice_jointe" (click)="userService.ouvrirFichier(personnel.peice_jointe)">Ouvrir</a>
+                      </td>
+                      <td>{{personnel.lien_parente}}: {{personnel.contact_urgence}}</td>
+                      <td>
+                        <div  class="profil-reinscriptionT ">
+                          <img [src]="adresseIp+':8000/storage/images/profile/' + personnel.photo   || adresseIp+':8000/storage/images/profile/avatar.png'"
+                          class="mt-1 border rounded-circle mx-auto d-block  " alt="Image élève" style="width: 30px; height: 30px;">
+                         </div>
+                        </td>
+                      <td>
+                        <button type="button" class="btn btn-sm btn-outline-success    me-2"
+                        data-bs-toggle="modal" data-bs-target="#modal_modifier_personnel" (click)="ouvreModal(personnel.id)" >
+                        <i class="fa fa-edit" title="Modifier"></i>
+                      </button>
+                      </td>
+                  </tr>
+               </tbody>
+              </table>
+              </div>
+              <div class="flex jen">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination paginattion-md-lg justify-content-center">
+                    <li class="page-item disabled">
+                      <a class="page-link">Précedent</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Suivant</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+
+  <div class="modal" tabindex="-1"  id="modal_modifier_personnel">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modification des informations de l'enseignant</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="personnelForm"  (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+            <div class="row w-sm">
+                <div class="col-12 col-md-6">
+                  <label for="matricule" class="form-label  d-none d-md-block ">Matricule (auto)</label>
+                  <input readonly type="text" class="form-control" formControlName="matricule_personnel" id="prenom" placeholder="Ex: 2204135924" >
+
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <label for="prenom" class="form-label  d-none d-md-block  mt-3">Prénom <span style="color: red;"> *</span></label>
+                    <input type="text" appNoSpecialChars class="form-control" formControlName="prenom_personnel" id="prenom" placeholder="Entrez le prénom" >
+                    <small class="text-danger" *ngIf="personnelForm.controls['prenom_personnel'].invalid && personnelForm.controls['prenom_personnel'].touched">
+                      Le prénom est obligatoire.
+                    </small>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="nom" class="form-label d-none d-md-block mt-3">Nom <span style="color: red;"> *</span></label>
+                    <input type="text" appNoSpecialChars class="form-control " formControlName="nom_personnel" id="nom" placeholder="Entrez le nom" >
+                    <small class="text-danger" *ngIf="personnelForm.controls['nom_personnel'].invalid && personnelForm.controls['nom_personnel'].touched">
+                      Le nom est obligatoire.
+                    </small>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <label for="sexe" class="form-label d-none d-md-block mt-3">Genre <span style="color: red;"> *</span></label>
+                    <select name="sexe"  id="sexe" formControlName="genre_personnel" class="form-select">
+                    <option value=""> Choisir le genre </option>
+                    <option value="Masculin">Masculin</option>
+                    <option value="Féminin">Féminin</option>
+                    </select>
+                    <small class="text-danger" *ngIf="personnelForm.controls['genre_personnel'].invalid && personnelForm.controls['genre_personnel'].touched">
+                      Le genre est obligatoire.
+                    </small>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="date" class="form-label d-none d-md-block mt-3">Date de nais <span style="color: red;"> *</span></label>
+                    <input type="date" class="form-control" formControlName="date_nais_personnel"  aria-label=" date">
+                    <small class="text-danger" *ngIf="personnelForm.controls['date_nais_personnel'].invalid && personnelForm.controls['date_nais_personnel'].touched">
+                      La date est obligatoire.
+                    </small>
+                    <div class="text-danger" *ngIf="personnelForm.get('date_nais_personnel')?.errors?.['minAge']">
+                      Le personnel doit avoir au moins 18 ans (âge actuel : {{
+                        personnelForm.get('date_nais_personnel')?.errors?.['minAge']?.actualAge
+                      }}).
+                  </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <label for="telephone" class="form-label  d-none d-md-block mt-3">Téléphone <span style="color: red;"> *</span></label>
+                    <input type="text" appNoSpecialChars class="form-control  "  formControlName="tel_personnel"  placeholder="Entrez le téléphone" aria-label="First name">
+                    <small class="text-danger" *ngIf="personnelForm.controls['tel_personnel'].invalid && personnelForm.controls['tel_personnel'].touched">
+                      Le téléphone est obligatoire.
+                    </small>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label for="formFileLg" class="form-label d-none d-md-block text-muted mt-3">Choisir une image <span style="color: red;"> *</span></label>
+                    <input class="form-control   fichierImage_mTop" formControlName="photo" #fileInput id="formFileLg" type="file" (change)="onImageSelected($event, fileInput)" accept=".jpg, .png, .jpeg">
+                    <span class="text-danger"  *ngIf="image_error" >{{image_error}}</span>
+                    <small class="text-danger" *ngIf="personnelForm.controls['photo'].invalid && personnelForm.controls['photo'].touched">
+                      La photo est obligatoire.
+                    </small>
+                  </div>
+                  <div class="col- col-md-1 profil-reinscriptionF mt-2">
+                    <img id="imagePreview" [src]="imgPreview" class="mt-1" alt="Image élève"  width="">
+                  </div>
+                </div>
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+                      <label for="ville_quartier" class="form-label d-none d-md-block mt-3">Ville/Quartier <span style="color: red;"> *</span></label>
+                      <input type="text" appNoSpecialChars class="form-control"  formControlName="adresse_personnel"  placeholder="Entrez la ville ou quartier" aria-label="Last name">
+                      <small class="text-danger" *ngIf="personnelForm.controls['adresse_personnel'].invalid && personnelForm.controls['adresse_personnel'].touched">
+                        L'adresse est obligatoire.
+                      </small>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="email" class="form-label  d-none d-md-block mt-3">Email</label>
+                      <input type="email" class="form-control"  formControlName="mail_personnel"  placeholder="Entrez l'adresse email" aria-label="First name">
+                      <small class="text-danger" *ngIf="personnelForm.controls['mail_personnel'].invalid && personnelForm.controls['mail_personnel'].touched">
+                        entrez un email valid.
+                      </small>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <label for="formFileLg" class="form-label d-none d-md-block text-muted mt-3">CV <span style="color: red;"> *</span></label>
+                    <input class="form-control   fichierImage_mTopPas" formControlName="cv" #fileInput1 id="formFileLg" type="file" (change)="onCvSelected($event, fileInput1)" accept=".pdf">
+                    <span class="text-danger"  *ngIf="cv_error" >{{cv_error}}</span>
+                    <small class="text-danger" *ngIf="personnelForm.controls['cv'].invalid && personnelForm.controls['cv'].touched">
+                      Selection un format pdf.
+                    </small>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="formFileLg" class="form-label d-none d-md-block text-muted mt-3">Poièce jointe <span style="color: red;"> *</span></label>
+                    <input class="form-control   fichierImage_mTopPas" formControlName="peice_jointe" #fileInput3 id="formFileLg" type="file" (change)="onPeice_jointeSelected($event, fileInput3)" accept=".pdf">
+                    <span class="text-danger" *ngIf="pj_error" >{{pj_error}}</span>
+                    <small class="text-danger" *ngIf="personnelForm.controls['peice_jointe'].invalid && personnelForm.controls['peice_jointe'].touched">
+                      Selection un format pdf.
+                    </small>
+
+                  </div>
+                </div>
+                <div class="title mt-3">Ajouter une personne à contacter en cas d'urgence</div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <label for="lien_parente" class="form-label d-none d-md-block mt-3">Lien de parenté <span style="color: red;"> *</span></label>
+                    <select name="lien_parente" id="lien_parente" formControlName="lien_parente" class="form-select">
+                    <option value=""> Choisir le lien </option>
+                    <option value="Père">Père</option>
+                    <option value="Mère">Mère</option>
+                    <option value="Frère">Frère</option>
+                    <option value="Soeur">Soeur</option>
+                    <option value="Ami(e)">Ami(e)</option>
+                    <option value="Autre">Autre</option>
+                    </select>
+                    <small class="text-danger" *ngIf="personnelForm.controls['lien_parente'].invalid && personnelForm.controls['lien_parente'].touched">
+                      Le lien de parenté est obligatoire.
+                    </small>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="contact_urgence" class="form-label d-none d-md-block mt-3">Contact d'urgence <span style="color: red;"> *</span></label>
+                    <input type="text" appNoSpecialChars formControlName="contact_urgence" class="form-control"  placeholder="Entrez le contact d'urgence" aria-label="Last name">
+                    <small class="text-danger" *ngIf="personnelForm.controls['contact_urgence'].invalid && personnelForm.controls['contact_urgence'].touched">
+                      Le contact d'urgence est obligatoire.
+                    </small>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-outline-success">Modifier</button>
+            <button type="button" class="btn btn-outline-danger">Annuler</button>
+          </div>
+        </form>
+        <div class="mt-3">
+          <span class="text-success" *ngIf="message" >{{message}}</span>
+          <span class="text-danger" *ngIf="messaged" >{{messaged}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

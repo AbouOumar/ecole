@@ -1,0 +1,672 @@
+/* You can add global styles to this file, and also import other style files */
+/* Début Interface admin */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'ngx-toastr/toastr';
+ *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ }
+body{
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  /* background-color: #; */
+}
+ .bg-body-vertT{
+    background-color: #dff8e5;
+ }
+
+ /* style onglets */
+
+
+
+ .nav-pills .nav-link.active
+{
+
+  background-color: #2ecc706c;
+  border-color: #2ecc71;
+  color:#111;
+
+}
+
+.nav-pills .nav-link {
+border-radius: 0;
+transition: backgroud-color 0.3s ease;
+color:#111;
+  /* border-radius: 10px 10px 0 0; */
+  border: none;
+
+}
+
+
+
+@media (max-width: 768px) {
+  h3{
+    font-size: 1em;
+  }
+}
+
+
+
+
+ /* End style onglets */
+/* style impression */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .table-responsivePas{
+    max-height:none;
+    overflow-y:initial;
+  }
+
+  .dNone{
+    display: block;
+  }
+  .dNoneH{
+    display: none;
+  }
+  .card .card-body{
+    width: 100%;
+  }
+
+  thead .bordered{
+    /* border: 0.1px solid #111; */
+  }
+  th, tr{
+    /* border: 0.1px solid black !important; */
+  }
+  p,h1,h2,h3,h4,h6,Table,td,th{
+    font-size: 12pt;
+    color: black !important;
+  }
+
+  @page{
+  margin: 10mn;
+  size:auto
+}
+
+
+}
+
+
+
+.dNone{
+  display: none;
+}
+
+
+
+/*  Fin Style */
+
+/* style Etat  */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .table-responsivePas{
+    max-height:none;
+    overflow-y:initial;
+  }
+
+  .dNone{
+    display: block;
+  }
+  .dNonePage{
+    display: none;
+  }
+  thead .bordered{
+    /* border: 0.1px solid #111; */
+  }
+  th, tr{
+    /* border: 0.1px solid black !important; */
+  }
+
+}
+/* End style Etat  */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* survole le contenu des tablea */
+.table-responsive{
+  /* max-height: 400px;
+  overflow-y: auto;
+  position: relative; */
+}
+/* .table thead tr {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+} */
+/* .table {
+  table-layout: auto;
+}
+
+th, td{
+  white-space: nowrap;
+} */
+
+thead th{
+  /* line-height: 0.5; */
+  font-size: 1.2em;
+
+  text-align: center;
+
+}
+tbody tr{
+  /* font-size: 0.87em; */
+}
+.textTrunk {
+  /* max-width: 110px !important; */
+}
+
+input, select, button {
+  font-size: 13.5px !important;
+}
+
+th, td{
+
+  /* vertical-align: middle !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important; */
+}
+
+thead th{
+  font-size: 0.89em !important;
+
+
+}
+tbody tr{
+  font-size: 0.79em !important;
+  /* line-height: ; */
+}
+input,select{
+  border: 2px solid #cccccc71 !important;
+}
+.flex-1{
+  flex: 1;
+}
+
+.flex-2{
+  flex: 2;
+}
+.flex-3{
+  flex: 3;
+}
+.flex-4{
+  flex: 4;
+}
+
+
+.table-responsive thead th, tr{
+  /* border: 0.1px solid black !important; */
+}
+.tablResBorder thead th, tr{
+  /* border: 0.1px solid black !important; */
+}
+/* End survole le contenu des tablea */
+
+.form-label{
+  /* color: #fff; */
+}
+/* .Mont{
+  font-family: Montserrat,sans-serif;
+
+} */
+
+
+.separer{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 0.1px solid #2ecc71;
+  /* margin-left:0.80rem; */
+}
+
+
+.page-header{
+  margin-left: 14.9rem;
+  /* width: 100%; */
+
+  /* z-index: 110; */
+
+
+}
+
+@media screen and  (max-width: 1300px){
+
+  .sidebar a{
+      font-size: 5px;
+  }
+
+}
+
+@media screen and (max-width: 768px){
+  .page-header{
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: 1080px){
+  .page-header{
+    margin-left: 0;
+  }
+
+}
+.pag-container{
+  margin-left: 14.9rem;
+  /* background-color: #cccccc08; */
+  position: relative;
+  overflow-x: hidden;
+}
+@media screen and (max-width: 1080px){
+  .pag-container{
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: 768px){
+  .pag-container{
+
+    margin-left: 0rem;
+
+  }
+}
+
+/* Fin Interface admin */
+
+
+/* Navabar */
+.navbar-gradient{
+
+    background-color: #2ecc71;
+
+    color: white;
+    padding: 1rem;
+}
+/* Responsive aside navbar */
+.title-v{
+    color: #2ecc71;
+    font-weight: 600;
+}
+.box-shadow{
+
+box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+}
+.box-shadow1{
+
+box-shadow: 0 3px 5px -1px #2ecc7056, 0 6px 10px #2ecc702d, 0 1px 18px #2ecc702a;
+}
+
+.bg-s{
+    background-color: #2ecc71;
+}
+
+thead th{
+  /* background-color: #2ecc71; */
+  /* color: #fff; */
+  /* font-size: 1.2em; */
+}
+
+
+
+
+.flex-2{
+    flex: 2;
+}
+.flex-1{
+    flex: 1;
+}
+.flex-3{
+    flex: 3;
+}
+/*Rendre les blocs flexible...*/
+.flex{
+    display: flex;
+}
+.jcc{
+    justify-content: center;
+}
+.jen{
+    justify-content: end;
+}
+.js{
+    justify-content: space-between;
+}
+.aic{
+    align-items: center;
+}
+.tac{
+    text-align: center;
+}
+.gap-1{
+    gap: 1rem;
+}
+.gap-2{
+    /* gap: 1px; */
+}
+ input, select, .btn, .btn1, .btn2{
+  /* border: 1px solid #2ecc71 !important; */
+  /* border: 1px solid #111 !important; */
+
+}
+ tr, td, th{
+  border: 1px solid #111 !important;
+
+}
+th{
+  font-size: 1.1rem;
+}
+/* taille contenu espacement */
+/* .content{
+    margin: 0 auto;
+    margin-top: 5rem;
+    z-index: 90;
+} */
+.content1{
+    width: 100%;
+
+    margin: 0 auto;
+
+    margin-top: 20px;
+    transition: 0.3s;
+}
+.contentQ{
+    width: 100%;
+    height: 10vh;
+    margin: 0 auto;
+
+    margin-top: 20px;
+    transition: 0.3s;
+}
+.mtop{
+    margin-top: 90px;
+
+}
+.mtopE{
+    margin-top: 110px;
+
+}
+
+.input-invalid-custom {
+  border: 2px solid #2ecc71 !important;
+}
+
+/* style color et bg btn */
+btn-danger{
+  background-color: #2ecc71 !important;
+  border-color: none;
+  transition: background-color 0.1s ease;
+    border: none !important;
+
+}
+
+.btn-danger:hover{
+  background-color: #e61759 !important;
+}
+
+.btn-success{
+  background-color: #2ecc71 !important;
+  border-color: none;
+  transition: background-color 0.3s ease;
+
+    border: none !important;
+}
+
+.btn-success:hover{
+ background-color: #0ebb56 !important;
+}
+/* End style color et bg btn */
+.text-vert{
+  color: #2ecc71;
+}
+.text-vert-50{
+  color: #2ecc71;
+  opacity: 0.5;
+}
+.border-vert{
+  border-color: #2ecc71;
+}
+.bg-vert{
+  background-color: #2ecc71 !important;
+}
+
+.bg-vertF{
+  background-color: #dff8e5;
+}
+.bg-withe{
+  background-color: #fff;
+}
+.bg-vertT{
+  background-color: rgba(46, 204, 112, 0.8) !important; /* Vert transparent */
+}
+.bg-vertT1{
+  background-color: #27ae5f26
+}
+.bg-rougeT{
+  background-color:rgba(255, 56, 119, 0.56);
+}
+.text-rouge{
+  color: #2ecc71;
+}
+.text-rouge-40{
+  color: #2ecc71;
+  opacity: 0.4;
+}
+.bg-rouge{
+  background-color: #2ecc71;
+}
+.bg-rouge{
+  color: #2ecc71;
+}
+
+@media  (max-width: 768px){
+   .fs-sm{
+  /* font-size: 0.8em; */
+}
+.minW-sm{
+  min-width: 7rem;
+}
+
+
+.minW-sm-10{
+  min-width: 10rem !important;
+}
+  .minW-sm-15{
+  min-width: 15rem !important;
+}
+.minW-sm-20{
+  min-width: 20rem !important;
+}
+.minW-sm-8{
+  min-width: 8rem;
+}
+.minW-sm-9{
+  min-width: 9rem;
+}
+.minW-sm-5{
+  min-width: 5rem;
+}
+.minW-sm-6{
+  min-width: 6rem;
+}
+}
+@media  (max-width: 500px){
+   .fs-sm{
+  /* font-size: 0.8em; */
+}
+.minW-sm{
+  min-width: 7rem;
+}
+.minW-sm-10{
+  min-width: 10rem;
+}
+.minW-sm-8{
+  min-width: 8rem;
+}
+.minW-sm-9{
+  min-width: 9rem;
+}
+.minW-sm-5{
+  min-width: 5rem;
+}
+.minW-sm-6{
+  min-width: 6rem;
+}
+
+}
+
+
+
+.content1:hover{
+    transform: translateY(-15px);
+}
+
+.contentfeva{
+    width: 100%;
+    min-height: 22rem;
+    margin: 0 auto;
+
+    margin-top: 20px;
+    transition: 0.3s;
+}
+.contentfeva:hover{
+    transform: translateY(-15px);
+}
+.content1f{
+    width: 100%;
+    min-height: 0rem;
+    margin: 0 auto;
+
+    margin-top: 20px;
+}
+.content1h{
+    width: 100%;
+    min-height: 35rem;
+    margin: 0 auto;
+
+    margin-top: 20px;
+}
+.content1a{
+    width: 100%;
+    min-height: 25rem;
+    background-color: #2ecc7018;
+
+    transition: 0.3s;
+    margin-top: 40px;
+}
+.content1a:hover{
+    transform: translateY(-15px);
+}
+.content1r{
+    width: 100%;
+    min-height: 2rem;
+    margin: 0 auto;
+
+    margin-top: 40px;
+}
+
+.b{
+    border: 5px solid red;
+}
+.bv{
+    border: 3px solid green,;
+}
+.bb{
+    border: 2px solid blue;
+}
+.bbl{
+    border: 1px solid black;
+}
+.title-5{
+
+    color: red;
+    margin-top: 15px;
+    font-size: 1rem;
+  }
+  .title-6{
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  .title {
+    font-size: 1.2rem;
+    color: #2ecc71;
+    font-weight: 500;
+}
+
+
+.retourAl{
+    flex-wrap: wrap;
+}
+.tiret{
+    width: 5rem;
+    height: 2px;
+    background-color: #111;
+    display: none;
+}
+/* Appliquer un style différent sur les colonnes impaires au survol */
+tbody tr:nth-child(odd):hover{
+    background-color: #2ecc701b; /* Couleur jaune pâle pour l'exemple */
+    color: #111; /* Couleur du texte noir pour contraste */
+    /* opacity: 40%; */
+}
+
+
+
+.btn-danger{
+  background-color: #2ecc71 !important;
+  border-color: none;
+  transition: background-color 0.1s ease;
+    border: none !important;
+
+}
+
+.btn-danger:hover{
+  background-color: #e61759 !important;
+}
+
+.btn-success{
+  background-color: #2ecc71 !important;
+  border-color: none;
+  transition: background-color 0.3s ease;
+
+    border: none !important;
+}
+
+.btn-success:hover{
+ background-color: #0ebb56 !important;
+}
+
+.p-06{
+  padding: 0.6rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

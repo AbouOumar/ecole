@@ -1,0 +1,189 @@
+<div class="pag-container">
+  <div class="container transformY  bordere roundede border-2e w-sm">
+    <div class="flex js mt-2">
+      <div class="title  pt-3">Liste des Users</div>
+    </div>
+      <div class="col-8 col-md-5 selectInsdd mt-3">
+        <button class="btn btn-outline-success"
+          data-bs-toggle="modal"
+          data-bs-target="#ajouterNouveauUser">
+          <i class="fas fa-coins"></i> <i class="fas fa-plus"></i>  Ajouter un nouveau user
+       </button>
+     </div>
+
+
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="me-2 flex js mt-4">
+
+              <nav aria-label="...">
+                <ul class="pagination pagination-md-lg">
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">1</span>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                </ul>
+              </nav>
+                <!-- <button type="search" class="ms-4 btn">Imprimer</button> -->
+                <form action="" class="row g-3">
+
+                  <div class="col-12 col-md-12">
+                    <div class="form-group flex">
+                      <div class="title ms-5  mt-2 d-none d-md-block">Rechercher</div>
+                      <input type="search" class="form-control ms-2" placeholder="Entrer un Droit"
+                      style="border-radius: 15px;"
+                      >
+
+                    </div>
+                   </div>
+                </form>
+            </div>
+
+            <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+            <div class="table-responsive text-center">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">email</th>                        
+                        <th scope="col">Nom user</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Télephone</th>
+                        <th scope="col">Droit</th>
+                        <th scope="col">image</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr *ngFor="let user of users; let i = index">
+                        <th scope="row">{{i+1}}</th>                       
+                        <td>{{user?.email}}</td>
+                        <td>{{user?.nomUser}}</td>
+                        <td>{{user?.prenomUser}}</td>
+                        <td>{{user?.telephoneUser}}</td>
+                        <td>{{user?.Droit}}</td>
+                        <td>
+                          <div  class="profil-reinscriptionT ">
+                            <img [src]="adresseIp+':8000/storage/images/profile/' + user.photosUser   || adresseIp+':8000/storage/images/profile/avatar.png'"
+                             class="mt-1 border rounded-circle mx-auto d-block  " alt="Image élève" width="30">
+                           </div>
+                          </td>
+                        <td width="197">
+                              <button (click)="changeStatut(user.id)" type="button" class="btn btn-outline-success btn-sm  btnI-v  btn-vert btn-sm-v me-2">
+                                <i class="fa fa-check-circle" title="Actif"> </i> {{user.statut}}
+                              </button>
+                              <button type="button" class="btn btn-outline-danger btn-sm   btnI-v  btn-vert btn-sm-v me-2"
+                                data-bs-toggle="modal" data-bs-target="#modifierNouveauUser" (click)="ouvreModal(user.id)">
+                                <i class="fa fa-edit me-" title="Modier"> </i> Modifier
+                              </button>
+                        </td>
+                    </tr>
+                 </tbody>
+                </table>
+                <nav>
+                  <ul class="pagination justify-content-center">
+                      <li class="page-item disabled">
+                          <a class="page-link" style="background-color: #fff;">&laquo;</a>
+                      </li>
+                      <li class="page-item" style="background-color: #2ecc71;">
+                          <a class="page-link" style="background-color: #fff;">1</a>
+                      </li>
+                      <li class="page-item active" style="background-color: #2ecc71;">
+                          <a class="page-link" style="background-color: #2ecc71;">2</a>
+                      </li>
+                      <li class="page-item" style="background-color: #fff;">
+                          <a class="page-link" style="background-color: #fff;">3</a>
+                      </li>
+                      <li class="page-item">
+                          <a class="page-link" style="background-color: #fff;">&raquo;</a>
+                      </li>
+                  </ul>
+              </nav>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+   <!-- modifier une nouveeauCompte -->
+   <div class="modal" tabindex="-1"  id="modifierNouveauUser">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title title" style="color: #2ecc71;">Modification des informations de l'utilisateur</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="updateUserForm" (ngSubmit)="onSubmitUpdate()">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <label for="nom" class="form-label d-none d-md-block mt-3">Nom d'utilisateur <span style="color: red;"> *</span></label>
+                <input type="text" appNoSpecialChars class="form-control"  formControlName="nomUser"   id="nomUser" name="nomUser" placeholder="Entrez le  nom du compte" >
+                <small class="text-danger" *ngIf="updateUserForm.controls['nomUser'].invalid && updateUserForm.controls['nomUser'].touched">
+                  Le nom d'utilisateur est requis.
+                </small>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="nom" class="form-label d-none d-md-block mt-3">Prénom d'utilisateur <span style="color: red;"> *</span></label>
+                <input type="text" appNoSpecialChars class="form-control" formControlName="prenomUser" id="prenomUser" name="prenomUser" placeholder="Entrez le numéro du compte" >
+                <small class="text-danger" *ngIf="updateUserForm.controls['prenomUser'].invalid && updateUserForm.controls['prenomUser'].touched">
+                  Le prenom d'utilisateur est requis.
+                </small>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <label for="nom" class="form-label d-none d-md-block mt-3">Téléphone <span style="color: red;"> *</span></label>
+                <input type="text" appNoSpecialChars class="form-control" formControlName="telephoneUser" id="telephoneUser" id="telephoneUser" placeholder="Entrez le numéro de téléphone">
+                <small class="text-danger" *ngIf="updateUserForm.controls['telephoneUser'].invalid && updateUserForm.controls['telephoneUser'].touched">
+                  Le téléphone de requis.
+                </small>
+              </div>
+
+
+              <div class="col-12 col-md-6">
+                <label for="nom" class="form-label d-none d-md-block mt-3">Email <span style="color: red;"> *</span></label>
+                <input type="email" class="form-control" formControlName="email" id="email" name="email" placeholder="Entrez la email" >
+                 <small class="text-danger" *ngIf="updateUserForm.controls['email'].invalid && updateUserForm.controls['email'].touched">
+                      L'Email est obligatoire.
+                </small>
+              </div>
+
+
+              <div class="col-12 col-md-6">
+                <label for="nom" class="form-label d-none d-md-block mt-3">Nouveau mot de passe <span style="color: red;"></span></label>
+                <input type="text" appNoSpecialChars class="form-control" [(ngModel)]="password" formControlName="password" id="password" name="password" placeholder="Entrez le nouveau password" >
+              </div>
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <label for="formFileLg" class="form-label d-none d-md-block text-muted mt-3">Choisir une image <span style="color: red;"> *</span></label>
+                    <input class="form-control   fichierImage_mTop" formControlName="photosUser" #fileInput id="formFileLg" type="file" (change)="onImageSelected($event, fileInput)" accept=".jpg, .png, .jpeg">
+                    <span class="text-danger"  *ngIf="image_error" >{{image_error}}</span>
+                    <small class="text-danger" *ngIf="updateUserForm.controls['photosUser'].invalid && updateUserForm.controls['photosUser'].touched">
+                      La photo est obligatoire.
+                    </small>
+                  </div>
+                  <div class="col- col-md-1 profil-reinscriptionF mt-2">
+                    <img id="imagePreview"  [src]="adresseIp+':8000/storage/images/profile/' + selectedUser.photosUser || adresseIp+':8000/storage/images/profile/avatar.png'" class="mt-1" alt="Image élève"  width="">
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
+          <button type="submit" class="btn btn-outline-success"><i class="fa fa-edit"></i> Modifier</button>
+          <button type="button" class="btn btn-outline-danger"><i class="fa fa-times-circle"></i> Annuler</button>
+        </div>
+        </form>
+        <span class="text-success p-3" *ngIf="messageUpdate">{{messageUpdate}}</span>
+        <div style="height: 1rem;"></div>
+      </div>
+    </div>
+  </div>
+  <!-- End modifier Compte -->
+</div>
+
+
+

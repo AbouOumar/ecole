@@ -1,0 +1,117 @@
+<div class="pag-container">
+  <div class="container transformY  bordere roundede border-2e w-sm">
+    <div class="flex js mt-2">
+      <div class="h3 pt-3" style="color: #FF3877;">Coefficient des matières</div>
+      <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div>
+    </div>
+        <div class="row mt-2 selectInsF ">
+          <div class="col-6 col-md-3">
+            <select name="sexe" id="annee" class="form-select">
+              <option value="">-- choisir l'année --</option>
+              <option value="25">2024-2025</option>
+              <option value="24">2023-2024</option>
+              </select>
+            </div>
+        </div>
+
+    <div class="flex jend mt-4">
+      <nav aria-label="...">
+        <ul class="pagination pagination-md-lg">
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">1</span>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </ul>
+      </nav>
+    </div>
+
+
+    <div class="row">
+        <div class="table-container table-responsive mt-md-3 ">
+          <table class="table table-bordered text-center">
+              <thead>
+                  <tr>
+                      <th scope="col">N°</th>
+                      <th>Matiere</th>
+                      <th>Option</th>
+                      <th>Cycle</th>
+                      <th>Coefficient</th>
+                      <td>Action</td>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let coefficient of  coefficients; let i=index">
+                      <td>{{i+1}}</td>
+                      <td>
+                        {{coefficient.matiere.libelle_matiere}}
+                      </td>
+                      <td>
+                        {{coefficient.option?.nom_option}}
+                      </td>
+                      <td>
+                        {{coefficient.clycle}}
+                      </td>
+                      <td>
+                        {{coefficient.valeur}}
+                      </td>
+                      <td>
+                        <button type="button" class="btnI-v  btn-vert btn-sm-v me-2"
+                          data-bs-toggle="modal" data-bs-target="#modal_ModifierNouvelleFrais" (click)="ouvreModal(coefficient.id)">
+                          <i class="fa fa-edit" title="Modifier"></i>
+                        </button>
+                        </td>
+                   </tr>
+              </tbody>
+          </table>
+
+      </div>
+      <div class="flex jen mt-md-3">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination paginattion-md-lg justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modifier un frais de scolarité -->
+  <div class="modal" tabindex="-1"  id="modal_ModifierNouvelleFrais">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="text-center" style="color: #2ecc71;">Modifiaction des frais</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="UpdateCoefficientForm" (ngSubmit)="onSubmitUpdate()">
+          <div class="modal-body">
+                <div class="mb-3">
+                    <label for="frais_inscription" class="form-label d-none d-md-block ">Frais d'inscription</label>
+                    <input formControlName="valeur" name="valeur" id="valeur"  type="number" appNoSpecialChars class="form-control" id="valeur" placeholder="Entrer un coefficient">
+                    <small class="text-danger" *ngIf="UpdateCoefficientForm.controls['valeur'].invalid && UpdateCoefficientForm.controls['valeur'].touched">
+                        la valeur est obligatoire.
+                    </small>
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-outline-success">Modifier</button>
+            <button type="button" class="btn btn-outline-danger">Annuler</button>
+          </div>
+        </form>
+        <span *ngIf="messageUpdate" class="text-vert">{{messageUpdate}}</span>
+        <span *ngIf="messaged" class="text-rouge">{{messaged}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,226 @@
+
+    /* Style personnalisé pour la sidebar */
+
+    .sidebar {
+      min-height: 100vh;
+      width: 271px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #2ecc703e;
+      /* background-color: #2ecc71; */
+      z-index: 110;
+
+
+    }
+
+
+
+    /* Pour éviter que les sous-menus cassent la hauteur */
+    .submenu {
+      overflow-y: auto;
+      max-height: 1000px; /* Ajustable selon tes besoins */
+    }
+
+    .logo{
+      z-index: 80;
+    }
+
+   .sidebar .scrollerCont{
+      z-index: 70;
+      flex-grow: 1;
+      overflow-y: auto;
+      max-height: 100vh;
+      padding-bottom: 20px;
+
+    }
+
+    .sidebar .logo img{
+      width: 100px;
+      height: 100px;
+    }
+    .sidebar .logo{
+      text-align: center;
+    }
+    .sidebar .logo .titleL {
+      color: #2ecc71;
+      font-weight: bold;
+
+    }
+    .text-rouge{
+      font-size: 0.7em;
+    }
+    .separateur{
+      display: flex;
+      justify-content: center;
+      width: 90%;
+      border: 0.1px solid #2ecc7027;
+      margin-left:0.80rem;
+    }
+    ul{
+      list-style: none;
+
+
+    }
+    .sidebar a {
+      color: #111;
+      text-decoration: none;
+      padding: 10px 20px;
+      display: block;
+      font-size: 0.9em;
+    }
+
+    .sidebar a.active {
+
+
+    }
+    .sidebar a:hover {
+      color: #FF3877;
+    }
+     .sidebar .submenu  a.active{
+      color: green;
+    }
+    .sidebar .submenu a {
+      padding-left: 15px;
+      color: #fff;
+      font-weight: 400;
+      /* color: gray; */
+      font-size: 0.9em;
+      padding: 3px 20px;
+
+    }
+    .sidebar .submenu{
+      background-color: #2ecc7008;
+      /* margin-left: 1rem; */
+    }
+    .sidebar .submenu a:hover {
+      /* color: #2ecc71; */
+      color: #ff387789;
+
+    }
+    /* .content {
+      margin-left: 250px;
+      padding: 20px;
+    } */
+
+    .icon-rouge{
+      color: #FF3877 !important;
+    }
+    .icon-vert{
+      color: #2ecc71 !important;
+    }
+
+
+
+    @media screen and (max-width: 1080px){
+      .sidebar{
+        display: none;
+      }
+
+    }
+    @media (max-width: 768px) {
+
+
+      /* Aside en mobile */
+      .sidebar {
+        width: 190px;
+        /* background-color: #2ecc703e; */
+        background-color: #2ecc71;
+        z-index: 110;
+      }
+
+
+
+      /* Pour éviter que les sous-menus cassent la hauteur */
+      .submenu {
+        overflow-y: auto;
+        max-height: 1000px; /* Ajustable selon tes besoins */
+      }
+
+      .logo{
+        z-index: 80;
+      }
+
+     .sidebar .scrollerCont{
+        z-index: 70;
+        flex-grow: 1;
+        overflow-y: auto;
+        max-height: 100vh;
+        padding-bottom: 20px;
+
+      }
+
+      .sidebar .logo img{
+        width: 60px;
+        height: 60px;
+      }
+      .sidebar .logo{
+        text-align: center;
+      }
+      .sidebar .logo .titleL {
+        color: #fff;
+        font-size: 0.9em;
+      }
+      .text-rouge{
+        color: #111;
+        font-size: 0.6em;
+      }
+
+      .sidebar a {
+        color: #fff;
+        padding: 10px 15px;
+        display: block;
+        font-size: 0.7em;
+        transition: all background-color 0.3s ease-in;
+      }
+
+      .text-success{
+        color: #fff !important;
+        font-size: 13px;
+      }
+
+
+      .sidebar a:hover {
+        /* color: #FF3877; */
+        background-color: #ffffff9b;
+        border-radius: 15px;
+        padding: 8px 10px;
+
+      }
+       .sidebar .submenu  a.active{
+        color: green;
+      }
+      .sidebar .submenu a {
+        padding-left: 5px;
+        color: #1d1d1d;
+        /* color: gray; */
+        font-size: 0.6em;
+        padding: 3px 5px;
+
+      }
+      .sidebar .submenu{
+        background-color: #2ecc703e;
+        /* margin-left: 1rem; */
+      }
+      .sidebar .submenu a:hover {
+        /* color: #2ecc71; */
+        color: #fff;
+        background-color: #FF3877;
+        /* background-color: #ff387789; */
+        border-radius: 15px;
+
+      }
+
+
+      .icon-rouge{
+        color: #FF3877 !important;
+        font-size: 13px;
+      }
+
+      .icon-vert{
+        color: #fff !important;
+        font-size: 13px;
+      }
+    }
+
+

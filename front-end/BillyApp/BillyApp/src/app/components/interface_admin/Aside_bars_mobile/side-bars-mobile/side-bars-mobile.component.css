@@ -1,0 +1,125 @@
+
+    /* Style personnalisé pour la sidebar */
+
+    .sidebar {
+      min-height: 100vh;
+      width: 271px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #2ecc71;
+
+      z-index: 110;
+      display: block;
+    }
+
+
+
+    .submenu {
+      overflow-y: auto;
+      max-height: 1000px;
+    }
+
+    .logo{
+      z-index: 80;
+    }
+    .btn-close{
+      font-size: 2rem !important;
+    }
+
+   .sidebar .scrollerCont{
+      z-index: 70;
+      flex-grow: 1;
+      overflow-y: auto;
+      max-height: 100vh;
+      padding-bottom: 20px;
+
+    }
+
+    .sidebar .logo img{
+      width: 80px;
+      height: 80px;
+    }
+    .sidebar .logo{
+      text-align: center;
+    }
+    .sidebar .logo .titleL {
+      color: #fff;
+      font-weight: bold;
+
+    }
+    .text-rouge{
+      color: #111;
+      font-size: 0.7em;
+    }
+    .separateur{
+      display: flex;
+      justify-content: center;
+      width: 90%;
+      border: 0.1px solid #2ecc7027;
+      margin-left:0.80rem;
+    }
+    ul{
+      list-style: none;
+
+
+    }
+    .sidebar a {
+      text-decoration: none;
+      padding: 9px 20px;
+      display: block;
+      font-size: 0.9em;
+
+      color: #fff;
+
+      transition: all background-color 0.3s ease-in;
+    }
+
+    .sidebar a.active {
+
+
+    }
+    .text-success{
+
+    }
+    .sidebar a:hover {
+      color: #FF3877 !important;
+      background-color: #ffffff9b;
+      border-radius: 15px;
+
+    }
+    .icon-rouge:hover{
+      color: #2ecc71 !important;
+    }
+     .sidebar .submenu  a.active{
+      color: green;
+    }
+    .sidebar .submenu a {
+      padding-left: 15px;
+      font-weight: 400;
+
+      color: #1d1d1d;
+      font-size: 0.8em;
+      padding: 3px 5px;
+
+    }
+    .sidebar .submenu{
+      background-color: #ffffff1b;
+    }
+    .sidebar .submenu a:hover {
+         color: #fff !important;
+        background-color: #2ecc70b3;
+        border-radius: 15px;
+
+    }
+
+
+    .icon-rouge{
+      color: #FF3877 !important;
+    }
+
+
+
+   
+
+

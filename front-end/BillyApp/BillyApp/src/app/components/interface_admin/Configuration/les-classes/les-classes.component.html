@@ -1,0 +1,232 @@
+<div class="pag-container">
+          <div class="container transformY  bordere roundede border-2e w-sm">
+            <div class="flex js mt-2">
+              <div class="h5 pt-3" style="color: #FF3877;">Liste des Salles de Classe</div>
+              <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div>
+            </div>
+                <div class="row mt-2 selectInsF ">
+                  <div class="col-6 col-md-3">
+                    <select name="sexe" id="annee" class="form-select">
+                      <option value="">-- choisir l'année --</option>
+                      <option value="25">2024-2025</option>
+                      <option value="24">2023-2024</option>
+                      </select>
+                    </div>
+                    <div class="col-8 col-md-6">
+                        <button class="btn btn-outline-success float-md-end"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal_ajouterNouvelleClasse"><i class="fa fa-plus-circle text-success"></i> Ajouter une nouvelle classe
+                      </button>
+                    </div>
+                </div>
+
+            <div class="flex jend mt-4">
+              <nav aria-label="...">
+                <ul class="pagination pagination-md-lg">
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">1</span>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                </ul>
+              </nav>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 col-lg-12 ">
+                    <div class="me-2 flex jen">
+                      <span class="title ms-5  mt-md-3 d-none d-md-block ">Rechercher</span>
+
+                        <!-- <button type="search" class="ms-4 btn">Imprimer</button> -->
+                        <form action="" class="row g-3">
+                          <div class="col-12 col-md-12">
+                            <div class="form-group">
+                              <input type="search" name="textRecherche" id="textRecherche" [(ngModel)]="textRecherche" class="form-control ms-2 mb-sm-2" placeholder="Entrer une recherche"
+                              style="border-radius: 15px;"
+                              >
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+
+
+
+                </div>
+                <div class="table-container table-responsive mt-md-3 ">
+                  <table class="table table-bordered text-center">
+                      <thead>
+                          <tr>
+                              <th scope="col">N°</th>
+                              <th>Classe</th>
+                              <th>Option</th>
+                              <th>Nombre de place</th>
+                              <th>Nombre d'élève</th>
+                              <th>Garçon</th>
+                              <th>Fille</th>
+                              <th>Place restante</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let classe of classes|filtreClasse:textRecherche; let i=index" >
+                              <td>{{i+1}}</td>
+                              <td>{{classe.classe.nom_classe}}</td>
+                              <td >
+                                {{classe?.option?.nom_option || 'Non spécifié'}}
+                              </td>
+                              <td>{{classe.classe.nom_place}}</td>
+                              <td>{{classe.classe.effectif_total}}</td>
+                              <td>{{classe.classe.effectif_garcon}}</td>
+                              <td>{{classe.classe.effectif_fille}}</td>
+                              <td>{{(classe.classe.nom_place-classe.classe.effectif_total)}}</td>
+                              <td>
+                                <button type="button" class="btnI-v  btn-vert btn-sm-v me-2"
+                                  data-bs-toggle="modal" data-bs-target="#modal_ModifierNouvelleClasse" (click)="ouvreModal(classe.classe.id)">
+                                  <i class="fa fa-edit" title="Modifier"></i>
+                                </button>
+                            </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="flex jen mt-md-3">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination paginattion-md-lg justify-content-center">
+                    <li class="page-item disabled">
+                      <a class="page-link">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+    <!-- Ajouter une nouvelle classe -->
+        <div class="modal" tabindex="-1"  id="modal_ajouterNouvelleClasse">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="text-center" style="color: #FF3877;">Ajout d'une Classe</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form [formGroup]="classeForm" (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nom_classe" class="form-label d-none d-md-block ">Nom de la classe</label>
+                        <input formControlName="nom_classe"  type="text" appNoSpecialChars name="nom_classe" id="nom_classe" class="form-control" placeholder="Entrer une classe...">
+                        <small class="text-danger" *ngIf="classeForm.controls['nom_classe'].invalid && classeForm.controls['nom_classe'].touched">
+                          Le nom de la classe est obligatoire.
+                        </small>
+                    </div>
+                    <div class="mb-3">
+                      <label for="nom_place" class="form-label d-none d-md-block ">Nombre de place</label>
+                      <input formControlName="nom_place"  type="number" name="nom_place" id="nom_place" class="form-control" placeholder="Entrer un nombre...">
+                      <small class="text-danger" *ngIf="classeForm.controls['nom_place'].invalid && classeForm.controls['nom_place'].touched">
+                        Le nombre de place est obligatoire.
+                      </small>
+                  </div>
+                    <div class="mb-3">
+                        <label  for="niveau" class="form-label d-none d-md-block">Choisir le niveau</label>
+                        <select (change)="affiche(1)" class="form-select" formControlName="niveau" name="niveau" id="niveau">
+                          <option value="">Choisir le niveau</option>
+                          <option *ngFor="let niveau of niveaux" value="{{niveau.id}}"><span *ngIf="niveau.niveau!=13">{{niveau.niveau}}ème Année</span><span *ngIf="niveau.niveau==13">Terminal</span></option>
+                        </select>
+                        <small class="text-danger" *ngIf="classeForm.controls['niveau'].invalid && classeForm.controls['niveau'].touched">
+                          Le niveau est obligatoire.
+                        </small>
+                    </div>
+                    <div *ngIf="lycee" class="mb-3">
+                      <label  for="option" class="form-label d-none d-md-block">Choisir l'option</label>
+                      <select  class="form-select" formControlName="option" name="option" id="option">
+                          <option value="">Choisir l'option</option>
+                          <option value="Science Sociale">Science Sociale</option>
+                          <option value="Science Mathématiques">Science Mathématiques</option>
+                          <option value="Science Experimentale">Science Experimentale</option>
+                      </select>
+                      <small class="text-danger" *ngIf="messageOption">
+                        {{ messageOption}}
+                      </small>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-outline-success">Enregistrer</button>
+                  <button type="button" class="btn btn-outline-danger">Annuler</button>
+                </div>
+              </form>
+              <span *ngIf="message" class="text-vert">{{message}}</span>
+            </div>
+          </div>
+        </div>
+        <!-- End ajouter une recette -->
+
+        <!-- Modifier une nouvelle recette -->
+        <div class="modal" tabindex="-1"  id="modal_ModifierNouvelleClasse">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="text-center" style="color: #2ecc71;">Modifiaction d'une Classe</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form [formGroup]="UpdateClasseForm" (ngSubmit)="onSubmitUpdate()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <p *ngIf="opClasseSelect">{{opClasseSelect}}</p>
+                        <label for="nom_classe" class="form-label d-none d-md-block ">Nom de la classe</label>
+                        <input formControlName="nom_classe"  type="text" appNoSpecialChars name="nom_classe" id="nom_classe" class="form-control" placeholder="Entrer une classe...">
+                        <small class="text-danger" *ngIf="UpdateClasseForm.controls['nom_classe'].invalid && UpdateClasseForm.controls['nom_classe'].touched">
+                          Le nom de la classe est obligatoire.
+                        </small>
+                    </div>
+                    <div class="mb-3">
+                      <label for="nom_place" class="form-label d-none d-md-block ">Nom de la classe</label>
+                      <input formControlName="nom_place"  type="number" name="nom_place" id="nom_place" class="form-control" placeholder="Entrer une classe...">
+                      <small class="text-danger" *ngIf="UpdateClasseForm.controls['nom_place'].invalid && UpdateClasseForm.controls['nom_place'].touched">
+                        Le nombre de place est obligatoire.
+                      </small>
+                  </div>
+                    <div class="mb-3">
+                        <label  for="niveau" class="form-label d-none d-md-block">Choisir le niveau</label>
+                        <select (change)="affiche(2)" class="form-select" formControlName="niveau" name="niveau" id="niveau">
+                          <option value="">Choisir le niveau</option>
+                          <option *ngFor="let niveau of niveaux" value="{{niveau.id}}"><span *ngIf="niveau.niveau!=13">{{niveau.niveau}}ème Année</span><span *ngIf="niveau.niveau==13">Terminal</span></option>
+                        </select>
+                        <small class="text-danger" *ngIf="UpdateClasseForm.controls['niveau'].invalid && UpdateClasseForm.controls['niveau'].touched">
+                          Le niveau est obligatoire.
+                        </small>
+                    </div>
+                    <div *ngIf="lycee" class="mb-3">
+                      <label  for="option" class="form-label d-none d-md-block">Choisir l'option</label>
+                      <select  class="form-select" formControlName="option" name="option" id="option">
+                          <option value="">Choisir l'option</option>
+                          <option value="Science Sociale">Science Sociale</option>
+                          <option value="Science Mathématique">Science Mathématique</option>
+                          <option value="Science Experimentale">Science Experimentale</option>
+                      </select>
+                      <small class="text-danger" *ngIf="messageOption">
+                        {{ messageOption}}
+                      </small>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-outline-success">Enregistrer</button>
+                  <button type="button" class="btn btn-outline-danger">Annuler</button>
+                </div>
+              </form>
+              <span *ngIf="messageUpdate" class="text-vert">{{messageUpdate}}</span>
+              <span *ngIf="messaged" class="text-rouge">{{messaged}}</span>
+            </div>
+          </div>
+        </div>
+        <!-- End Modifier une recette -->
+</div>
+
+

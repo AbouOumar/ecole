@@ -1,0 +1,140 @@
+
+
+  <div class="container transformY  bordere roundede border-2e w-sm">
+  <div class="flex js mt-2">
+    <!-- <div class="h5 pt-3 text-vert" >Liste des impayé</div> -->
+    <!-- <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div> -->
+  </div>
+ <form action="" class="selectInsF mt-md-3">
+      <div class="row mt-2">
+        <div class="col-4 col-md-3">
+          <select name="sexe" id="annee" class="form-select">
+            <option value="">-- choisir l'année --</option>
+            <option value="25">2024-2025</option>
+            <option value="24">2023-2024</option>
+            </select>
+          </div>
+        <div class="col-4 col-md-3">
+          <select name="sexe" id="annee" class="form-select">
+            <option value="">-- Choissir matière --</option>
+            <option value="25">2024-2025</option>
+            <option value="24">2023-2024</option>
+            </select>
+          </div>
+          <div class="col-4 col-md-3">
+            <select name="class" id="classe" class="form-select">
+            <option value="">-- choisir le niveau --</option>
+            <option value="7">7ème</option>
+            <option value="T">TSM</option>
+            </select>
+          </div>
+          <div class="col-1 col-md-1">
+             <!-- <button type="search" class="btn btn-outline-success">Rechercher</button> -->
+          </div>
+      </div>
+  <!-- </div> -->
+ </form>
+  <div class="flex jend mt-4">
+    <nav aria-label="...">
+      <ul class="pagination pagination-md-lg">
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">1</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <div class="row">
+      <div class="col-12 col-lg-12 ">
+          <div class="me-2 flex jen">
+             <span class="title ms-5  mt-md-3 d-none d-md-block ">Rechercher</span>
+
+              <!-- <button type="search" class="ms-4 btn">Imprimer</button> -->
+              <form action="" class="row g-3">
+                <div class="col-12 col-md-12">
+                  <div class="form-group">
+                    <input [(ngModel)]="textRecherche" name="textRecherche" id="textRecherche" type="search" class="form-control ms-2" placeholder="Entrer votre recherche"
+                    style="border-radius: 15px;"
+                    >
+                  </div>
+                 </div>
+              </form>
+           </div>
+
+
+
+      </div>
+      <div class="table-container table-responsive mt-md-3 ">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Matricule</th>
+                    <th>Prénom et Nom</th>
+                    <th>Téléphone</th>
+                    <th>Classe</th>
+                    <th>Matière</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let enseignantMatiere of enseignantMatieres|affectationClasse:textRecherche">
+                    <td>{{enseignantMatiere.enseigner.personnel.matricule_personnel}}</td>
+                    <td>{{enseignantMatiere.enseigner.personnel.prenom_personnel+" "+enseignantMatiere.enseigner.personnel.nom_personnel}}</td>
+                    <td>{{enseignantMatiere.enseigner.personnel.tel_personnel}}</td>
+                    <td>{{enseignantMatiere.classe.nom_classe}}</td>
+                    <td>{{enseignantMatiere.enseigner.matiere.libelle_matiere}}</td>
+                    <td>
+                      <button (click)="ouvreModal(enseignantMatiere.id)" type="button" class="btnI-r  btn-rouge btn-sm-r border-0 me-2"
+                        data-bs-toggle="modal" data-bs-target="#modal_supprimer_affectation">
+                        <i class="fa fa-trash" title="supprimer"></i>
+                      </button>
+                   </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="flex jen mt-md-3">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination paginattion-md-lg justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal_supprimer_affectation" tabindex="-1" aria-labelledby="modal_supprimer_affectationLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modal_supprimer_affectationLabel">Voulez-vous vraiment supprimer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <input class="d-none" [(ngModel)]="idSelected" type="number">
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" (click)="deleteTypeDepense(idSelected)" class="btn btn-sm btn-primary">Supprimer</button>
+      </div>
+      <span class="text-danger p-3" *ngIf="messaged">{{messaged}}</span>
+      <span class="text-primary p-3" *ngIf="message">{{message}}</span>
+    </div>
+  </div>
+</div>
+     <!-- En suppression -->
+
+

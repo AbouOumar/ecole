@@ -1,0 +1,38 @@
+<div class="pag-container bg-light">
+  <ul class="nav nav-pills nav-fills">
+    <li class="nav-item">
+      <a href="#StatistiqueComptabilite" class="nav-link active"
+      aria-current="page" data-bs-toggle="tab" > Statistique Comptabilité
+    </a>
+   </li>
+   <li class="nav-item">
+    <a href="#StatistiqueDG" class="nav-link" data-bs-toggle="tab">
+      Statistique du DE
+    </a>
+  </li>
+
+   <li class="nav-item">
+    <a href="#StatistiqueCenseur" class="nav-link" data-bs-toggle="tab">
+      Statistique Censeur
+    </a>
+  </li>
+  </ul>
+  <div class="container">
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="StatistiqueComptabilite">
+        <!-- <h5>Salaires Enseignant</h5> -->
+        <app-statistique-comptabilite></app-statistique-comptabilite>
+    </div>
+    <div class="tab-pane fade" id="StatistiqueDG">
+      <!-- <h5>Salaires Responsable</h5> -->
+      <app-statistique-de></app-statistique-de>
+    </div>
+    <div class="tab-pane fade" id="StatistiqueCenseur">
+      <!-- <h5>Salaires Responsable</h5> -->
+      <app-statistique-censeur></app-statistique-censeur>
+    </div>
+  </div>
+</div>
+</div>
+
+

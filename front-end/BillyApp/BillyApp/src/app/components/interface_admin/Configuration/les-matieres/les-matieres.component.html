@@ -1,0 +1,215 @@
+<div class="pag-container">
+  <div class="container transformY  bordere roundede border-2e w-sm">
+    <div class="flex js mt-2">
+      <div class="h5 pt-3" style="color: #FF3877;">Liste des Matières</div>
+      <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div>
+    </div>
+        <div class="row mt-2 selectInsF ">
+          <div class="col-6 col-md-3">
+            <select name="sexe" id="annee" class="form-select">
+              <option value="">-- choisir l'année --</option>
+              <option value="25">2024-2025</option>
+              <option value="24">2023-2024</option>
+              </select>
+            </div>
+            <div class="col-8 col-md-6">
+                <button class="btn btn-outline-success float-md-end"
+                data-bs-toggle="modal"
+                data-bs-target="#modal_ajouterNouvelleMatiere"><i class="fa fa-plus-circle text-success"></i> Ajouter une nouvelle matière
+              </button>
+            </div>
+        </div>
+
+    <div class="flex jend mt-4">
+      <nav aria-label="...">
+        <ul class="pagination pagination-md-lg">
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">1</span>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </ul>
+      </nav>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12 col-lg-12 ">
+            <div class="me-2 flex jen">
+              <span class="title ms-5  mt-md-3 d-none d-md-block "style="color: #FF3877;">Rechercher</span>
+
+                <form action="" class="row g-3">
+                  <div class="col-12 col-md-12">
+                    <div class="form-group">
+                      <input type="search" [(ngModel)]="textRecherche" name="textRecherche" class="form-control ms-2 mb-sm-2" placeholder="Entrer une matiere"
+                      style="border-radius: 15px;"
+                      >
+                    </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+        <div class="table-container table-responsive mt-md-3 ">
+          <table class="table table-bordered text-center">
+              <thead>
+                  <tr>
+                      <th scope="col">N°</th>
+                      <th>Matière</th>
+                      <th>Type de matière</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr  *ngFor="let matiere of matieres|matiere:textRecherche; let i=index">
+                      <td >{{i+1}}</td>
+                      <td>{{matiere?.libelle_matiere}}</td>
+                      <td>{{matiere?.type}}</td>
+                      <td><small>{{matiere?.description}}</small></td>
+                      <td>
+                        <button type="button" class="btnI-v  btn-vert btn-sm-v me-2"
+                          data-bs-toggle="modal" data-bs-target="#modal_ModifierNouvelleMatiere" (click)="ouvreModal(matiere.id)">
+                          <i class="fa fa-edit" title="Modifier"></i>
+                        </button>
+                    </td>
+                  </tr>                  
+              </tbody>
+          </table>
+
+      </div>
+      <div class="flex jen mt-md-3">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination paginattion-md-lg justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+<!-- Ajouter une nouvelle recette -->
+<div class="modal" tabindex="-1"  id="modal_ajouterNouvelleMatiere">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center" style="color: #FF3877;">Ajout d'une Matière</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="matiereForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nomMatiere" class="form-label d-none d-md-block ">Nom de la matière</label>
+                        <input formControlName="libelle_matiere" name="libelle_matiere" id="libelle_matiere"  type="text" appNoSpecialChars class="form-control" id="nomMatiere" placeholder="Entrer une matière...">
+                        <small class="text-danger" *ngIf="matiereForm.controls['libelle_matiere'].invalid && matiereForm.controls['libelle_matiere'].touched">
+                          Le nom de la matiere est obligatoire.
+                        </small>
+                      </div>
+                    <div class="mb-3">
+                        <label for="typeMatiere" class="form-label d-none d-md-block">Choisir le type</label>
+                        <select formControlName="type" name="type" id="type" class="form-select" id="typeMatiere">
+                            <option selected>Choisir le type...</option>
+                            <option value="Scientifique">Scientifique</option>
+                            <option value="Littéraire">Littéraire</option>
+                        </select>
+                        <small class="text-danger" *ngIf="matiereForm.controls['type'].invalid && matiereForm.controls['type'].touched">
+                          Le type de la matiere est obligatoire.
+                        </small>
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label d-none d-md-block">Descritption</label>
+                      <textarea class="form-select" rows="3"  formControlName="description" name="description" id="description"></textarea>
+                      <small class="text-danger" *ngIf="matiereForm.controls['description'].invalid && matiereForm.controls['description'].touched">
+                        La description de la matiere est obligatoire.
+                      </small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label d-none d-md-block">Sélectionner les classes</label>
+                        <div class="border h-sm  rounded p-3 bg-light">
+                          <div *ngFor="let classe of classes;" class="form-check">
+                            <input class="form-check-input" (change)="selectionnerClasse(classe.classe.id, $event)" type="checkbox" value="{{classe.classe.id}}" id="niveau{{classe.classe.id}}">
+                            <label class="form-check-label" for="niveau{{classe.classe.id}}">{{classe.classe.nom_classe}} <span *ngIf="classe?.option?.nom_option" >{{classe?.option?.nom_option}}</span></label>
+                        </div>                       
+                        </div>
+                    </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-outline-success">Enregistrer</button>
+          <button type="button" class="btn btn-outline-danger">Annuler</button>
+        </div>
+      </form>
+      <span *ngIf="message" class="text-vert">{{message}}</span>
+      <span *ngIf="messaged" class="text-rouge">{{messaged}}</span>
+    </div>
+  </div>
+</div>
+<!-- End ajouter une recette -->
+
+<!-- Modifier une nouvelle recette -->
+<div class="modal" tabindex="-1"  id="modal_ModifierNouvelleMatiere">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center" style="color: #2ecc71;">Modifiaction d'une Matière</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="UpdateMatiereForm" (ngSubmit)="onSubmitUpdate()">
+        <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="nomMatiere" class="form-label d-none d-md-block ">Nom de la matière</label>
+                      <input formControlName="libelle_matiere" name="libelle_matiere" id="libelle_matiere"  type="text" appNoSpecialChars class="form-control" id="nomMatiere" placeholder="Entrer une matière...">
+                      <small class="text-danger" *ngIf="UpdateMatiereForm.controls['libelle_matiere'].invalid && UpdateMatiereForm.controls['libelle_matiere'].touched">
+                        Le nom de la matiere est obligatoire.
+                      </small>
+                    </div>
+                    <div class="mb-3">
+                      <label for="typeMatiere" class="form-label d-none d-md-block">Choisir le type</label>
+                      <select formControlName="type" name="type" id="type" class="form-select" id="typeMatiere">
+                          <option selected>Choisir le type...</option>
+                          <option value="Scientifique">Scientifique</option>
+                          <option value="Littéraire">Littéraire</option>
+                      </select>
+                      <small class="text-danger" *ngIf="UpdateMatiereForm.controls['type'].invalid && UpdateMatiereForm.controls['type'].touched">
+                        La description de la matiere est obligatoire.
+                      </small>
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label d-none d-md-block">Descritption</label>
+                      <textarea  class="form-select" rows="3" formControlName="description" name="description" id="description"></textarea>
+                      <small class="text-danger" *ngIf="UpdateMatiereForm.controls['description'].invalid && UpdateMatiereForm.controls['description'].touched">
+                        La description de la matiere est obligatoire.
+                      </small>
+                    </div>
+                  <div class="mb-3">
+                    <label class="form-label d-none d-md-block">Sélectionner les niveaux</label>
+                    <div class="border h-sm  rounded p-3 bg-light">
+                      <div *ngFor="let classe of classes;" class="form-check">
+                        <input class="form-check-input" (change)="selectionnerClasse(classe.classe.id, $event)" type="checkbox" value="{{classe.classe.id}}" id="niveau{{classe.classe.id}}">
+                        <label class="form-check-label" for="niveau{{classe.classe.id}}">{{classe.classe.nom_classe}} <span *ngIf="classe?.option?.nom_option" >{{classe?.option?.nom_option}}</span></label>
+                    </div>                        
+                    </div>
+                </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-outline-success">Modifier</button>
+          <button type="button" class="btn btn-outline-danger">Annuler</button>
+        </div>
+      </form>
+      <span *ngIf="messageUpdate" class="text-vert">{{messageUpdate}}</span>
+      <span *ngIf="messaged" class="text-rouge">{{messaged}}</span>
+    </div>
+  </div>
+</div>
+<!-- End Modifier une recette -->
+</div>
+
+

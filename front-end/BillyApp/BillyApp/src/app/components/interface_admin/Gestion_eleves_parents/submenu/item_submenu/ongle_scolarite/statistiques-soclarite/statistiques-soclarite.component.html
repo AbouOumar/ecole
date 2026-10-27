@@ -1,0 +1,122 @@
+
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-4 col-md-4 mt-3">
+        <select name="sexe" id="annee" class="form-select">
+          <option value="">Année Scolaire </option>
+          <option value="25">2024-2025</option>
+          <option value="24">2023-2024</option>
+          </select>
+      </div>
+        <div class="col-4 col-md-4 mt-3">
+          <select name="mois" id="maListe" class="form-select">
+            <option value="">Choisir la classe</option>
+            <option value="11">11ème</option>
+            <option value="7">7ème</option>
+        </select>
+        </div>
+        <div class="col-1 col-md-2">
+          <button type="search" class="btn btn-outline-success mt-3">Chercher</button>
+       </div>
+    </div>
+
+
+    <div class="row mt-4">
+      <div class="col-12 col-md-4 transformY">
+        <div class="card  card box-shadow rounded-4  " id="bg-vertP">
+          <div class="card-body">
+            <div class="flex js">
+              <span class="title1">Total Reduction</span>
+              <i class="fa fa-percentage "></i>
+            </div>
+            <div class="title2">{{(totaux?.reductions[0]?.total_reduction || 0) | number:'1.2-2'}} FG</div>
+            <div class="flex gap-3 mt-2">
+              <span class="title3">Année scolaire</span>
+              <span class="title4 mb-2">2024-2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4 transformY">
+        <div class="card  card box-shadow rounded-4  " id="bg-rouge1P">
+          <div class="card-body">
+            <div class="flex js">
+              <span class="title1">Total Ré/Inscription</span>
+              <i class="fa fa-dollar-sign "></i>
+            </div>
+            <div class="flex gap-3">
+              <span class="title2">{{(totaux?.totalInscription[0]?.total_inscription || 0) | number:'1.2-2'}} FG </span>
+            </div>
+            <div class="flex gap-3 mt-2">
+              <span class="title3">Total Payement </span>
+              <span class="title2">{{(totaux?.payements[0]?.total_payement || 0) | number:'1.2-2'}} FG</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4 transformY">
+        <div class="card  card box-shadow rounded-4  " id="bg-vertP">
+          <div class="card-body">
+            <div class="flex js">
+              <span class="title1">Total Impayé</span>
+              <i class="fa fa-dollar-sign text-warninsg "></i>
+            </div>
+            <div class="flex gap-3">
+              <span class="title3">Nombre d'élèves </span>
+              <span class="title2">{{listeImpaye.length}}</span>
+            </div>
+            <div class="flex gap-3 mt-2">
+              <span class="title3">Montant </span>
+              <span class="title2">{{(totaux?.impayes["1"] || 0)| number:'1.2-2'}} FG</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="row mt-3">
+      <div class="col-12 col-md-12">
+        <div class="borders border-3s border-primaryes">
+          <div class="title">Liste des impayé</div>
+          <div class="table-responsive mt text-center mt-4">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">Prénom et nom</th>
+                    <th scope="col">Tranche 1</th>
+                    <th scope="col">Tranche 2</th>
+                    <th scope="col">Tranche 3</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr *ngFor="let impaye of listeImpaye">
+                    <td>{{impaye.matricule_eleve}}</td>
+                    <td>{{impaye.nom_complet_eleve}}</td>
+                    <td >{{impaye.impayerTranche1}}</td>
+                    <td >{{impaye.impayerTranche2}}</td>
+                    <td >{{impaye.impayerTranche3}}</td>
+                </tr>
+
+             </tbody>
+            </table>
+
+        </div>
+        </div>
+      </div>
+       <!-- <div class="col-12 col-md-6">
+        <div class="border border-3 border-primarye flex jcc">
+          <div class="cercle-statistique"></div>
+        </div>
+       </div> -->
+    </div>
+
+
+
+  <div style="height: 1rem;"></div>
+
+

@@ -1,0 +1,171 @@
+
+<div class="pag-containerddd">
+
+  <div class="container transformY   shadow  rounded-4 ">
+  <div class="flex js mt-2">
+    <!-- <div class="h5 pt-3" style="color: green;">Liste des impayé</div> -->
+    <!-- <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div> -->
+  </div>
+ <form action="" class="selectIns mt-3">
+      <div class="row mt-2">
+        <div class="col-4 col-md-3">
+          <select name="sexe" id="annee" class="form-select">
+            <option value="">-- choisir l'année --</option>
+            <option value="25">2024-2025</option>
+            <option value="24">2023-2024</option>
+            </select>
+          </div>
+        <div class="col-4 col-md-3">
+          <select name="sexe" id="annee" class="form-select">
+            <option value="">-- Choissir matière --</option>
+            <option value="25">2024-2025</option>
+            <option value="24">2023-2024</option>
+            </select>
+          </div>
+          <div class="col-4 col-md-3">
+            <select  [(ngModel)]="textRechercheClasse" name="class" id="classe" class="form-select"  name="textRechercheClasse">
+              <option value=""> Choisir la classe </option>
+              <option value={{classe.id}} *ngFor="let classe of classes">{{classe.nom_classe}}</option>
+              </select>
+          </div>
+          <div class="col-1 col-md-1">
+             <button type="Chercher" class="btn btn-outline-success">Chercher</button>
+          </div>
+      </div>
+  <!-- </div> -->
+ </form>
+  <!-- <div class="flex jend mt-4">
+    <nav aria-label="...">
+      <ul class="pagination pagination-md-lg">
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">1</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+      </ul>
+    </nav>
+  </div> -->
+
+
+  <div class="row">
+      <div class="col-12 col-lg-12 ">
+          <div class="me-2 flex jen">
+            <!-- <div class="title ms-5  mt-3">Rechercher</div> -->
+              <form action="" class="row g-3">
+                <div class="col-12 col-md-12">
+                  <div class="form-group">
+                    <input type="Chercher" [(ngModel)]="textRecherche" name="textRecherche" class="form-control ms-2 mt-4" placeholder="Chercher"
+                    style="border-radius: 15px;"
+                    >
+                  </div>
+                 </div>
+              </form>
+          </div>
+
+
+
+      </div>
+      <div class="table-container table-responsive mt-3 text-center">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="min-width: 145px;">Matricule</th>
+                    <th style="min-width: 145px;">Prénom et Nom</th>
+                    <th style="min-width: 145px;">Contact Parent</th>
+                    <th style="min-width: 100px;">Tranche 1</th>
+                    <th style="min-width: 100px;">Tranche 2</th>
+                    <th style="min-width: 100px;">Tranche 3</th>
+                    <th style="min-width: 145px;">Total impayer</th>
+                    <th>Classe</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let listeImpay of listeImpaye | filtreImpayes:textRecherche:textRechercheClasse">
+                <td>{{listeImpay?.matricule_eleve}}</td>
+                <td class="" style="min-width: 12rem; line-height: 1; text-align: left;">{{listeImpay?.nom_complet_eleve}}</td>
+                <td style="line-height: 1;">{{listeImpay?.parent_contact}}</td>
+                <td  class="" style="min-width: 10rem; line-height: 1;">{{listeImpay?.impayerTranche1 | number:'1.2-2'}} FG</td>
+                <td  class="" style="min-width: 10rem; line-height: 1;">{{listeImpay?.impayerTranche2 | number:'1.2-2'}} FG</td>
+                <td  class="" style="min-width: 10rem; line-height: 1;">{{listeImpay?.impayerTranche3 | number:'1.2-2'}} FG</td>
+                <td>{{listeImpay?.netResteAPayer | number:'1.2-2'}} FG</td>
+                <td style="min-width: 5rem;">{{listeImpay?.nom_classe}}</td>
+              </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+    <div class="flex jen mt-3">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination paginattion-md-lg justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Précédent</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Suivant</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  </div>
+
+  <div class="modal" tabindex="-1"  id="modal_modifier_listeImpayer">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modification de la liste des impayé</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <label for="prenom" class="form-label  d-none d-md-block text-muted">Prénom <span style="color: red;"> *</span></label>
+                <input type="text" class="form-control  " id="prenom" placeholder="Entrez le prénom" >
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="nom" class="form-label d-none d-md-block">Nom <span style="color: red;"> *</span></label>
+                <input type="text" class="form-control  " id="nom" placeholder="Entrez le nom" >
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-3">
+                <label for="sexe" class="form-label d-none d-md-block text-muted mt-3">Sexe <span style="color: red;"> *</span></label>
+                <select name="sexe" id="sexe" class="form-select">
+                <option value="">Choisir le sexe </option>
+                <option value="h">H</option>
+                <option value="f">F</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-3">
+                <label for="date" class="form-label d-none d-md-block text-muted mt-3">Date de nais <span style="color: red;"> *</span></label>
+                <input type="date" class="form-control   "  aria-label=" date">
+              </div>
+              <div class="col-8 col-md-4">
+                  <label for="formFileLg" class="form-label d-none d-md-block text-muted mt-3">choisir une image <span style="color: red;"> *</span></label>
+                  <input class="form-control   fichierImage_mTop" id="formFileLg" type="file">
+              </div>
+              <div class="col-4 col-md-1 profil-reinscription mt-2">
+                  <img src="/assets/images/photoEn.jpg" class="mt-1" alt="Image élève"  width="">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-outline-success">Modifier</button>
+            <button type="button" class="btn btn-outline-danger">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

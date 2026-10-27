@@ -1,0 +1,68 @@
+/* style resultat trimestriel */
+.selectIns select, input{
+  padding: 10px;
+  border-radius: 60px;
+}
+
+.title , strong, input,  .selectIns select, span, .btn{
+  font-size: 1em;
+}
+
+
+.table-responsive{
+  /* max-height: 400px;
+  overflow-y: auto;
+  position: relative; */
+}
+
+.table thead tr {
+  /* position: sticky;
+  top: 0;
+  z-index: 2; */
+}
+
+
+
+
+@media  (max-width: 768px) {
+  .selectIns select, input{
+    height: 2.7rem;
+    line-height: 1;
+}
+.btn{
+  /* margin-top: 1rem; */
+  margin-left: -9rem;
+}
+
+ .minW-sm{
+  min-width: 155px;
+}
+
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .table-responsivePas{
+    max-height:none;
+    overflow-y:initial;
+  }
+
+  .dNone{
+    display: block;
+  }
+  .dNonePage{
+    display: none;
+  }
+  thead .bordered{
+    border: 0.1px solid #111;
+  }
+  th, tr{
+    border: 0.1px solid black !important;
+  }
+
+}
+
+/* End */

@@ -1,0 +1,242 @@
+<div class="row">
+  <div class="col-6 col-md-5 d-none d-md-block"><h5>Emploi du temp collège / lycée</h5>   <small class="text-vert">Affecter une salle et à une matière</small></div>
+
+  <div class="col-6 col-md-7 ml-sm">
+    <button class="btn btn-outline-success float-end "
+    type="button" data-bs-toggle="collapse" data-bs-target="#AjoutEmploi"
+    aria-expanded="false" aria-controls="AjoutEmploi"
+  >
+  <i class="fa fa-plus  d-none "></i> Ajout un Emploi
+  </button>
+  </div>
+</div>
+<div class="container bg-light">
+  <div class="collapse" id="AjoutEmploi">
+    <div class="col-12 col-md-4">
+      <select (change)="onChangeClasse()" [(ngModel)]="selectedClasse" id="maListe" class="form-select formStyle  mt-3  fs-sm " name="classe">
+        <option  value="">Sélectionner la classe</option>
+        <option *ngFor="let classe of classes" value="{{classe.classe_id}}">{{classe.nom_classe}}</option>
+      </select>
+    </div>
+      <table class="table table-bordered mt-4">
+        <thead class="">
+          <tr>
+            <th>Jour</th>
+            <th>Heure Début</th>
+            <th>Heure Fin</th>
+            <th>Matière</th>
+            <th>Prof</th>
+            <th>Ajouter</th>
+            <th *ngIf="masqueSupp">Supprimer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let jour of jours">
+            <ng-container *ngFor="let ligne of getLignesParJour(jour); let i = index; let last = last">
+              <tr>
+                <!-- Fusion de cellule pour le jour -->
+                <td *ngIf="i === 0" [attr.rowspan]="getLignesParJour(jour).length">{{ jour }}</td>
+
+                <td>
+                  <input type="time" name="time1" class="form-control" [(ngModel)]="ligne.debut">
+                  <small class="text-danger" *ngIf="!isHoraireValide(jour)">{{erreur}}</small>
+                </td>
+                <td><input type="time" name="time2" class="form-control" [(ngModel)]="ligne.fin"></td>
+
+                <td>
+                  <select (change)="onChangeMatiere(ligne,ligne.matiere,ligne.debut,ligne.fin)" name="matiere" class="form-select" [(ngModel)]="ligne.matiere">
+                    <option value="">-- Matière --</option>
+                    <option *ngFor="let m of matiereEnseigner" [value]="m.matiere_id">{{ m.libelle_matiere }}</option>
+                  </select>
+                </td>
+
+               <td>
+                  <select name="prof" class="form-select" [(ngModel)]="ligne.prof">
+                    <option value="">-- Prof --</option>
+                    <option *ngFor="let p of getProfs(ligne.matiere,jour,ligne.debut,ligne.fin)" [value]="p.personnel_id">M.{{ p.nom_personnel+" "+p.prenom_personnel }}</option>
+                  </select>
+                  <small class="text-danger" *ngIf="ligne.erreur">{{ligne.erreur}}</small>
+                </td>
+
+
+                <!-- Bouton ajouter -->
+                <td *ngIf="last">
+                  <button class="btn btn-success text-center" (click)="ajouterLigne(jour)">
+                    <i class="fa fa-plus-circle"></i>
+                  </button>
+                </td>
+                <td *ngIf="!last"></td>
+
+                <!-- Bouton supprimer (seulement pour les lignes ajoutées) -->
+                <td *ngIf="masqueSupp">
+                  <button
+                    *ngIf="ligne.ajouteManuellement"
+                    class="btn btn-danger"
+                    (click)="supprimerLigne(ligne)"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>        
+      </table>
+
+      <small class="text-danger" *ngIf="erreurEmpoi">{{erreurEmpoi}}</small>
+      <small class="text-vert" *ngIf="message">{{message}}</small>
+      <div class="float-end">
+        <button type="button" (click)="onSubmit()"  class="btn btn-outline-success me-3" [disabled]="!isFormValide"><i class="fa fa-plus"></i> Valider</button>
+        <button type="button" class="btn btn-outline-danger"><i class="fa fa-times-circle"></i> Annuler</button>
+      </div>
+
+  </div>
+
+          <div class="row mt-5  ">
+              <div class="col-1 col-md-2 mt-3 ">
+                <nav aria-label="...">
+                  <ul class="pagination pagination-md-lg">
+                    <li class="page-item active" aria-current="page">
+                      <span class="page-link">1</span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="col-md-6">
+                <div class="text-rouge mt-2 me-1 d-none text-center d-md-block mt-4" style="text-decoration: underline;">Fitrage par:</div>
+              </div>
+
+                <div class="col-12 col-md-4">
+                  <select  id="maListe" class="form-select formStyle  mt-3  fs-sm " name="textRechercheMois">
+                    <option value="">Rechercher par jour</option>
+                    <option value="Lundi">Lundi</option>
+                    <option value="Mardi">Mardi</option>
+                    <option value="Mercredi">Mercredi</option>
+                    <option value="Jeudi">Jeudi</option>
+                    <option value="Vendrdi">Vendrdi</option>
+                    <option value="Samedi">Samedi</option>
+                  </select>
+                </div>
+                <!-- <div class="col-12 col-md-4">
+                 <input type="search" class="form-control formStyle mt-3  fs-sm " placeholder="Searche">
+              </div> -->
+          </div>
+          <div class="table-responsive text-center mt-3">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">N°</th>
+                    <th scope="col">Classe</th>
+                    <th scope="col" class="minW-sm">Action</th>
+                    <th scope="col" class="minW-sm">Supprimer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let emploi of listeEmplois; let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{emploi.classe.nom_classe}}</td>
+                    <td class="minW-sm">  
+                      <button type="button" class=" btn-sm-r   btnI-r btn-rouge  btn-sm-r me-2"
+                      data-bs-toggle="modal" data-bs-target="#modifierEmploi" (click)="ouvreModal(emploi.classe.id)">
+                      <i class="fa fa-eye me-" title="Voir"> </i>
+                    </button>                    
+                      <button type="button" class=" btn-sm  btnI-v  btn-vert btn-sm-v me-2"
+                      (click)="onPrint()" >
+                        <i class="fa fa-print" title="imprimer"> </i>
+                      </button>
+                    </td>
+                    <td>
+                      <button type="button" class=" btn-sm  btnI-v  btn-rouge btn-sm-v me-2" (click)="ouvreModalSupp(emploi.classe.id)"
+                      data-bs-toggle="modal" data-bs-target="#SupprimerEmploi">
+                        <i class="fa fa-trash" title="supprimer"> </i>
+                      </button>
+
+                    </td>
+                  </tr>                
+                </tbody>
+              </table>
+              <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" style="background-color: #fff;">&laquo;</a>
+                    </li>
+                    <li class="page-item" style="background-color: #2ecc71;">
+                        <a class="page-link" style="background-color: #fff;">1</a>
+                    </li>
+                    <li class="page-item active" style="background-color: #2ecc71;">
+                        <a class="page-link" style="background-color: #2ecc71;">2</a>
+                    </li>
+                    <li class="page-item" style="background-color: #fff;">
+                        <a class="page-link" style="background-color: #fff;">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" style="background-color: #fff;">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+          </div>
+
+
+          <!-- modifier une eva -->
+          <div class="modal" tafandex="-1"  id="modifierEmploi">
+          <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title title" style="color: #2ecc71;">Emploi du temps {{emploiClasse[0]?.classe.nom_classe || 'chargement ...'}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form >
+            <div class="modal-body">
+
+              <table class="table table-bordered mt-4">
+                <thead class="">
+                  <tr>
+                    <th>Jour</th>
+                    <th>Horaire</th>
+                    <th>Matière</th>
+                    <th>Prof</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let emploi of emploiClasse; let i=index">
+                    <th scope="row">{{emploi?.jour}}</th>
+                    <td>{{emploi?.heure_debut}} - {{emploi?.heure_fin}}</td>
+                    <td>{{emploi?.matiere.libelle_matiere}}</td>
+                    <td>M. {{emploi?.personnel.nom_personnel+" "+emploi?.personnel.prenom_personnel}}</td>
+                  </tr>  
+                </tbody>
+              </table>
+
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
+          </div>
+          </form>
+          <!-- <span class="text-primary p-3" *ngIf="messageUpdate">{{messageUpdate}}</span> -->
+          </div>
+          </div>
+          </div>
+          <!-- End modifiere eva -->
+
+          <!-- Modal -->
+          <div class="modal fade" id="SupprimerEmploi" tafandex="-1" aria-labelledby="SupprimerEmploiLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="SupprimerEmploiLabel">Voulez-vous vraiment supprimer</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+              <input class="d-none"  type="number">
+              <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" (click)="supprimerEmploi()"  class="btn btn-sm btn-primary">Supprimer</button>
+            </div>
+            <span class="text-primary p-3" *ngIf="messageSuppression">{{messageSuppression}}</span>
+            </div>
+            </div>
+            </div>
+            <!-- En suppression -->
+
+</div>

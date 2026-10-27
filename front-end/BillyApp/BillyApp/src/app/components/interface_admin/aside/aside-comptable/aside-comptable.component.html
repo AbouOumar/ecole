@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar Responsive</title>
+</head>
+<body>
+
+<aside class="sidebar d-none d-md-block">
+  <div class="logo mt-3">
+    <img src="/assets/images/icones/billy-ecole.jpg" class="rounded-circle mx-auto d-block" alt="Logo Billy-ecole">
+    <span class="titleL text-uppercase mt-2 ">Billy ecole</span>
+    <div class="text-center text-rouge">La puissance de l'excellence</div>
+  </div>
+  <div class="separateur mt-2"></div>
+  <div class="scrollerCont">
+        <a  routerLink="/admin/tableaudebord"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <i class="fa fa-home icon-rouge"></i> Tableau de bord
+        </a>
+
+          <!-- sidemenu -->
+          <!-- Ci-dessous Gestion des Eleves -->
+          <a class="dropdown-toggle" data-bs-toggle="collapse"
+            href="#gestionEleves"
+              role="button" aria-expanded="false"
+              aria-controls="gestionEleves">
+            <i class="fa fa-user-graduate icon-vert" ></i> Gestion des élèves
+          </a>
+          <div class="collapse submenu" id="gestionEleves">
+            <ul>
+              <li *ngFor="let routeEleve of data_submenuC" >
+                  <a [routerLink]="[routeEleve?.path]"
+                  routerLinkActive="active-link">
+                    {{ routeEleve.name }}
+                  </a>
+              </li>
+            </ul>
+          </div>
+          <!-- End gestion eleves -->
+
+          <!-- Ci-dessous Gestion des Personnels -->
+          <a class="dropdown-toggle" data-bs-toggle="collapse"
+            href="#gestionPersonnels"
+            role="button" aria-expanded="false"
+            aria-controls="gestionPersonnels"
+          > <i class="fa fa-users icon-rouge"></i> Gestion des Personnels
+          </a>
+          <!-- Ci-dessous contenu Gestion des personnels -->
+            <div class="collapse submenu" id="gestionPersonnels">
+              <ul>
+                <li *ngFor="let routePers of  data_submenu_personnelsC">
+                  <a [routerLink]="[routePers?.path]"
+                  routerLinkActive="active-link">{{routePers.name}}
+                </a>
+                </li>
+              </ul>
+
+            </div>
+          <!-- End gestion des personnels -->
+
+
+        <!-- Ci-dessous Gestion des Recettes -->
+        <a class="dropdown-toggle" data-bs-toggle="collapse"
+        href="#gestionRecette"
+        role="button" aria-expanded="false"
+        aria-controls="gestionRecette"
+        > <i class="fa fa-file-invoice-dollar icon-vert"></i> Gestion des Recettes
+        </a>
+        <!-- Ci-dessous contenu Gestion des Recettes -->
+        <div class="collapse submenu" id="gestionRecette">
+          <ul>
+            <li *ngFor="let route2Re of  data_submenu_recettesC">
+              <a [routerLink]="[route2Re?.path]"
+                routerLinkActive="active-link">
+                {{route2Re.name}}
+              </a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- End gestion des Recettes -->
+
+
+          <!-- Ci-dessous Gestion des Depenses -->
+          <a class="dropdown-toggle" data-bs-toggle="collapse"
+          href="#gestionDepenses"
+          role="button" aria-expanded="false"
+          aria-controls="gestionRecette"
+          > <i class="fa fa-wallet icon-rouge"></i> Gestion des Depenses
+          </a>
+        <!-- Ci-dessous contenu Gestion Depenses  -->
+        <div class="collapse submenu" id="gestionDepenses">
+          <ul>
+            <li *ngFor="let route3D of  data_submenu_depensesC">
+              <a [routerLink]="[route3D?.path]"
+                routerLinkActive="active-link">
+                {{route3D.name}}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- End gestion Depenses  -->
+
+
+          <!-- Ci-dessous Gestion des Tresories -->
+          <a class="dropdown-toggle" data-bs-toggle="collapse"
+          href="#gestionTresories"
+          role="button" aria-expanded="false"
+          aria-controls="gestionTresories"
+          > <i class="fa fa-chart-line icon-vert"></i> Gestion des Trésories
+          </a>
+        <!-- Ci-dessous contenu Gestion Tresories  -->
+        <div class="collapse submenu" id="gestionTresories">
+          <ul>
+            <li *ngFor="let route4T of  data_submenu_tresoriesC">
+              <a [routerLink]="[route4T?.path]"
+                routerLinkActive="active-link">
+                {{route4T.name}}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- End gestion Tresories  -->
+
+            <!-- Ci-dessous Gestion des Rapport -->
+            <a  routerLink="/admin/gestionRapports"  class=""
+            routerLinkActive="active-link">
+            <i class="fas  fa-chart-bar icon-rouge"></i> Gestion des Rapports
+            </a>
+          <!-- Ci-dessous contenu Gestion Rapport  -->
+
+  </div>
+</aside>
+
+</body>
+</html>
+

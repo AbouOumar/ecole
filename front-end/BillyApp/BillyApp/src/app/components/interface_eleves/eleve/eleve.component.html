@@ -1,0 +1,16 @@
+
+<div class="h-header">
+  <app-header-eleves [user]="user"></app-header-eleves>
+</div>
+
+<div class="h-content">
+    <div *ngIf="isEmplois(); else showRouterOulet">
+    <app-renseignements></app-renseignements>
+    </div>
+
+    <ng-template #showRouterOulet>
+    <router-outlet></router-outlet>
+    </ng-template>
+</div>
+
+

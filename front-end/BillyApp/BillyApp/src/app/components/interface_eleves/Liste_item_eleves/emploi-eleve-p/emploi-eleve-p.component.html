@@ -1,0 +1,23 @@
+
+<span class="text-vert mb-2" *ngIf="emploiClasse.length==0" >Emplois du temps non disponible</span>
+<div *ngIf="emploiClasse.length>0">
+  <span>Emplois du temps {{emploiClasse[0]?.classe.nom_classe}}</span>
+  <table class="table table-bordered mt-4">
+    <thead class="">
+      <tr>
+        <th>Jour</th>
+        <th>Horaire</th>
+        <th>Matière</th>
+        <th>Prof</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emploi of emploiClasse; let i=index">
+        <th scope="row">{{emploi?.jour}}</th>
+        <td>{{emploi?.heure_debut}} - {{emploi?.heure_fin}}</td>
+        <td>{{emploi?.matiere.libelle_matiere}}</td>
+        <td>M. {{emploi?.personnel.nom_personnel+" "+emploi?.personnel.prenom_personnel}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

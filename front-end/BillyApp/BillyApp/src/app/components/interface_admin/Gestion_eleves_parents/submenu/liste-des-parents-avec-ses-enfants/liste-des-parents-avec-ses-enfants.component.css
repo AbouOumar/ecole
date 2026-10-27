@@ -1,0 +1,531 @@
+.student-card-container {
+  display: flex;
+  flex-wrap: wrap;  /* Permet le passage à la ligne sur petits écrans */
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  /* background-color: #f9f9f9; */
+  font-size: 0.9em;
+}
+
+.card-section {
+  /* display: flex; */
+  /* flex-direction: row;   */
+  align-items: center;
+  /* width: 400px;   */
+  /* min-height: 180px;  */
+  background-color: #e8f9e8;
+  border: 2px solid #2ecc71;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.card-section h2 {
+  /* color: #2ecc71; */
+  color: #FF3877;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.info-container {
+  flex: 1;  /* Prend tout l’espace disponible à droite */
+  padding-left: 15px;
+}
+
+
+.student-affiche {
+  width: 230px;
+  height: 230px;
+  border-radius: 5%;
+  object-fit: cover;
+  margin-left: 14rem;
+}
+
+.transformY{
+  transition: 0.1s;
+}
+.transformY:hover{
+  transform: translateY(-5px);
+}
+.student-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Cacher la photo des parents et du tuteur */
+.no-photo {
+  display: none;
+}
+
+
+
+
+
+/* Style Liste des eleves et parents */
+.mtopp{
+  height: 50rem;
+  margin-top: 7rem;
+}
+
+/* Animation */
+.transformY{
+  transition: 0.3s;
+}
+.transformY:hover{
+  transform: translateY(-5px);
+}
+
+select{
+  padding: 10px;
+  width: 30rem;
+  height: 2.6rem;
+  border-radius: 60px;
+
+  font-size: 0.9rem;
+}
+/* .btn{
+  width: 7rem;
+  height: 2.7rem;
+  border-radius: 60px;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+
+  font-weight: bold;
+
+  background: linear-gradient(135deg, #2ecc71, #09724A);
+
+  cursor: pointer;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+}
+.btn:hover {
+
+  background: linear-gradient(135deg,  #2ecc71,  #2ecc71);
+  color: #fff;
+  transform: scale(1.05);
+
+} */
+
+
+.card-header{
+  background-color: #2ecc7062;
+  color: #FF3877;
+  font-size: 1em;
+}
+.card-body img{
+  border-radius: 50%;
+  width: 80PX;
+  height: 80PX;
+}
+.card-body{
+  font-size: 0.9em;
+}
+@media screen and (max-width: 1300px)
+{
+  .card-header {
+    font-size: 0.9em;
+  }
+  .card-body{
+    font-size: 0.8em;
+  }
+}
+.separateur{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 0.1px solid #2ecc7027;
+  /* margin-left */
+}
+
+@media  (max-width: 768px){
+  select{
+      padding: 10px;
+      width: 22.8rem;
+      height: 2.6rem;
+
+      font-size: 0.9rem;
+
+  }
+  .btn{
+      height: 2.4rem;
+      margin-top: 0.2rem;
+  }
+  .mtopp{
+      height: 80rem;
+      margin-top: 7rem;
+  }
+  .col-11{
+    margin: 0 auto;
+
+  }
+}
+
+/* Fin */
+
+
+
+
+
+
+/* Style Liste des eleves et parents */
+.mtopp{
+  height: 50rem;
+  margin-top: 7rem;
+}
+
+/* Animation */
+.transformY{
+  transition: 0.3s;
+}
+.transformY:hover{
+  transform: translateY(-5px);
+}
+
+select{
+  padding: 10px;
+  width: 30rem;
+  height: 2.6rem;
+  border-radius: 60px;
+
+  font-size: 0.9rem;
+}
+form .btn{
+  width: 7rem;
+  height: 2.7rem;
+  border-radius: 60px;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+
+  font-weight: bold;
+
+  background: linear-gradient(135deg, #2ecc71, #09724A);
+
+  cursor: pointer;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+}
+form .btn:hover {
+
+  background: linear-gradient(135deg,  #2ecc71,  #2ecc71);
+  color: #fff;
+  transform: scale(1.05);
+
+}
+
+
+.card-header{
+  background-color: #2ecc7062;
+  color: #FF3877;
+  font-size: 1em;
+}
+.card-body img{
+  border-radius: 50%;
+  width: 80PX;
+  height: 80PX;
+}
+.card-body{
+  font-size: 0.9em;
+}
+@media screen and (max-width: 1300px)
+{
+  .card-header {
+    font-size: 0.9em;
+  }
+  .card-body{
+    font-size: 0.8em;
+  }
+}
+.separateur{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 0.1px solid #2ecc7027;
+  /* margin-left */
+}
+
+@media  (max-width: 768px){
+  select{
+      padding: 10px;
+      width: 22.8rem;
+      height: 2.6rem;
+
+      font-size: 0.9rem;
+
+  }
+  form .btn{
+      height: 2.4rem;
+      margin-top: 0.2rem;
+  }
+  .mtopp{
+      height: 80rem;
+      margin-top: 7rem;
+  }
+}
+
+/* Fin */
+
+
+
+/* Style Liste des actions */
+select{
+  padding: 10px;
+  width: 30rem;
+  height: 2.6rem;
+  border-radius: 60px;
+
+  font-size: 0.9rem;
+}
+/* btnI i{
+  font-size: 1.2em;
+} */
+
+/* .btn-sm {
+  border-radius: 15px;
+}
+.btn-vert {
+  background: linear-gradient(45deg, #66cc66, #2ecc71);
+  color: white;
+  border-color: #2ecc71;
+  opacity: 0.9;
+}
+.btn-rouge {
+  background: linear-gradient(45deg, #ff6f61, #FF3877);
+  color: white;
+  border-color: #FF3877;
+  opacity: 0.9;
+} */
+
+/* Button imprimer */
+.print-button {
+  background-color: #FF3877; /* Couleur principale */
+  color: #fff; /* Couleur du texte */
+  border: none;
+  padding: 6px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.print-button:hover {
+  background-color: #2ecc71; /* Couleur au survol */
+}
+
+.print-button i {
+  margin-right: 8px; /* Espacement entre l'icône et le texte */
+}
+
+/*  Fin Button imprimer */
+.btn-vert:hover, .btn-rouge:hover {
+  opacity: 100;
+}
+form .btn{
+  /* padding: 17px 15px; */
+  width: 7rem;
+  height: 2.7rem;
+  border-radius: 60px;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  /* line-height: normal; */
+  font-weight: bold;
+  /* background: linear-gradient(135deg,  #FFD700, #FF6347, #008000); */
+  /* background: linear-gradient(135deg,  #27ae60,  #19e919,  #FF6347); */
+  background: linear-gradient(135deg, #2ecc71, #09724A);
+
+  cursor: pointer;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+}
+form .btn:hover {
+  /* background: #2ecc71; */
+  background: linear-gradient(135deg,  #2ecc71,  #2ecc71);
+  color: #fff;
+  transform: scale(1.05);
+  /* border: 1px solid rgb(245, 83, 83); */
+}
+/* fin */
+/* Les tableau */
+
+.mtopp{
+  margin-top: 120px;
+}
+/* thead th{
+
+  color: white;
+  background-color: #2ecc71;
+  text-align: center;
+} */
+tbody tr:nth-child(odd):hover{
+  background-color: #2ecc701b; /* Couleur jaune pâle pour l'exemple */
+  color: #111; /* Couleur du texte noir pour contraste */
+  /* opacity: 40%; */
+}
+/* tr, td, th{
+  line-height: normal;
+  border: 0.1px solid #ccc;
+  line-height: normal;
+} */
+ thead{
+      font-size: 1rem;
+
+  }
+  tbody{
+      font-size: 0.9rem;
+  }
+
+.transformY{
+  transition: 0.1s;
+}
+.transformY:hover{
+  transform: translateY(-3px);
+}
+
+/* Fin  */
+.btnI-r i{
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  line-height: 1;
+  /* margin-right: 5px; */
+}
+.btnI-v i{
+  /* font-size: 0.5em; */
+  /* margin-right: 5px; */
+  color: white;
+  text-align: center;
+  line-height: 1;
+}
+
+.btn-sm-r {
+  padding: 3px 10px;
+  border-radius: 5px;
+  background-color: #FF3877;
+  opacity: 0.8;
+
+}
+.btn-sm-v {
+  font-size: 14px;
+  padding: 3px 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #2ecc71;
+  opacity: 0.8;
+
+}
+
+.btn-rouge, .btn-vert {
+
+  margin-left: 5px;
+}
+
+.btn-vert:hover, .btn-rouge:hover {
+  opacity: 100;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+  .btnI{
+      width: 100%;
+      font-size: 10px;
+      padding: 6px 1px
+   }
+}
+@media  (max-width: 768px) {
+   thead{
+      font-size: 0.7rem;
+
+  }
+  tbody{
+      font-size: 0.6rem;
+  }
+  /*
+  thead{
+      width: 100%;
+      height: 1px;
+
+  } */
+
+
+
+   .btnI-r i{
+      font-size: 1em;
+      /* margin-right: 5px; */
+      color: #FF3877;
+  }
+   .btnI-v i{
+      font-size: 1em;
+      /* margin-right: 5px; */
+      color: #2ecc71;
+  }
+  select{
+    padding: 10px;
+    width: 22.8rem;
+    height: 2.3rem;
+
+    font-size: 0.7rem;
+
+}
+.btn-sm-r {
+  padding: 0px 0px;
+  background-color: inherit;
+
+}
+.btn-sm-v {
+  font-size: 11px;
+  padding: 0px 0px;
+  background-color: inherit;
+
+}
+
+
+form .btn{
+    height: 2.3rem;
+    margin-top: 0.2rem;
+}
+.btn-rouge, .btn-vert {
+
+  margin-left: 0px;
+}
+
+  .title{
+      font-size: 1.3rem;
+  }
+  .w-sm{
+      /* margin-left: 8px; */
+      width: 100%;
+    }
+}
+
+@media  (max-width: 500px) {
+  /* thead{
+      font-size: 0.7rem;
+      text-transform: uppercase;
+  }
+  tbody{
+      font-size: 0.6rem;
+  }
+  thead{
+      height: 1px;
+
+  } */
+   .w-sm{
+      width: 95%;
+   }
+
+  .title{
+      font-size: 0.9rem;
+  }
+
+}
+
+/* Fin Style Liste des actions */
+
+
+

@@ -1,0 +1,13 @@
+
+
+<div *ngIf="user?.Droit=='parent'">
+  <app-renseignements-parents [user]="user"></app-renseignements-parents>
+</div>
+
+
+<div *ngIf="user?.Droit=='eleve'"  style="margin-top: 5rem;">
+  <app-renseignements-eleve [user]="user"></app-renseignements-eleve>
+</div>
+
+<app-footer-eleves></app-footer-eleves>
+

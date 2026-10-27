@@ -1,0 +1,269 @@
+/* Style classe */
+body {
+  background-color: #f8f9fa;
+}
+.custom-card {
+  max-width: 600px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.form-check-label {
+
+  font-weight: 500;
+}
+/* S'assure que les inputs et les checkboxes ne débordent pas */
+.form-check-input {
+  /* width: 100%; */
+  margin-right: 5px;
+  box-sizing: border-box;
+}
+
+/* Pour les petits écrans */
+@media (max-width: 768px) {
+
+  .form-check {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2px;
+  }
+
+  .form-check-input {
+  }
+}
+
+.selectInsF select, input{
+  padding: 10px;
+  border-radius: 60px;
+}
+
+.modal-body  select{
+  padding:10px;
+  border-radius: 7px;
+}
+.modal-dialog{
+  margin-left: 30rem;
+  /* margin-bottom: 10rem; */
+}
+.modal-body   input{
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.8em;
+}
+
+.btn-outline-success{
+  background-color: #2ecc71 !important;
+  border-color: none;
+  color: #fff;
+  transition: background-color 0.3s ease;
+
+    border: none !important;
+}
+
+.btn-outline-success:hover{
+ background-color: #0ebb56 !important;
+}
+
+.btnI-v i{
+  color: white;
+  text-align: center;
+  line-height: 1;
+}
+
+.btn-sm-v {
+  font-size: 14px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #FF3877;
+  opacity: 0.8;
+}
+
+.btn-vert {
+  margin-left: 5px;
+}
+
+.btn-vert:hover, .btn-rouge:hover {
+  opacity: 100;
+}
+.btn-vert:hover, .btn-rouge:hover {
+  opacity: 100;
+}
+
+
+thead th{
+  /* background-color: #2ecc71; */
+  /* color: #fff; */
+  font-size: 1rem;
+}
+
+tbody tr td{
+  line-height: 1;
+  line-height: normal;
+  font-size: 0.9rem;
+}
+
+  .title , strong, input, select, .selectInsF, span{
+    font-size: 1em;
+  }
+
+.transformY{
+  transition: 0.1s;
+}
+.transformY:hover{
+  transform: translateY(-3px);
+}
+
+.paginattion .page-link{
+  background: #27ae60;
+}
+.paginattion .page-link .active{
+  background: #27ae60;
+}
+
+/* Fin  */
+
+
+
+
+@media screen and (max-width: 1200px) {
+  .btnI{
+      width: 100%;
+      font-size: 10px;
+      padding: 6px 1px
+   }
+}
+
+
+
+@media  (max-width: 768px) {
+   thead{
+      font-size: 0.8rem;
+
+  }
+  input, select{
+    margin-top: 1rem;
+  }
+  tbody{
+      font-size: 0.7rem;
+  }
+  .title , strong, input, select, .selectInsF, span{
+    font-size: 0.9em;
+  }
+  .modal-dialog{
+    margin-left:10px;
+  }
+  .modal-body  select{
+    padding:9px;
+    border-radius: 7px;
+    font-size: 0.8em;
+  }
+  .modal-body input{
+    padding: 9px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    height: 2.5rem;
+  }
+  .pt-sm-5{
+    padding-top: 2rem;
+  }
+  .modal{
+    min-height: 70%;
+  }
+  .modal-title{
+    font-size: 0.8em;
+  }
+ .btnI-v i{
+    font-size: 1em;
+    color: #2ecc71;
+}
+
+.btn-sm-v {
+font-size: 11px;
+padding: 0px 0px;
+background-color: inherit;
+
+}
+
+  .selectInsF select, input{
+    padding: 10px;
+    font-size: 0.9em;
+    height: 2.5rem;
+    line-height: normal;
+}
+
+.btn{
+  margin-top: 1rem;
+}
+.mb-sm-2, input{
+  margin-bottom: 1rem;
+  height: 2.3rem;
+}
+.btn-rouge, .btn-vert {
+
+  margin-left: 0px;
+}
+
+  .title{
+      font-size: 1.3rem;
+  }
+}
+
+@media  (max-width: 500px) {
+
+   .w-sm{
+      width: 95%;
+   }
+
+  .title{
+      font-size: 0.9rem;
+  }
+
+}
+
+/*  Fin Style */
+
+
+/* sytle table */
+
+.table-container {
+  max-height: 400px; /* Ajuste la hauteur selon ton besoin */
+  overflow-y: auto;
+  position: relative;
+}
+.table thead tr {
+  position: sticky;
+  top: 0;
+  color: white;
+  z-index: 2;
+}
+.table tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+.table tbody tr:hover {
+  background-color: #d1e7dd;
+}
+
+
+@media (max-width: 768px) {
+  tbody{
+    font-size: 0.8em;
+  }
+.h-sm{
+  height: 19rem;
+}
+.h-sm .form-check-input{
+padding-top: 1rem;
+}
+.edit-btn {
+
+  padding: 4px 8px;
+  font-size: 0.8em;
+
+}
+}
+/* Fin sytle table */
+
+
+
+

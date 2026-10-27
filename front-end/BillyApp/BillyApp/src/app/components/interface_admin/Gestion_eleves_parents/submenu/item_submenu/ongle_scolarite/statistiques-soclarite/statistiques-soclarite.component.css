@@ -1,0 +1,316 @@
+
+.cercle-statistique{
+  width: 23rem;
+  height: 23rem;
+  border-radius: 50%;
+  background-color: rgba(255, 166, 0, 0.26);
+}
+
+.card{
+  border: 2px solid #27ae60;
+}
+.flex{
+  display: flex;
+}
+.js{
+  justify-content: space-between;
+}
+/* style tableau */
+/* Style parent d'eleves */
+
+thead th{
+  color: #fff;
+  background-color: #2ecc71;
+  text-align: center;
+}
+
+.table-responsive {
+  max-height: 400px; /* Ajuste la hauteur selon tes besoins */
+  overflow-y: auto;
+}
+tbody tr:nth-child(odd):hover{
+  background-color: #2ecc701b; /* Couleur jaune pâle pour l'exemple */
+  color: #111; /* Couleur du texte noir pour contraste */
+  /* opacity: 40%; */
+}
+tr, td, th{
+  line-height: normal;
+  border: 0.1px solid #ccc;
+  line-height: normal;
+}
+ thead{
+      /* font-size: 0.8em; */
+
+  }
+  tbody{
+      /* font-size: 0.7em; */
+  }
+  .title , strong, input, select, .selectIns, span{
+    font-size: 0.9em;
+  }
+
+.transformY{
+  transition: 0.1s;
+}
+.transformY:hover{
+  transform: translateY(-3px);
+}
+
+.paginattion .page-link{
+  background: #27ae60;
+}
+.paginattion .page-link .active{
+  background: #27ae60;
+}
+
+/* Fin  */
+
+
+/* Fin */
+
+
+@media screen and (max-width: 1200px) {
+  .btnI{
+      width: 100%;
+      font-size: 10px;
+      padding: 6px 1px
+   }
+}
+
+
+
+@media  (max-width: 768px) {
+   thead{
+      font-size: 0.8rem;
+
+  }
+  input, select{
+    margin-top: 1rem;
+  }
+  tbody{
+      font-size: 0.7rem;
+  }
+  .title , strong, input, select, .selectIns, span{
+    font-size: 0.9em;
+  }
+
+
+
+
+
+ select, input{
+    padding: 10px;
+    font-size: 0.7em;
+    width: 14.3em;
+    height: 2rem;
+    line-height: 1;
+}
+ .btn{
+  margin-top: 0.6rem;
+  font-size: 0.9em;
+  height: 2rem;
+  width: 5rem;
+
+}
+.btn-rouge, .btn-vert {
+
+  margin-left: 0px;
+}
+
+  .title{
+      font-size: 1.3rem;
+  }
+  .w-sm{
+      /* margin-left: 8px; */
+      width: 100%;
+    }
+}
+
+@media  (max-width: 500px) {
+
+   .w-sm{
+      width: 95%;
+   }
+
+  .title{
+      font-size: 0.9rem;
+  }
+
+}
+
+/*  Fin Style */
+
+/* Fin style tableau */
+
+
+#bg-vert{
+  /* background-color: #2ecc71; */
+  background: linear-gradient(45deg, #5af55a, #54f597,#2ecc71);
+  color: #fff;
+  border-radius: 15px;
+  /* border-color: #2ecc71; */
+  border: none;
+}
+#bg-rouge{
+  /* background-color: #2ecc71; */
+  /* background-color: #2ecc703e; */
+
+  background: linear-gradient(45deg, #FF3877, #54f597,#FF3877);
+  color: #fff;
+  border-radius: 15px;
+  /* border-color: #FF3877; */
+    border: none;
+
+}
+#bg-rouge1{
+  /* background-color: #2ecc71; */
+  background: linear-gradient(45deg, #f995b5, #f585a8,#fc276ae8);
+  color: #fff;
+  border-radius: 15px;
+  /* border-color: #FF3877; */
+    border: none;
+
+}
+/* Animation */
+.transformY{
+  transition: 0.3s;
+}
+.transformY:hover{
+  transform: translateY(-5px);
+}
+.title1, .title3 {
+  font-size: 0.7em;
+  /* padding-top: 3px; */
+  font-weight: 545;
+}
+.title3{
+  padding-top: 5px;
+}
+h5{
+  color: #fff;
+}
+.title2{
+  font-size: 1em;
+  /* padding-bottom: 3px; */
+  /* margin: 3px; */
+  font-weight: bold;
+}
+ .title4 {
+  font-size: 0.7em;
+  /* padding: 3px; */
+  padding-top: 5px;
+  font-weight: bold;
+}
+i{
+  padding: 10px 15px;
+  background-color: #ffffff58;
+  /* background-color: #ff38778a; */
+  border-radius: 7px;
+}
+.btntI i{
+ /* font-size: 16px; */
+}
+
+
+ select{
+  padding: 10px;
+  border-radius: 60px;
+  font-size: 0.9em;
+}
+ .btn{
+  width: 6rem;
+  height: 2.5rem;
+  border-radius: 60px;
+  border: none;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  background: linear-gradient(135deg, #2ecc71, #09724A);
+
+  cursor: pointer;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+}
+ .btn:hover {
+  background: linear-gradient(135deg,  #2ecc71,  #2ecc71);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+
+@media  (max-width: 768px) {
+
+  i{
+    padding: 10px 15px;
+    /* border-radius: 0px; */
+    margin-left: 6rem;
+  }
+
+  select{
+    padding: 10px;
+    font-size: 0.6em;
+    width: 14em;
+    height: 2rem;
+    line-height: 1;
+  }
+  .retourAl select{
+    /* padding: 10px;
+    font-size: 0.6em;
+    width: 17.5em;
+    height: 2rem;
+    line-height: 1; */
+
+
+  }
+
+ .btn{
+  margin-top: 0.6rem;
+  font-size: 0.8em;
+  height: 2rem;
+  width: 5rem;
+  margin-top: 1.4rem;
+  line-height: 1;
+  margin-top: 1.5rem;
+ }
+ .titleT{
+  margin-left: 1.2rem;
+ }
+  .card{
+    margin-top: 7px;
+  }
+}
+
+
+@media  (max-width: 360px) {
+
+  i{
+    padding: 10px 15px;
+    background-color: #ffffff58;
+    /* border-radius: 0px; */
+    /* margin-left: 6rem; */
+  }
+
+  select, input{
+    padding: 10px;
+    font-size: 0.5em;
+    width: 13em;
+    height: 2rem;
+    line-height: 1;
+}
+
+
+ .btn{
+  margin-top: 0.6rem;
+  font-size: 0.8em;
+  height: 2rem;
+  width: 5rem;
+  margin-top: 1.4rem;
+  line-height: 1;
+ }
+ .titleT{
+  margin-left: 1.2rem;
+ }
+  .card{
+    margin-top: 7px;
+  }
+}

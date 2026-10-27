@@ -1,0 +1,220 @@
+
+nav{
+  /* background-color: #2ecc703e; */
+  background-color: #fff;
+  z-index: 100;
+  /* overflow: hidden; */
+
+
+  /* border-bottom: 2px solid red; */
+}
+.navbar{
+  /* position: fixed; */
+}
+
+/* Style sidbar */
+
+
+/* Fin Style sidbar */
+
+.custom-param-icon {
+  color: #2ecc71; /* Utilise ta couleur verte */
+  font-size: 1.2rem;
+}
+.custom-param-iconR {
+  color: #FF3877; /* Utilise ta couleur verte */
+  font-size: 1.2rem;
+}
+
+
+.marginleft{
+  margin-left: 24rem;
+  gap: 5px;
+}
+.dropdown-toggle::after {
+  display: none !important; /* Cache l'icône de la flèche */
+}
+
+ .dropdown-toggle .outline-danger:hover {
+  color: #27ae60 !important;
+}
+
+/* Pour les éléments <a> dans le menu déroulant */
+.dropdown-item {
+  color: #111; /* Couleur rouge */
+}
+
+.dropdown-item:hover {
+  color: #2ecc71; /* Changer la couleur au survol pour la couleur verte */
+  background-color: #f0f0f0; /* Couleur de fond au survol */
+}
+
+/* Pour les éléments <li> dans le menu déroulant */
+.nav-item {
+  margin-bottom: 10px; /* Optionnel : espacement entre les éléments */
+}
+
+
+input{
+  width: 25rem;
+  height: 2.7rem;
+  /* font-size: 0.8em; */
+  /* border-radius: 35px; */
+  border-radius:35px  0px 0px  35px;
+
+}
+.btn{
+  width: 6rem;
+  height: 2.7rem;
+  /* font-size: 0.8em; */
+  border-radius:0px  35px 35px  0px;
+  background-color: #2ecc71;
+  color: #fff;
+  /* border-color: #FF3877; */
+  transition: all 0.3s ease-in;
+}
+.btn:hover {
+  background-color: #27ae60;
+
+
+}
+
+.bg-img img{
+  /* background: #FF3877; */
+  /* border: 0.1px solid #27ae5f; */
+  object-fit:fill;
+  width: 35px;
+  height: 35px;
+}
+
+
+.menu-bar img{
+  border-radius: 5px;
+  border: 1px solid #27ae60 ;
+
+}
+.menu-bar img:hover{
+  border-radius: 6px;
+  border: 1px solid red ;
+}
+
+
+
+
+
+
+@media  (max-width: 868px){
+  input{
+    width: 15rem;
+    height: 2.3rem;
+    font-size: 0.9em;
+  }
+  .marginleft{
+    margin-left: 0rem;
+    margin-top: 0;
+  }
+  .btn{
+    width: 5rem;
+    height: 2.3rem;
+    font-size: 0.8em;
+    border-radius:0px  35px 35px  0px;
+
+  }
+
+
+}
+@media  (max-width: 768px){
+  input{
+    width: 10rem;
+    height: 2.3rem;
+    font-size: 0.9em;
+  }
+  .marginleft{
+    margin-left: 0rem;
+    margin-top: 0;
+  }
+  .btn{
+    width: 5rem;
+    height: 2.3rem;
+    font-size: 0.8em;
+    border-radius:0px  35px 35px  0px;
+
+  }
+
+
+}
+
+@media   (max-width: 1040px){
+
+  .marginleft{
+    margin-left: 35rem;
+    margin-top: 0;
+  }
+
+}
+@media screen and  (max-width: 1300px){
+
+  .marginleft{
+    margin-left: 14rem;
+    margin-top: 0;
+  }
+
+}
+@media  (max-width: 500px){
+
+  input{
+    width: 14.5rem;
+    border-radius:15px  0 0  15px;
+
+  }
+  .marginleft{
+    margin-left: 0rem;
+    margin-top: 0;
+  }
+
+  .btn{
+    width: 4rem;
+    /* height: 2rem; */
+    /* font-size: 0.8em; */
+    border-radius:0px  35px 35px  0px;
+  }
+
+
+
+  a .btn1 {
+    background: linear-gradient(135deg, #2ecc71, #FF3877);
+    width: 10rem;
+    font-size: 0.8em;
+    color: #2ecc71;
+    font-weight: bold;
+  }
+  a .btn1:hover{
+    background: linear-gradient(135deg, #FF3877, #2ecc71);
+  }
+
+
+}
+@media  (max-width: 390px){
+  .navbar{
+    width: 100%;
+  }
+  .marginleft{
+    margin-left: 0rem;
+    margin-top: 0;
+  }
+  input{
+    width: 7rem;
+    /* height: 2rem; */
+    /* font-size: 0.8em; */
+
+  }
+
+  .btn{
+    width: 4rem;
+    /* height: 2rem; */
+    font-size: 0.7em;
+  }
+
+
+
+}

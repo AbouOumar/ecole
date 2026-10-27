@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body style="  background-color: #dff8e5;">
+    <div class="container my-5 " id="meilleursEleve">
+  <h2 class="text-center mb-4 fw-bold text-uppercase">
+    <i class="fas fa-trophy" style="color: #2ecc71;"></i>
+    Nos Meilleurs Élèves
+  </h2>
+  <div class="row justify-content-center">
+    <div class="col-md-4 mb-4" *ngFor="let eleve of eleves">
+      <div class="card shadow-lg border-0 rounded-4 text-center" style="border-color: #2ecc71;">
+        <div class="card-body">
+          <img [src]="eleve.photo" alt="{{ eleve.nom }}" class="rounded-circle mb-3" width="100" height="100">
+          <h5 class="card-title fw-bold" style="color: #111;">{{ eleve.nom }}</h5>
+          <p class="text-muted">{{ eleve.classe }}</p>
+          <p class="mb-1">
+            <span class="badge" style="background-color: #2ecc71;">
+              <i class="fas fa-chart-line me-1"></i> Moyenne : {{ eleve.moyenne }}
+            </span>
+          </p>
+          <p>
+            <span class="badge" style="background-color: #2ecc71;">
+              <i class="fas fa-certificate me-1"></i> Mention : {{ eleve.mention }}
+            </span>
+          </p>
+          <div class="mt-2">
+            <span class="badge fs-6" style="background-color: #f8f9fa; color: #333; border: 1px solid #FF3877;">
+              <i class="fas fa-medal me-1" style="color: #FF3877;"></i> #{{ eleve.rang }}
+            </span>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<article id="activite">
+  <!-- Classes -->
+<section class="py-5 bg-light">
+  <div class="container ">
+      <section class="benefit-online" *ngFor="let classe of classes">
+      <div class="images-section">
+        <img [src]="classe.teacherImg" alt="Teacher explaining" class="teacher-img">
+        <img [src]="classe.studentImg" alt="Student learning" class="student-img">
+      </div>
+      <div class="text-section mt-sm">
+        <div class=" my-4">
+          <h3 class="fw-boldv title-double-line">
+            <span class="text-vert">{{classe.title}}</span>
+          </h3> <br>
+          <small class="text-center">{{classe.subtitle}}</small>
+        </div>
+        <p class="text-muted ">{{classe.description}}</p>
+        <ul class="features-list">
+          <li *ngFor="let feature of classe.features">
+            <span class="check-icon badge bg-rouge text-white text-rouge">✔</span> {{ feature }}
+          </li>
+        </ul>
+        <button class="learn-more-btn"> {{ classe.buttonText }}</button>
+      </div>
+    </section>
+
+
+
+  </div>
+</section>
+<!-- END classe -->
+
+<!-- Activités Sportive -->
+<section class="py-5 bg-light mt-md-5">
+  <div class="container text-centerZ">
+      <section class="benefit-online" *ngFor="let sport of sports">
+      <div class="text-section">
+        <div class=" my-4">
+          <h3 class="fw-boldv title-double-line">
+            <span class="text-vert">{{sport.title}}</span>
+          </h3> <br>
+          <small class="text-center">{{sport.subtitle}}</small>
+        </div>
+        <p class="text-muted ">{{sport.description}}</p>
+        <ul class="features-list">
+          <li *ngFor="let feature of sport.features">
+            <span class="check-icon badge bg-rouge text-white text-rouge">✔</span> {{ feature }}
+          </li>
+        </ul>
+        <button class="learn-more-btn"> {{ sport.buttonText }}</button>
+      </div>
+      <div class="images-section">
+        <img [src]="sport.SportImg" alt="Teacher explaining" class="teacher-img classe-img">
+      </div>
+    </section>
+
+
+
+  </div>
+</section>
+<!-- END Activités Sportive -->
+
+
+<!-- Bibliothèque -->
+<section class="py-5 bg-light">
+  <div class="container">
+      <section class="benefit-online">
+        <div class="images-section">
+          <img src="assets/images/bg-billy0.jpg" alt="Teacher explaining" class="teacher-img classe-img1">
+
+          <!-- <img src="assets/images/eleve3.jpg" alt="Student learning" class="student-img"> -->
+
+        </div>
+
+      <div class="text-section ">
+        <div class=" my-4">
+          <h3 class="fw-bold title-double-line">
+            <span >Bibliothèque </span>
+            <!-- <span style="color: #2ecc71;"> Sportives</span> -->
+          </h3>
+        </div>
+        <p class="text-muted fs-5">
+          La bibliothèque de Billy-École propose des ressources pour encourager la recherche aut.         <br />
+          Nous allions tradition et innovation pour former les citoyens de demain.
+        </p>
+        <ul class="features-list">
+          <li><i class="check-icon badge bg-rouge text-white">✔</i> Recorded Classes</li>
+          <li><i class="check-icon badge bg-rouge text-white">✔</i> Audio Classes</li>
+          <li><i class="check-icon badge bg-rouge text-white">✔</i> Live Classes</li>
+          <li><i class="check-icon badge bg-rouge text-white">✔</i> Assessment</li>
+        </ul>
+        <button class="learn-more-btn">Détalis</button>
+      </div>
+
+    </section>
+
+
+
+  </div>
+</section>
+<!-- END Bibliothèque -->
+
+
+<!-- Evenement scolaire -->
+<section class="py-5 bg-light">
+  <div class="container text-centerZ">
+      <section class="benefit-online">
+      <div class="text-section">
+        <div class=" my-4">
+          <h3 class="fw-bold title-double-line">
+            <span style="color: #2ecc71;">Événements </span>
+            <span> Scolaires</span>
+          </h3>
+        </div>
+        <p class="text-muted fs-5">
+          Les événements scolaires renforcent l’esprit communautaire d Billy-École.          <br />
+          Nous allions tradition et innovation pour former les citoyens de demain.
+        </p>
+        <ul class="features-list">
+          <li><i class="check-icon badge bg-rouge text-white badge bg-rout">✔</i> Recorded Classes</li>
+          <li><i class="check-icon badge bg-rouge text-white">✔</i> Audio Classes</li>
+          <li><i class="check-icon badge bg-rouge text-white">✔</i> Live Classes</li>
+          <li><i class="check-icon badge bg-rouge text-white">✔</i> Assessment</li>
+        </ul>
+        <button class="learn-more-btn">Détalis</button>
+      </div>
+
+      <div class="images-section ms-md-5">
+        <img src="assets/images/feux.jpg" alt="Teacher explaining" class="teacher-img">
+        <img src="assets/images/bg-billy-5.jpg" alt="Student learning" class="student-img d-none d-md-block">
+      </div>
+    </section>
+
+
+
+  </div>
+</section>
+<!-- END Evenement scolaire -->
+
+<!-- prof et matières -->
+<section class="py-5 px-4 text-center bg-success bg-opacity-10 mt-5">
+  <div class="py-5">
+    <h2 class="display-3 font-weight-bold mb-4 text-light" style="color: #111 !important;">
+      <span class="text-success">Nos Cours</span> et Professeurs
+    </h2>
+    <p class="text-muted mb-5 lead text-light">
+      Découvrez nos matières et nos professeurs qualifiés qui les enseignent.
+    </p>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+      <div *ngFor="let prof of professeursAffiches" class="col">
+        <div class="card shadow-lg border-0 rounded-5 overflow-hidden">
+          <div class="position-relative">
+            <img [src]="prof.image" [alt]="prof.nom" class="card-img-top"
+              style="height: 250px; object-fit: cover; border-bottom: 3px solid #2ecc71;">
+            <div class="position-absolute bottom-0 start-0 p-3" style="background-color: rgba(39, 130, 4, 0.607); width: 100%;">
+              <h5 class="card-title text-white">{{ prof.nom }}</h5>
+              <p class="card-text text-white">{{ prof.matiere }}</p>
+            </div>
+          </div>
+          <div class="card-body text-center">
+            <button class="btn learn-more-btn btn-sm"
+                    (click)="afficherDetails(prof)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#profModal">
+              En savoir plus
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="mt-4">
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button class="page-link" (click)="changePage(currentPage - 1)" style="color: #FF3877;">Précédent</button>
+          </li>
+
+          <li class="page-item"
+              *ngFor="let page of [].constructor(totalPages); let i = index"
+              [class.active]="currentPage === i + 1">
+            <button class="page-link" (click)="changePage(i + 1)" style="background-color: #2ecc71; border-color: #fff; color: #fff;">
+              {{ i + 1 }}
+            </button>
+          </li>
+
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button class="page-link" (click)="changePage(currentPage + 1)" style="color: #2ecc71;">Suivant</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+
+
+
+
+</article>
+
+
+
+
+
+<!-- MODALE PROF -->
+<div class="modal fade" id="profModal" tabindex="-1" aria-labelledby="profModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content rounded-4">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="profModalLabel">{{ selectedProf?.nom }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img [src]="selectedProf?.image" [alt]="selectedProf?.nom" class="img-fluid rounded mb-3" style="max-height: 300px;">
+        <h5>{{ selectedProf?.matiere }}</h5>
+        <p class="text-muted">
+          {{ selectedProf?.description || 'Aucune description fournie pour le moment.' }}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--End prof et matières -->
+
+<!-- Frais de  Renseignement -->
+
+  <section id="frais">
+    <section class="py-5"  style="background-color: #dff8e5;" >
+      <div class="text-center mb-5">
+      <h2 class="text-black">Fiche de Renseignement – Frais Scolaires 2024-2025</h2>
+        <p class="lead">Billy École – Du Collège (7<sup>e</sup>) au Lycée (Terminale)</p>
+          <div class="container">
+            <button class="learn-more-btn float-end text-black">Détalis</button>
+
+          </div>
+      </div>
+
+    <section class="py-5 container ">
+          <section class="benefit-online w-frais">
+            <div class="images-section">
+              <img src="assets/images/info1.jpg" alt="Teacher explaining" class="teacher-img classe-img1-1 d-none d-md-block">
+
+              <img src="assets/images/info2.jpg" alt="Student learning" class="student-img d-none d-md-block">
+
+            </div>
+
+          <div class="text-section bg-lightP shadow  rounded-3 " >
+
+            <div class=" my-5 " style="margin-left:  15px;">
+              <h3 class="fw-bold title-double-line">
+                <span class="text-black">Frais d'Inscription </span>
+              </h3>
+            </div>
+            <p class="text-muted text-black"   style="margin-left:  15px;">
+            Nos frais de scolarité sont fixés dans un souci d'accessibilité et de qualité, afin de permettre à chaque élève, <br>
+            du collège au lycée, de béneficier d'un accompagnement pédagogique complet.
+            </p>
+            <ul class="features-list"  style="margin-left:  15px;">
+              <li><i class="check-icon badge  text-rouge">✔</i> Type de frais</li>
+              <li><i class="check-icon badge text-rouge ">✔</i> Montant (FG)</li>
+            </ul>
+            <p  style="margin-left:  15px;"><i class="fas fa-user-plus fa-2x mb-3 me-1 text-vert"></i>
+              Inscription (nouvel élève)
+              <i class="fas fa-money-bill-wave  text-muted   me-1 "></i>     100 000 FG
+              </p>
+            <p  style="margin-left:  15px;"><i class="fas fa-user-check fa-2x mb-3 me-1 text-rouge"></i>
+                Réinscription (ancien élève)
+                <i class="fas fa-money-bill-wave  text-muted   me-1 "></i>     75 000 FG
+                </p>
+
+          </div>
+
+        </section>
+    </section>
+</section>
+
+<div class="card py-4 container  mb-4">
+  <div class="card-header bg-vert text-white">Frais de Scolarité</div>
+  <div class="card-body">
+    <table class="table table-striped table-hover table-responsive">
+      <thead class="thead-dark">
+        <tr>
+          <th>Niveau</th>
+          <th>Tranche 1</th>
+          <th>Tranche 2</th>
+          <th>Tranche 3</th>
+          <th>Total Annuel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let niveau of frais">
+          <td>{{ niveau.nom }}</td>
+          <td>{{ niveau.tranche1 }}</td>
+          <td>{{ niveau.tranche2 }}</td>
+          <td>{{ niveau.tranche3 }}</td>
+          <td>{{ niveau.total }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  </section>
+
+  <!-- <div class="card  mb-4">
+    <div class="card-header bg-dark text-white">Informations & Modalités</div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Paiement en <strong>trois tranches</strong> ou en une seule fois.</li>
+        <li class="list-group-item">Modes acceptés : Espèces, Orange Money, Virement, Chèque certifié.</li>
+        <li class="list-group-item">Contact : +224 XXX XXX XXX / contactbillyecole.gn</li>
+        <li class="list-group-item">Adresse : Billy École, Quartier XXX, Conakry</li>
+      </ul>
+    </div>
+  </div> -->
+
+
+<!-- End Frais de Renseignement -->
+
+<!-- Les events -->
+<section class="evenements-section py-5 px-4 bg-light" id="event" >
+  <div class="text-center">
+    <h2 class="fw-bold">Événements de <span class="text-vert">Billy-Ecole</span></h2>
+    <p class="text-muted fst-italic">Restez informé des événements et activités à venir</p>
+    <h4 class="mt-4 text-vert fw-bold">Calendrier</h4>
+  </div>
+
+  <div class="container  p-4 rounded shadow-sm">
+    <h5 class="fw-bold text-vert">Événement à Venir</h5>
+
+    <!-- Boucle Angular -->
+    <div *ngFor="let event of evenements" class="event-card mb-3 p-3 rounded bg-success bg-opacity-10 border-start border-success border-4">
+      <div class="fw-bold text-vert">{{ event.date }}</div>
+      <div class="fw-bold">{{ event.titre }}</div>
+      <div class="fst-italic">{{ event.description }}</div>
+    </div>
+  </div>
+</section>
+
+<!--End Les events -->
+
+<!-- Formulaire de contact -->
+ <!-- SECTION CONTACT US -->
+
+ <section class="contact-container" id="contact">
+  <div class="contact-wrapper">
+    <!-- Formulaire Dynamique -->
+    <div class="contact-form">
+      <h1 text-black>Contact nous</h1>
+      <p>Des questions ? Contactez-nous !</p>
+
+      <form  (ngSubmit)="onSubmit()">
+        <label for="name">Name</label>
+        <input
+          type="text" id="name" class="form-control" formControlName="nom" placeholder="Enter your name" />
+        <div class="text-danger" *ngIf="contactForm.get('nom')?.invalid && contactForm.get('nom')?.touched">
+          Le nom est requis.
+        </div>
+
+        <label for="email">Email</label>
+        <input
+          type="email" id="email" class="form-control" formControlName="email" placeholder="Enter your email" />
+        <div class="text-danger" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+          Une adresse e-mail valide est requise.
+        </div>
+
+        <label for="message">Message</label>
+        <textarea
+          id="message" class="form-control" formControlName="message" placeholder="Type your message..."></textarea>
+        <div class="text-danger" *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched">
+          Le message doit contenir au moins 20 caractères.
+        </div>
+
+        <button type="submit" [disabled]="contactForm.invalid">Envoyer</button>
+      </form>
+    </div>
+
+    <!-- Carousel Dynamique -->
+    <div class="contact-image">
+      <div
+        id="carouselBilly"
+        class="carousel slide"
+        data-bs-ride="carousel"
+        data-bs-interval="3000"
+        data-bs-touch="true"
+        data-bs-pause="hover"
+      >
+        <div class="carousel-inner rounded-3 shadow">
+          <div *ngFor="let img of images; let i = index" class="carousel-item" [class.active]="i === 0">
+            <img [src]="img" class="d-block w-100" alt="Image Billy">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselBilly" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselBilly" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+<!-- End Formulaire de contact -->
+
+</body>
+</html>

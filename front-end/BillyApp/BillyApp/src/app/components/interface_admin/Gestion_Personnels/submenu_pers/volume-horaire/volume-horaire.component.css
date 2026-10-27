@@ -1,0 +1,176 @@
+
+.btn-danger{
+  background-color: #FF3877 !important;
+  border-color: none;
+  transition: background-color 0.1s ease;
+    border: none !important;
+
+}
+.search{
+  border-radius: 30px;
+  font-size: 0.9em;
+  height: 2.6rem;
+}
+.btnS{
+  border-radius: 40px;
+  font-size: 0.9em;
+  width: 6rem;
+  height: 2.4rem;
+  margin-top: 2.5px;
+}
+.btn-danger:hover{
+  background-color: #e61759 !important;
+}
+
+.btn-success{
+  background-color: #2ecc71 !important;
+  border-color: none;
+  transition: background-color 0.3s ease;
+
+    border: none !important;
+}
+
+.btn-success:hover{
+ background-color: #0ebb56 !important;
+}
+
+.btnI-r i{
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  line-height: 1;
+  /* margin-right: 5px; */
+}
+.btnI-v i{
+  /* font-size: 0.5em; */
+  /* margin-right: 5px; */
+  color: BLUE;
+  text-align: center;
+  line-height: 1;
+}
+
+
+.btn-sm-r {
+  padding: 3px 5px;
+  border-radius: 5px;
+  background-color: #FF3877;
+  opacity: 0.8;
+
+}
+.btn-sm-v {
+  font-size: 16px;
+  padding: 1px 5px;
+  border-radius: 5px;
+  border: none;
+  /* background-color: #2ecc71; */
+  opacity: 0.8;
+
+}
+
+.btn-rouge, .btn-vert {
+
+  margin-left: 5px;
+}
+
+.btn-vert:hover, .btn-rouge:hover {
+  opacity: 100;
+}
+
+form .bg-form {
+  background-color: #ff38771d;
+  /* background-color: #2ecc703e; */
+}
+
+@media (max-width: 768px) {
+  .btnI-r i{
+    font-size: 1em;
+    /* margin-right: 5px; */
+    color: #FF3877;
+  }
+  .btnI-v i{
+    font-size: 1em;
+    /* margin-right: 5px; */
+    color: #2ecc71;
+  }
+
+  .search{
+    padding:9px;
+    /* border-radius: 7px; */
+    font-size: 0.9em;
+    width: 22rem;
+
+
+  }
+  input, select{
+    margin-top: 1rem;
+    padding: 9px;
+    width: 100%;
+  }
+  .btn-success{
+    margin-top: 1rem;
+  }
+  .btn-danger, .btn-success{
+    width: 100%;
+    }
+    form .bg-form {
+      background-color: #ff38771d;
+    }
+  .btnS{
+    margin-left: 2.5rem;
+    margin-top: 9px;
+  }
+
+
+
+  .btn-sm-r {
+  padding: 0px 0px;
+  background-color: inherit;
+
+  }
+  .btn-sm-v {
+  font-size: 11px;
+  padding: 0px 0px;
+  background-color: inherit;
+
+  }
+  thead{
+    font-size: 0.9em;
+  }
+  tbody{
+    font-size: 0.8em;
+  }
+
+
+
+}
+
+@media  (max-width: 360px) {
+
+  .w-sm{
+     width: 95%;
+  }
+
+ .title{
+     font-size: 0.9rem;
+ }
+
+ .search{
+   padding:9px;
+   /* border-radius: 7px; */
+   font-size: 0.8em;
+   width: 14rem;
+   height: 2rem;
+ }
+ .btnS{
+   margin-left: 1rem;
+   margin-top: 1rem;
+   height: 1.8rem;
+   width: 5rem;
+   font-size: 0.9em;
+   line-height: 1;
+ }
+ div, .title , strong, input, select, .selectIns, span{
+   font-size: 0.9em;
+ }
+
+}

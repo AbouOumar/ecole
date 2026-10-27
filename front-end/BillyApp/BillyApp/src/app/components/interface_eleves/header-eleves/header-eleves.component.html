@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plate-frome Elève & Parent</title>
+</head>
+<body>
+  <!-- Entête -->
+  <header class="navbar-gradient box-shadow ">
+    <nav class="nav-bar flex js aic">
+        <div class="img-logo flex aic gap"
+
+        >
+            <div class="menu-bar box-shadow"
+            (click)="handleDisplayMobileNav()"
+            (mouseenter)="handleDisplayMobileNav()"
+            >
+                <img src="/assets/images/icones/menu.png" alt="menu bar" width="40"class="">
+            </div>
+            <span *ngIf="user?.Droit=='eleve'" class="message-souhait mb-1 aic h5">Espace Elèves</span>
+            <span *ngIf="user?.Droit=='parent'" class="message-souhait mb-1 aic h5">Espace Parent</span>
+        </div>
+        <ul class="d-flex">
+          <li class="mb-1 aic"
+          *ngFor="let item of navs_data">
+          <a (click)="secureRouteService.navigateTo(item?.path)" routerLinkActive="active">
+            {{item?.name}}
+          </a>
+          </li>
+        </ul>
+        <button (click)="logout()" class="btn btn1 btn-outline-success rounded-4  p-2  bg-rouge text-white">
+          <i class="fas fa-sign-out-alt me-2"></i> Se Deconnecter
+        </button>
+      </nav>
+
+</header>
+<!-- Fin Entête -->
+
+   <app-asid-bar-eleve
+  (close)="handleCloseMobileNav()"
+  *ngIf="isDisplayMobileNav"
+  >
+  </app-asid-bar-eleve>
+ <!-- Fin Menu mobile -->
+
+</body>
+</html>

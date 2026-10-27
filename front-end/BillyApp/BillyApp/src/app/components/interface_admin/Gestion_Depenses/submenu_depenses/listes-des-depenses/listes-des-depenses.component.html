@@ -1,0 +1,246 @@
+<div class="pag-container">
+  <div class="container transformY  bordere roundede border-2e w-sm">
+    <div class="flex js mt-2">
+      <div class="title  pt-3" style="color: #FF3877;">Liste de depenses</div>
+      <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div>
+    </div>
+    <div class="col-8 col-md-5 mt-3 ">
+      <button class="btn btn-outline-success "
+      data-bs-toggle="modal"
+      data-bs-target="#ajouterNouvelleDepense"><i class="fa fa-plus-circle text-success"></i>  Ajouter une nouvelle depenses
+    </button>
+  </div>
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="me-2 flex js mt-4">
+
+              <nav aria-label="...">
+                <ul class="pagination pagination-md-lg">
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">1</span>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                </ul>
+              </nav>
+                <!-- <button type="search" class="ms-4 btn">Imprimer</button> -->
+                <form action="" class="row g-3">
+
+                  <div class="col-12 col-md-12">
+                    <div class="form-group flex">
+                      <div class="title ms-5  mt-2 d-none d-md-block">Rechercher</div>
+                      <input [(ngModel)]="textRechercheDepenses" type="search" class="form-control ms-2"
+                       placeholder="Entrer une date"
+                      style="border-radius: 15px;"
+                      id="textRechercheDepenses"
+                      name="textRechercheDepenses"
+                      >
+                    </div>
+                   </div>
+                </form>
+            </div>
+
+            <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+            <div class="table-responsive mt text-center mt-">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Type depense</th>
+                        <th scope="col">Compte</th>
+                        <th scope="col">Montant</th>
+                        <th scope="col">Pièce jointe</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr *ngFor="let depense of depenses | filtreListeDepense:textRechercheDepenses; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{depense.created_at|date:'dd/MM/yyyy'}}</td>
+                        <td>{{depense.type_depense?.libelle}}</td>
+                        <td>{{depense.compte?.nomCompte}}</td>
+                        <td>{{depense.montantTransanction}} FG</td>
+                        <td>
+                          <a (click)="userService.ouvrirFichier(depense.piece_jointe)" *ngIf="depense.piece_jointe">Ouvrir</a>
+                        </td>
+                        <td width="105">
+                              <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                  <i class="fa fa-print" title="Imprimer"></i>
+                              </a>
+                              <button type="button" class="btnI-v  btn-vert btn-sm-v me-2"
+                                data-bs-toggle="modal" data-bs-target="#modifierNouvelleDepense" (click)="ouvreModal(depense.id)">
+                                <i class="fa fa-edit" title="Modifier"></i>
+                              </button>
+                        </td>
+                    </tr>
+                 </tbody>
+                </table>
+                <div class="flex jen">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination paginattion-md-lg justify-content-center">
+                      <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Ajouter une nouvelle recette -->
+    <div class="modal" tabindex="-1"  id="ajouterNouvelleDepense">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" style="color: yellowgreen;">Enregistrement d'une nouvelle dépense</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form [formGroup]="ajouterdepenseForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <label for="sexe" class="form-label d-none d-md-block text-muted mt-3">Type dépense <span style="color: red;"> *</span></label>
+                  <select formControlName="type_depense_id"   id="type_depense_id" name="type_depense_id" class="form-select">
+                  <option value="">Choisir un type </option>
+                  <option value={{typeDepense.id}} *ngFor="let typeDepense of typeDepenses">{{typeDepense.libelle}}</option>
+                  </select>
+                  <small class="text-danger" *ngIf="ajouterdepenseForm.controls['type_depense_id'].invalid && ajouterdepenseForm.controls['type_depense_id'].touched">
+                    Le typed de depense est obligatoire .
+                  </small>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="montantTransanction" class="form-label d-none d-md-block mt-3">Montant <span style="color: red;"> *</span></label>
+                  <input formControlName="montantTransanction" type="number" class="form-control" id="montantTransanction" placeholder="Entrez le montant" style="border-radius: 5px; height: 2.2rem;">
+                  <small class="text-danger" *ngIf="ajouterdepenseForm.controls['montantTransanction'].invalid && ajouterdepenseForm.controls['montantTransanction'].touched">
+                    Le montant est obligatoire .
+                  </small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <label for="compte_id" class="form-label d-none d-md-block text-muted mt-3">Type de compte <span style="color: red;"> *</span></label>
+                  <select formControlName="compte_id"   id="compte_id" class="form-select"   name="compte_id">
+                    <option value="">-- Choisir le Compte --</option>
+                    <option value={{compte.id}} *ngFor="let compte of comptes">{{compte.nomCompte}}</option>
+                    </select>
+                    <small class="text-danger" *ngIf="ajouterdepenseForm.controls['compte_id'].invalid && ajouterdepenseForm.controls['compte_id'].touched">
+                      Le compte est obligatoire .
+                    </small>
+                </div>
+
+                <div class="col-8 col-md-4">
+                  <label for="formFileLg" class="form-label d-none d-md-block text-muted mt-3">Pièce jointe (Optionnel) <span style="color: red;"> *</span></label>
+                  <input formControlName="piece_jointe" class="form-control   fichierImage_mTop" id="formFileLg" type="file" (change)="onFileSelected($event)" accept=".jpg, .png, .jpeg .pdf, .txt, .docx">
+                  <small class="text-danger" *ngIf="ajouterdepenseForm.get('piece_jointe')?.invalid && ajouterdepenseForm.get('piece_jointe')?.touched">
+                    fichier invalide.
+                  </small>
+                </div>
+              <div class="col-4 col-md-2 profil-reinscription mt-2">
+                  <img id="imagePreview"  [src]="adresseIp+':8000/storage/images/icone/autre.png'" class="mt-1" alt="Image fichier"  width="">
+              </div>
+
+
+                <div class="col-12 col-md-12">
+                  <label for="texte" class="form-label d-none d-md-block text-muted mt-3">Description <span style="color: red;"> *</span></label>
+                  <textarea formControlName="description" type="text" appNoSpecialChars name="texte" id="texte" class="form-control texta" placeholder="Entrer les details"></textarea>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-outline-success">Enregistrer</button>
+              <button type="button" class="btn btn-outline-danger">Annuler</button>
+            </div>
+          </form>
+          <span *ngIf="message">{{message}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- End ajouter une recette -->
+
+     <!-- Modifier une nouvelle recette -->
+     <div class="modal" tabindex="-1"  id="modifierNouvelleDepense">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" style="color: yellowgreen;">Enregistrement d'une nouvelle dépense</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form [formGroup]="updatedepenseForm" (ngSubmit)="onSubmitUpdate()">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <label for="type_depense_id" class="form-label d-none d-md-block text-muted mt-3">Type dépense <span style="color: red;"> *</span></label>
+                  <select [(ngModel)]="selectedDepense.type_depense_id" formControlName="type_depense_id"   id="type_depense_id" name="type_depense_id" class="form-select">
+                  <option value="">Choisir un type </option>
+                  <option value={{typeDepense.id}} *ngFor="let typeDepense of typeDepenses">{{typeDepense.libelle}}</option>
+                  </select>
+                  <small class="text-danger" *ngIf="updatedepenseForm.controls['type_depense_id'].invalid && updatedepenseForm.controls['type_depense_id'].touched">
+                    Le typed de depense est obligatoire .
+                  </small>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="montantTransanction" class="form-label d-none d-md-block mt-3">Montant <span style="color: red;"> *</span></label>
+                  <input [(ngModel)]="selectedDepense.montantTransanction" formControlName="montantTransanction" type="number" class="form-control" id="montantTransanction" placeholder="Entrez le montant" style="border-radius: 5px; height: 2.2rem;">
+                  <small class="text-danger" *ngIf="updatedepenseForm.controls['montantTransanction'].invalid && updatedepenseForm.controls['montantTransanction'].touched">
+                    Le montant est obligatoire .
+                  </small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <label for="compte_id" class="form-label d-none d-md-block text-muted mt-3">Type de compte <span style="color: red;"> *</span></label>
+                  <select [(ngModel)]="selectedDepense.compte_id" formControlName="compte_id"   id="compte_id" class="form-select"   name="compte_id">
+                    <option value="">-- Choisir le Compte --</option>
+                    <option value={{compte.id}} *ngFor="let compte of comptes">{{compte.nomCompte}}</option>
+                    </select>
+                    <small class="text-danger" *ngIf="updatedepenseForm.controls['compte_id'].invalid && updatedepenseForm.controls['compte_id'].touched">
+                      Le compte est obligatoire .
+                    </small>
+                </div>
+
+                <div class="col-8 col-md-4">
+                  <label for="formFileLg" class="form-label d-none d-md-block text-muted mt-3">Pièce jointe (Optionnel) <span style="color: red;"> *</span></label>
+                  <input  formControlName="piece_jointe" class="form-control   fichierImage_mTop" id="formFileLg" type="file" (change)="onFileSelected2($event)" accept=".jpg, .png, .jpeg .pdf, .txt, .docx">
+                  <small class="text-danger" *ngIf="updatedepenseForm.get('piece_jointe')?.invalid && updatedepenseForm.get('piece_jointe')?.touched">
+                    fichier invalide.
+                  </small>
+                </div>
+              <div class="col-4 col-md-2 profil-reinscription mt-2">
+                  <img id="imagePreview2"  [src]="adresseIp+':8000/storage/images/icone/autre.png'" class="mt-1" alt="Image fichier"  width="">
+              </div>
+
+
+                <div class="col-12 col-md-12">
+                  <label for="texte" class="form-label d-none d-md-block text-muted mt-3">Description <span style="color: red;"> *</span></label>
+                  <textarea [(ngModel)]="selectedDepense.description" formControlName="description" type="text" appNoSpecialChars name="description" id="description" class="form-control texta" placeholder="Entrer les details"></textarea>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-outline-success">Enregistrer</button>
+              <button type="button" class="btn btn-outline-danger">Annuler</button>
+            </div>
+          </form>
+          <span *ngIf="messageUpdate">{{messageUpdate}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- End Modifier une recette -->
+</div>
+
+
+

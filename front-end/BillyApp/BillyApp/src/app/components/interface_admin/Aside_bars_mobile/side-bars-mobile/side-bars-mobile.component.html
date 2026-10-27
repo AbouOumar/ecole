@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar Responsive</title>
+
+
+</head>
+<body>
+
+    <aside class="sidebar d-md-block d-lg-none">
+        <div class="logo mt-3 d-nonee">
+          <div class="float-end" (click)="handleClose()">
+            <i class="fase fa-timese text-dangerd btn-close me-3 mt-3 fs-5s"></i>
+          </div>
+          <img src="/assets/images/icones/billy-ecole.jpg" class="rounded-circle mx-auto d-block" alt="Logo Billy-ecole">
+          <span class="titleL text-uppercase mt-2 me-5">Billy ecole</span>
+          <div class="text-center text-rouge me-4">La puissance de l'excellence</div>
+
+        </div>
+        <div class="separateur mt-2"></div>
+        <div class="scrollerCont">
+          <a (click)="handleClose()"  routerLink="/admin/tableaudebord" > <i class="fa fa-home icon-rouge" ></i> Tableau de bord</a>
+          <ng-container *ngIf="user">
+              <!-- Aside Mobile administrateur -->
+              <ng-container *ngIf="user.Droit=='admin'">
+                  <!-- sidemenu -->
+              <!-- Ci-dessous Gestion des Eleves -->
+              <a class="dropdown-toggle" data-bs-toggle="collapse"
+                href="#gestionElevesM"
+                role="button" aria-expanded="false"
+                aria-controls="gestionElevesM">
+                <i class="fa fa-user-graduate icon-vert"></i> Gestion des élèves
+              </a>
+              <div class="collapse submenu" id="gestionElevesM">
+                <ul>
+                  <li *ngFor="let route of data_submenu" >
+                      <a (click)="handleClose()"    [routerLink]="[route?.path]">
+                          {{ route.name }}
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- End gestion eleves -->
+
+              <!-- Ci-dessous Gestion des Personnels -->
+              <a class="dropdown-toggle" data-bs-toggle="collapse"
+                  href="#gestionPersonnelsM"
+                  role="button" aria-expanded="false"
+                  aria-controls="gestionPersonnelsM"
+                  > <i class="fa fa-users icon-rouge"></i> Gestion des Personnels
+              </a>
+              <!-- Ci-dessous contenu Gestion des personnels -->
+              <div class="collapse submenu" id="gestionPersonnelsM">
+                <ul>
+                  <li *ngFor="let route1 of  data_submenu_personnels">
+                    <a (click)="handleClose()"   [routerLink]="[route1?.path]"  >{{route1.name}}</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- End gestion des personnels -->
+
+
+              <!-- Ci-dessous Gestion des Recettes -->
+              <a class="dropdown-toggle" data-bs-toggle="collapse"
+                href="#gestionRecetteM"
+                role="button" aria-expanded="false"
+                aria-controls="gestionRecetteM"
+                > <i class="fa fa-file-invoice-dollar icon-vert"></i> Gestion des Recettes
+              </a>
+              <!-- Ci-dessous contenu Gestion des Recettes -->
+              <div class="collapse submenu" id="gestionRecetteM">
+                <ul>
+                  <li *ngFor="let route2 of  data_submenu_recettes" >
+                     <a (click)="handleClose()"    [routerLink]="[route2?.path]">{{route2.name}}</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- End gestion des Recettes -->
+
+
+              <!-- Ci-dessous Gestion des Depenses -->
+              <a class="dropdown-toggle" data-bs-toggle="collapse"
+                href="#gestionDepensesM"
+                role="button" aria-expanded="false"
+                aria-controls="gestionRecetteM">
+                <i class="fa fa-wallet icon-rouge"></i> Gestion des Depenses
+              </a>
+              <!-- Ci-dessous contenu Gestion Depenses  -->
+              <div class="collapse submenu" id="gestionDepensesM">
+                <ul>
+                  <li *ngFor="let route3 of  data_submenu_depenses" >
+                    <a (click)="handleClose()"    [routerLink]="[route3?.path]">{{route3.name}}</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- End gestion Depenses  -->
+
+
+              <!-- Ci-dessous Gestion des Tresories -->
+              <a class="dropdown-toggle" data-bs-toggle="collapse"
+              href="#gestionTresoriesM"
+              role="button" aria-expanded="false"
+              aria-controls="gestionTresoriesM"
+              > <i class="fa fa-chart-line icon-vert"></i> Gestion des Tresories
+              </a>
+              <!-- Ci-dessous contenu Gestion Tresories  -->
+              <div class="collapse submenu" id="gestionTresoriesM">
+              <ul>
+              <li *ngFor="let route4 of  data_submenu_tresories" >
+              <a (click)="handleClose()"    [routerLink]="[route4?.path]">{{route4.name}}</a>
+              </li>
+              </ul>
+              </div>
+              <!-- End gestion Tresories  -->
+
+              <!-- Ci-dessous Gestion des Rapport -->
+              <a  (click)="handleClose()"  routerLink="/admin/gestionRapports"
+              > <i class="fas  fa-chart-bar icon-rouge"></i> Gestion des Rapports
+              </a>
+              <!-- Ci-dessous contenu Gestion Rapport  -->
+
+              <!-- Ci-dessous Gestion des Configuration -->
+              <a class="dropdown-toggle" data-bs-toggle="collapse"
+              href="#gestionConfigurationM"
+              role="button" aria-expanded="false"
+              aria-controls="gestionConfigurationM"
+              > <i class="fa fa-gear icon-vert"></i> Configuration
+              </a>
+              <!-- Ci-dessous contenu Gestion Configuration  -->
+              <div class="collapse submenu" id="gestionConfigurationM">
+              <ul>
+              <li *ngFor="let route5 of  data_submenu_Configuration">
+              <a (click)="handleClose()" [routerLink]="[route5?.path]">{{route5.name}}</a>
+              </li>
+              </ul>
+              </div>
+              <!-- End gestion Configuration  -->
+
+              <!-- Ci-dessous Gestion des Supervision -->
+              <a routerLink="/admin/statistiqueSupervision"
+              (click)="handleClose()"
+              routerLinkActive="active-link">
+              <i class="fa-solid fa-briefcase icon-rouge"></i> Supervision
+              </a>
+              <!-- End gestion Supervision  -->
+
+
+              <!-- Ci-dessous Gestion des Notes -->
+              <a routerLink="/admin/gestionNotesCenseur"
+              routerLinkActive="active-link"
+              (click)="handleClose()">
+              <i class="fas fa-sort-numeric-up"></i> Gestion Notes
+              </a>
+              <!-- End gestion Notes  -->
+
+              <!-- Ci-dessous Gestion des emploi -->
+              <a routerLink="/admin/gestionEmploiCenseur"
+              routerLinkActive="active-link"
+              (click)="handleClose()">
+              <i class="fas fa-calendar-alt icon-rouge "></i>
+              Gestion Emploi</a>
+              <!-- End gestion emploi  -->
+              </ng-container>
+
+              <!-- End Aside Mobile administrateur -->
+              <ng-container *ngIf="user.Droit=='Comptable'">
+              <!-- Aside mobile cmptable-->
+               <!-- sidemenu -->
+                        <!-- Ci-dessous Gestion des Eleves -->
+                    <a class="dropdown-toggle" data-bs-toggle="collapse"
+                    href="#gestionEleves"
+                      role="button" aria-expanded="false"
+                      aria-controls="gestionEleves">
+                    <i class="fa fa-user-graduate icon-vert" ></i> Gestion des élèves
+                </a>
+                  <div class="collapse submenu" id="gestionEleves">
+                    <ul>
+                      <li *ngFor="let routeEleve of data_submenuC" >
+                          <a (click)="handleClose()"  [routerLink]="[routeEleve?.path]"
+                          routerLinkActive="active-link">
+                            {{ routeEleve.name }}
+                          </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- End gestion eleves -->
+
+                  <!-- Ci-dessous Gestion des Personnels -->
+                  <a class="dropdown-toggle" data-bs-toggle="collapse"
+                    href="#gestionPersonnels"
+                    role="button" aria-expanded="false"
+                    aria-controls="gestionPersonnels"
+                  > <i class="fa fa-users icon-rouge"></i> Gestion des Personnels
+                  </a>
+                  <!-- Ci-dessous contenu Gestion des personnels -->
+                    <div class="collapse submenu" id="gestionPersonnels">
+                      <ul>
+                        <li *ngFor="let routePers of  data_submenu_personnelsC">
+                          <a (click)="handleClose()"  [routerLink]="[routePers?.path]"
+                          routerLinkActive="active-link">{{routePers.name}}
+                        </a>
+                        </li>
+                      </ul>
+
+                    </div>
+                  <!-- End gestion des personnels -->
+
+
+                <!-- Ci-dessous Gestion des Recettes -->
+                <a class="dropdown-toggle" data-bs-toggle="collapse"
+                href="#gestionRecette"
+                role="button" aria-expanded="false"
+                aria-controls="gestionRecette"
+                > <i class="fa fa-file-invoice-dollar icon-vert"></i> Gestion des Recettes
+                </a>
+                <!-- Ci-dessous contenu Gestion des Recettes -->
+                <div class="collapse submenu" id="gestionRecette">
+                  <ul>
+                    <li *ngFor="let route2Re of  data_submenu_recettesC">
+                      <a (click)="handleClose()"  [routerLink]="[route2Re?.path]"
+                        routerLinkActive="active-link">
+                        {{route2Re.name}}
+                      </a>
+                    </li>
+                  </ul>
+
+                </div>
+                <!-- End gestion des Recettes -->
+
+
+                  <!-- Ci-dessous Gestion des Depenses -->
+                  <a class="dropdown-toggle" data-bs-toggle="collapse"
+                  href="#gestionDepenses"
+                  role="button" aria-expanded="false"
+                  aria-controls="gestionRecette"
+                  > <i class="fa fa-wallet icon-rouge"></i> Gestion des Depenses
+                  </a>
+                <!-- Ci-dessous contenu Gestion Depenses  -->
+                <div class="collapse submenu" id="gestionDepenses">
+                  <ul>
+                    <li *ngFor="let route3D of  data_submenu_depensesC">
+                      <a (click)="handleClose()"  [routerLink]="[route3D?.path]"
+                        routerLinkActive="active-link">
+                        {{route3D.name}}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- End gestion Depenses  -->
+
+
+                  <!-- Ci-dessous Gestion des Tresories -->
+                  <a class="dropdown-toggle" data-bs-toggle="collapse"
+                  href="#gestionTresories"
+                  role="button" aria-expanded="false"
+                  aria-controls="gestionTresories"
+                  > <i class="fa fa-chart-line icon-vert"></i> Gestion des Trésories
+                  </a>
+                <!-- Ci-dessous contenu Gestion Tresories  -->
+                <div class="collapse submenu" id="gestionTresories">
+                  <ul>
+                    <li *ngFor="let route4T of  data_submenu_tresoriesC">
+                      <a (click)="handleClose()"  [routerLink]="[route4T?.path]"
+                        routerLinkActive="active-link">
+                        {{route4T.name}}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- End gestion Tresories  -->
+
+                    <!-- Ci-dessous Gestion des Rapport -->
+                    <a  routerLink="/admin/gestionRapports"  class=""
+                      routerLinkActive="active-link" (click)="handleClose()" >
+                    <i class="fas  fa-chart-bar icon-rouge"></i> Gestion des Rapports
+                    </a>
+                  <!-- Ci-dessous contenu Gestion Rapport  -->
+               </ng-container>
+              <!-- Aside End mobile cmptable-->
+          </ng-container>
+
+          <!-- Aside DG -->
+          <ng-container *ngIf="user?.Droit=='DG'">
+            <!-- sidemenu -->
+               <!-- Ci-dessous Gestion des Eleves -->
+               <a  routerLink="/admin/listeDesElevesC"  class=""
+               (click)="handleClose()"
+               routerLinkActive="active-link">
+               <i class="fa fa-user-graduate icon-vert" ></i> Liste génerale des Elèves
+             </a>
+
+               <!-- End gestion eleves -->
+
+               <!-- Ci-dessous Gestion des Personnels -->
+               <a
+               class="d-block" data-bs-toggle="collapse"
+               href="#gestionPersonnels"
+               role="button" aria-expanded="false"
+               aria-controls="gestionPersonnels"
+               (click)="toggleIcon('gestionPersonnels')">
+               <i class="fa fa-users icon-rouge"></i> Gestion des Personnels
+                 <i class="fas fa-chevron-right fw-bold fa-sm   transition rotate-icon"
+                   [ngClass]="{'rotate': activeMenu ==='gestionPersonnels'}" style="margin-left: rem;">
+                 </i>
+             </a>
+               <!-- Ci-dessous contenu Gestion des personnels -->
+                 <div class="collapse submenu" id="gestionPersonnels">
+                   <ul>
+                     <li *ngFor="let route1DG of  data_submenu_personnelsDG">
+                       <a (click)="handleClose()" [routerLink]="[route1DG?.path]"
+                       routerLinkActive="active-link">{{route1DG.name}}
+                     </a>
+                     </li>
+                   </ul>
+
+                 </div>
+               <!-- End gestion des personnels -->
+
+
+
+
+                 <!-- Ci-dessous Gestion des Rapport -->
+                 <a  routerLink="/admin/gestionRapports"  class=""
+                 (click)="handleClose()"
+                 routerLinkActive="active-link">
+                 <i class="fas  fa-chart-bar icon-rouge"></i> Gestion des Rapports
+                 </a>
+               <!-- Ci-dessous contenu Gestion Rapport  -->
+
+               <!-- Ci-dessous Gestion des Configuration -->
+               <a class=" d-blocke d-lg-nonee"  class="d-block" data-bs-toggle="collapse"
+               href="#gestionConfiguration"
+               role="button" aria-expanded="false"
+               aria-controls="gestionConfiguration" (click)="toggleIcon('gestionConfiguration')">
+                 <i class="fa fa-gear icon-vert"></i> Configuration
+                   <i class="fas fa-chevron-right fw-bold fa-sm   transition rotate-icon"
+                     [ngClass]="{'rotate': activeMenu ==='gestionConfiguration'}" style="margin-left: rem;">
+                   </i>
+               </a>
+             <!-- Ci-dessous contenu Gestion Configuration  -->
+             <div class="collapse submenu" id="gestionConfiguration">
+               <ul>
+                 <li *ngFor="let route4DG of  data_submenu_ConfigurationDG">
+                   <a [routerLink]="[route4DG?.path]"
+                   (click)="handleClose()"
+                     routerLinkActive="active-link">
+                     {{route4DG.name}}
+                   </a>
+                 </li>
+               </ul>
+             </div>
+             <!-- End gestion Configuration  -->
+
+               <!-- Ci-dessous Gestion des Supervision -->
+               <a routerLink="/admin/statistiqueSupervision"
+               (click)="handleClose()"
+               routerLinkActive="active-link">
+                 <i class="fa-solid fa-briefcase icon-rouge"></i> Supervision
+               </a>
+             <!-- End gestion Supervision  -->
+
+         </ng-container>
+           <!-- Aside DG -->
+
+           <!-- Aside DG / Censeur -->
+         <ng-container *ngIf="user?.Droit=='Censeur' || user?.Droit=='DE'">
+                    <!-- sidemenu -->
+<!-- Ci-dessous Gestion des Eleves -->
+<a  routerLink="/admin/listeDesElevesDroit"  class=""
+routerLinkActive="active-link">
+<i class="fa fa-user-graduate icon-vert" ></i> Liste  des Elèves
+</a>
+<!-- End gestion eleves -->
+
+<!-- Ci-dessous Gestion des Personnels -->
+<a
+         class="d-block" data-bs-toggle="collapse"
+         href="#gestionPersonnels"
+         role="button" aria-expanded="false"
+         aria-controls="gestionPersonnels"
+         (click)="toggleIcon('gestionPersonnels')">
+         <i class="fa fa-users icon-rouge"></i> Gestion des Personnels
+           <i class="fas fa-chevron-right fw-bold fa-sm   transition rotate-icon"
+             [ngClass]="{'rotate': activeMenu ==='gestionPersonnels'}" style="margin-left: rem;">
+           </i>
+       </a>
+<!-- Ci-dessous contenu Gestion des personnels -->
+ <div class="collapse submenu" id="gestionPersonnels">
+   <ul>
+     <li *ngFor="let route1DEC of  data_submenu_personnelsDEC">
+       <a (click)="handleClose()" [routerLink]="[route1DEC?.path]"
+        routerLinkActive="active-link">{{route1DEC.name}}
+      </a>
+     </li>
+   </ul>
+
+ </div>
+<!-- End gestion des personnels -->
+
+
+
+
+
+<!-- Ci-dessous Gestion des Notes -->
+    <a routerLink="/admin/gestionNotesCenseur"
+    (click)="handleClose()"
+     routerLinkActive="active-link">
+     <i class="fas fa-sort-numeric-up"></i> Gestion Notes
+   </a>
+<!-- End gestion Notes  -->
+
+<!-- Ci-dessous Gestion des emploi -->
+    <a routerLink="/admin/gestionEmploiCenseur"
+    (click)="handleClose()"
+      routerLinkActive="active-link">
+     <i class="fas fa-calendar-alt icon-rouge "></i>
+       Gestion Emploi</a>
+<!-- End gestion emploi  -->
+         </ng-container>
+         <!-- End Aside DE-->
+
+
+      </div>
+
+      </aside>
+
+</body>
+</html>
+
+

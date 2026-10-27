@@ -1,0 +1,179 @@
+/* Style des Aside barre  */
+
+
+
+    /* Style personnalisé pour la sidebar */
+
+    .sidebar {
+      min-height: 100vh;
+      width: 243px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      /* background: #027226 ; */
+      background: #2ecc71;
+      /* background: linear-gradient(#2ecc71); */
+
+
+      z-index: 110;
+      display: block;
+    }
+
+
+
+    .submenu {
+      overflow-y: auto;
+      max-height: 1000px;
+    }
+
+    .rotate-icon{
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+
+    }
+
+    a{
+      position: relative;
+      display: block;
+      padding-right: 25px;
+    }
+
+      .transition{
+        transition: transform 0.3s ease;
+      }
+
+      .rotate{
+        transform: rotate(90deg);
+        /* color: red; */
+      }
+
+      .sidebar a i .ms-5{
+        padding-left: 35rem !important;
+      }
+
+    .logo{
+      z-index: 80;
+    }
+    .btn-close{
+      font-size: 2rem !important;
+    }
+
+   .sidebar .scrollerCont{
+      z-index: 70;
+      flex-grow: 1;
+      overflow-y: auto;
+      max-height: 100vh;
+      padding-bottom: 20px;
+
+    }
+
+    .sidebar .logo img{
+      width: 80px;
+      height: 80px;
+    }
+    .sidebar .logo{
+      text-align: center;
+    }
+    .sidebar .logo .titleL {
+      color: #fff;
+      font-weight: bold;
+
+    }
+    .text-rouge{
+      color: #111;
+      font-size: 0.7em;
+    }
+    .separateur{
+      display: flex;
+      justify-content: center;
+      width: 90%;
+      border: 0.1px solid #2ecc7027;
+      margin-left:0.80rem;
+    }
+    ul{
+      list-style: none;
+
+
+    }
+    .sidebar a {
+      text-decoration: none;
+      padding: 10px 30px;
+      display: block;
+      font-size: 12.5px;
+
+      color: #fff;
+
+      transition: all background-color 0.3s ease-in;
+    }
+
+    .active-link {
+      background-color: #ffffff9b;
+      /* background-color: #FF3877; */
+      opacity: 30;
+      border-radius: 10px;
+      font-weight: bold;
+      /* color: #FF3877 !important; */
+      /* color: #fff !important; */
+      color: #111 !important;
+
+    }
+
+
+
+    .sidebar a:hover {
+      /* color: #111 !important; */
+      /* background-color: #ffffff7b; */
+      color: #111;
+      /* color: #FF3877; */
+      /* border-radius: 15px; */
+
+      /* border-radius: 15px; */
+    }
+
+
+    .icon-rouge:hover{
+      color: #2ecc71 !important;
+    }
+     .sidebar .submenu  a.active{
+      color: green;
+    }
+    .sidebar .submenu a {
+      padding-left: 15px;
+      font-weight: 400;
+
+      /* color: #fff; */
+      /* color: red; */
+      font-size: 11px;
+      padding: 7px 5px;
+
+
+    }
+    .sidebar .submenu{
+      /* background-color: #111; */
+      /* background-color: #fff; */
+      background-color: #ffffff1b;
+    }
+    .sidebar .submenu a:hover {
+         /* color: #fff !important; */
+        /* background-color: #2ecc70b3; */
+        border-radius: 15px;
+
+    }
+
+
+    .icon-rouge{
+      /* color: #111 !important; */
+    }
+
+    .sidebar i{
+      color: #efeeee;
+      size: 26px;
+
+    }
+
+
+
+/* Style des Aside barre  */

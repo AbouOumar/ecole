@@ -1,0 +1,284 @@
+
+<div class="pag-container">
+  <app-loading *ngIf="isloading"></app-loading>
+
+
+    <div *ngIf="isMasquer"
+     class="container transformY  bordere roundede border-2e w-sm">
+    <div class="flex js mt-2">
+      <div class="title pt-3">Liste génerale des élèves</div>
+      <div class="title d-none pt-3">Année Scolaire <strong style="color: #111;"> 2024-2025</strong></div>
+    </div>
+   <form action="" class="selectIns mt-3">
+    <!-- <div class="mt-4 flex ms-2 mt-2"> -->
+        <div class="row mt-2">
+          <div class="col-4 col-md-4">
+            <div class="form-group">
+              <input type="search" class="form-control" placeholder="Entrer un matricule"
+              [(ngModel)]="textRecherche" name="textRecherche"
+              >
+            </div>
+           </div>
+            <div class="col-4 col-md-3">
+              <select  [(ngModel)]="textRechercheClasse" name="class" id="classe" class="form-select"  name="textRechercheClasse">
+              <option value=""> Choisir la classe </option>
+              <option value={{classe.id}} *ngFor="let classe of classes">{{classe.nom_classe}}</option>
+              </select>
+            </div>
+            <div class="col-4 col-md-3">
+              <select  [(ngModel)]="textRechercheEtat" name="class" id="classe" class="form-select"  name="textRechercheClasse">
+              <option value=""> Choisir l'etat </option>
+              <option value="0">Non inscrit</option>
+              </select>
+            </div>
+            <div class="col-1 col-md-1">
+               <button type="search" class="btn d-none btn-outline-success">Chercher</button>
+            </div>
+        </div>
+    <!-- </div> -->
+   </form>
+    <!-- <div class="flex js mt-5">
+      <nav aria-label="...">
+        <ul class="pagination pagination-md-lg">
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">1</span>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </ul>
+      </nav>
+    </div> -->
+
+    <div class="container mb-4 py-3">
+        <div class="card container py-4 ">
+          <div class="card-header bg-vertT bg-light text-vertP ">
+            <div class="flex js">
+                 <div class="mb-3">
+          <label for="filInput" class="form-label">Importer une liste d'élèves (.xlsx)  </label>
+          <input type="file"
+          id="filInput" (change)="onFileChange($event)"
+          accept=".Xlsx, .Xls"
+          class="form-controlPas ms-2">
+       </div>
+       <div class="me-2  mb-3">
+              <button type="search" class="ms-4 btn btn-outline-success text-white btn-lg rounded-4"
+                (click)="exporterElevesAffiches()"> Exporter
+            </button>
+        </div>
+            </div>
+          </div>
+
+            <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+            <div class="card-body">
+                <div class="table-responsive mt text-center">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Matricule</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Classe</th>
+                        <th scope="col">Date nais</th>
+                        <th scope="col">Image</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr *ngFor="let eleve of eleves|filtreEleve:textRecherche:textRechercheClasse:textRechercheEtat; let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{eleve.matricule_eleve}}</td>
+                        <td>{{eleve.nom_eleve}}</td>
+                        <td>{{eleve.prenom_eleve}}</td>
+                        <td>{{eleve.genre_eleve}}</td>
+                        <td >
+                          <span *ngIf="eleve.classe_id!=0" >{{eleve.classe?.nom_classe}}</span>
+                          <button *ngIf="eleve.classe_id==0" class="badge bg-success border-0 text-white" data-bs-toggle="modal" data-bs-target="#modal_inscription_eleve" (click)="ouvreModal(eleve.id)">
+                            inscrire
+                          </button>
+                        </td>
+                        <td>{{eleve.Date_naiss}}</td>
+                        <td>
+                          <div  class="profil-reinscriptionT ">
+                            <img [src]="adresseIp+':8000/storage/images/profile/' + eleve.photo   || adresseIp+':8000/storage/images/profile/avatar.png'"
+                             class="mt-1 border rounded-circle mx-auto d-block  " alt="Image élève" width="30">
+                           </div>
+                          </td>
+                        <td class="text-center">
+                          <a class="btnI-r  btn-rouge btn-sm-r me-2 " role="button" (click)="chargeParentsEleveId(eleve.id)">
+                                <i class="fa fa-eye" title="Voire" ></i>
+                            </a>
+                            <button type="button" class="btnI-v  btn-vert btn-sm-v me-2"
+                               data-bs-toggle="modal" data-bs-target="#modal_modifier_eleve" (click)="ouvreModal(eleve.id)">
+                              <i class="fa fa-edit" title="Modifier"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            </div>
+        </div>
+         <div class="flex jen py-2">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination paginattion-md-lg justify-content-center">
+                  <li class="page-item disabled">
+                    <a class="page-link">Précédent</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Suivant</a>
+                  </li>
+                </ul>
+              </nav>
+          </div>
+    </div>
+    </div>
+
+    <div class="modal" tabindex="-1"  id="modal_modifier_eleve">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modification des informations de l'élèves</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form [formGroup]="eleveForms" (ngSubmit)="updateEleve()" >
+            <div class="modal-body">
+              <div class="row">
+                <input type="text" appNoSpecialChars  formControlName="id" [(ngModel)]="selectedEleve.id" class="form-control d-none" id="id"  >
+                <div class="col-12 col-md-6">
+                  <label for="matricule" class="form-label  d-none d-md-block text-muted">Matricule <span style="color: red;"> *</span></label>
+                  <input type="text" readonly   class="form-control " formControlName="matricule_eleve" id="matricule"  >
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="prenom" class="form-label  d-none d-md-block text-muted">Prénom <span style="color: red;"> *</span></label>
+                  <input type="text" appNoSpecialChars class="form-control"  formControlName="prenom_eleve" id="prenom" placeholder="Entrez le prénom" >
+                  <small class="text-danger" *ngIf="eleveForms.get('prenom_eleve')?.invalid && eleveForms.get('prenom_eleve')?.touched">
+                    Le prénom est obligatoire et doit contenir au moins 3 caractères.
+                  </small>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="nom" class="form-label d-none d-md-block">Nom <span style="color: red;"> *</span></label>
+                  <input type="text" appNoSpecialChars   class="form-control"  formControlName="nom_eleve" id="nom" placeholder="Entrez le nom" >
+                  <small class="text-danger" *ngIf="eleveForms.get('nom_eleve')?.invalid && eleveForms.get('nom_eleve')?.touched">
+                    Le nom est obligatoire et doit contenir au moins 2 caractères.
+                  </small>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="tel" class="form-label d-none d-md-block">Téléphone</label>
+                  <input class="form-control" id="tel" formControlName="tel_eleve"  type="text" appNoSpecialChars placeholder="Entrer le téléphone">
+                  <small class="text-danger" *ngIf="eleveForms.get('tel_eleve')?.invalid && eleveForms.get('tel_eleve')?.touched">
+                    Le téléphone est obligatoire.
+                  </small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-3">
+                  <label for="genre" class="form-label d-none d-md-block text-muted mt-3">Sexe <span style="color: red;"> *</span></label>
+                  <select name="genre_eleve"  formControlName="genre_eleve" id="genre" class="form-select">
+                  <option value="">Choisir le genre</option>
+                  <option value="Masculin">Masculin</option>
+                  <option value="Féminin">Féminin</option>
+                  </select>
+                  <small class="text-danger" *ngIf="eleveForms.get('genre_eleve')?.invalid && eleveForms.get('genre_eleve')?.touched">
+                    Le genre est obligatoire.
+                  </small>
+                </div>
+                <div class="col-12 col-md-3">
+                  <label for="date" class="form-label d-none d-md-block text-muted mt-3">Date de nais <span style="color: red;"> *</span></label>
+                  <input type="date"   id="date" formControlName="Date_naiss" class="form-control"  aria-label=" date">
+                  <small class="text-danger" *ngIf="eleveForms.get('Date_naiss')?.invalid && eleveForms.get('Date_naiss')?.touched">
+                    La date est obligatoire.
+                  </small>
+                <div class="text-danger" *ngIf="eleveForms.get('Date_naiss')?.errors?.['minAge']">
+                    L'élève doit avoir au moins 10 ans (âge actuel : {{
+                      eleveForms.get('Date_naiss')?.errors?.['minAge']?.actualAge
+                    }}).
+                </div>
+                </div>
+                <div class="col-8 col-md-4">
+                    <label for="formFileLg" class="form-label d-none d-md-block text-muted mt-3">choisir une image <span style="color: red;"> *</span></label>
+                    <input class="form-control   fichierImage_mTop" id="formFileLg" type="file" (change)="onImageSelected($event)" accept=".jpg, .png, .jpeg">
+                    <small class="text-danger" *ngIf="eleveForms.get('photo')?.invalid && eleveForms.get('photo')?.touched">
+                      La photo est invalide.
+                    </small>
+                  </div>
+                <div class="col-4 col-md-1 profil-reinscription mt-2">
+                    <img id="imagePreview"  [src]="adresseIp+':8000/storage/images/profile/' + selectedEleve.photo || adresseIp+':8000/storage/images/profile/avatar.png'" class="mt-1" alt="Image élève"  width="">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="mt-3">
+                <span *ngIf="message" >{{message}}</span>
+              </div>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-outline-success">Modifier</button>
+              <button type="button" class="btn btn-outline-danger">Annuler</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1"  id="modal_inscription_eleve">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Formulaire d'inscription</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+            <div class="modal-body">
+              <span class="text-success" >Inscrition de l'élève: {{selectedEleve.prenom_eleve+" "+selectedEleve.nom_eleve+" Matricule: "+selectedEleve.matricule_eleve}}</span>
+              <form [formGroup]="inscForm" (ngSubmit)="onSubmitIns_reis()">
+                <div class="title mt-2">Formulaire d'inscription</div>
+                <div class="row">
+                  <div class="col-12 col-md-3">
+                    <label for="classe" class="form-label d-none d-md-block mt-3">Classe <span style="color: red;"> *</span></label>
+                    <select name="class" id="classe" formControlName="classe_id" class="form-select"
+                      (change)="onChangeClass($event)"
+                    >
+                    <option value="" > Choisir la classe </option>
+                    <option value={{classe.id}} *ngFor="let classe of classes">{{classe.nom_classe}}</option>
+                    </select>
+                    <small class="text-danger" *ngIf="inscForm.controls['classe_id'].invalid && inscForm.controls['classe_id'].touched">
+                      La classe est obligatoire.
+                    </small>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <label for="frais" class="form-label d-none d-md-block mt-3">Frais<span style="color: red;"> *</span></label>
+                    <input type="number"  formControlName="montant" class="form-control" id="frais" placeholder="Entrez le frais du montant"
+                      [(ngModel)]="fraisInscription"
+                    >
+
+                  </div>
+                  <div class="col-12 col-md-4">
+                      <label for="annee" class="form-label d-none d-md-block mt-3">Année scolaire<span style="color: red;"> *</span></label>
+                      <select name="sexe" id="annee" formControlName="annee_scolaire_id" class="form-select">
+                        <option value=""> Choisir l'année </option>
+                        <option value={{annee.id}} *ngFor="let annee of annees">{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</option>
+                        </select>
+                        <small class="text-danger" *ngIf="inscForm.controls['annee_scolaire_id'].invalid && inscForm.controls['annee_scolaire_id'].touched">
+                          L'année scolaire est obligatoire.
+                        </small>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-outline-success">Inscrire</button>
+                  <button type="button" class="btn btn-outline-danger">Annuler</button>
+                </div>
+              </form>
+              <span *ngIf="messageI" >{{messageI}}</span>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

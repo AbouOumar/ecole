@@ -1,0 +1,303 @@
+/* Style parent d'eleves */
+.selectIns select, input{
+  padding: 10px;
+  /* width: 30rem; */
+  /* height: 2.5rem; */
+  border-radius: 60px;
+
+  /* font-size: 0.8rem; */
+}
+.profil-reinscription img{
+  border-radius: 10px;
+  width: 75px;
+  height: 75px;
+  border: 0.1px solid #27ae60;
+  margin-left: 2rem;
+}
+.fichierImage_mTop{
+
+  width: 18rem;
+}
+.modal-body select{
+  padding:10px;
+  border-radius: 7px;
+  /* font-size: 0.8em; */
+}
+.modal-dialog{
+  margin-left: 23.2rem;
+}
+.modal-body input{
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.8em;
+}
+.profil-reinscriptionT img{
+
+  width: 30px;
+  height: 30px;
+  border: 0.1px solid #27ae60;
+  /* margin-left: 2rem; */
+}
+.title , strong, input,  .selectIns select, span, .btn{
+  font-size: 1em;
+}
+
+.btnI-r i{
+  font-size: 16px;
+  color: #FF3877;
+  text-align: center;
+  line-height: 1;
+  /* margin-right: 5px; */
+}
+.btnI-v i{
+  /* font-size: 0.5em; */
+  /* margin-right: 5px; */
+  color: #2ecc71;
+  text-align: center;
+  line-height: 1;
+}
+
+.btn-sm-r {
+  /* padding: 3px 10px; */
+  border-radius: 5px;
+  /* background-color: #FF3877; */
+  opacity: 0.8;
+
+}
+.btn-sm-v {
+  font-size: 14px;
+  /* padding: 3px 15px; */
+  border-radius: 5px;
+  border: none;
+  /* background-color: #2ecc71; */
+  opacity: 0.8;
+
+}
+
+.btn-rouge, .btn-vert {
+
+  margin-left: 5px;
+}
+
+.btn-vert:hover, .btn-rouge:hover {
+  opacity: 100;
+}
+
+
+/*  Fin Button imprimer */
+
+.btn-vert:hover, .btn-rouge:hover {
+  opacity: 100;
+}
+.selectIns .btn{
+  /* padding: 17px 15px; */
+  width: 7rem;
+  height: 2.5rem;
+  border-radius: 60px;
+  border: none;
+  color: #fff;
+  font-size: 0.9rem;
+  /* line-height: normal; */
+  font-weight: bold;
+  /* background: linear-gradient(135deg,  #FFD700, #FF6347, #008000); */
+  /* background: linear-gradient(135deg,  #27ae60,  #19e919,  #FF6347); */
+  background: linear-gradient(135deg, #2ecc71, #09724A);
+
+  cursor: pointer;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+}
+.selectIns .btn:hover {
+  /* background: #2ecc71; */
+  background: linear-gradient(135deg,  #2ecc71,  #2ecc71);
+  color: #fff;
+  transform: scale(1.05);
+  /* border: 1px solid rgb(245, 83, 83); */
+}
+/* fin */
+/* Les tableau */
+
+.mtopp{
+  margin-top: 20px;
+}
+.table-responsive {
+  max-height: 400px; /* Ajuste la hauteur selon tes besoins */
+  overflow-y: auto;
+  border: 1px solid #ddd; /* Ajoute une bordure pour bien délimiter */
+}
+
+
+.table thead{
+  /* color: white; */
+
+  /* text-align: center; */
+  font-size: 1.2rem;
+  line-height: 1;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+}
+
+tbody{
+  text-align: left;
+}
+
+.table {
+  table-layout: auto;
+}
+
+th, td {
+  white-space: nowrap;
+}
+
+tr, td, th{
+  line-height: 1;
+  line-height: normal;
+  font-size: 0.9rem;
+}
+  .title , strong, input, select, .selectIns, span{
+    font-size: 0.9em;
+  }
+
+.transformY{
+  transition: 0.1s;
+}
+.transformY:hover{
+  transform: translateY(-3px);
+}
+
+.paginattion .page-link{
+  background: #27ae60;
+}
+.paginattion .page-link .active{
+  background: #27ae60;
+}
+
+/* Fin  */
+
+
+
+@media screen and (max-width: 1200px) {
+  .btnI{
+      width: 100%;
+      font-size: 10px;
+      padding: 6px 1px
+   }
+}
+
+
+
+@media  (max-width: 768px) {
+   thead{
+      font-size: 0.8rem;
+
+  }
+  input, select{
+    margin-top: 1rem;
+  }
+  tbody{
+      font-size: 0.7rem;
+  }
+  .title , strong, input, select, .selectIns, span{
+    font-size: 0.9em;
+  }
+  .modal-dialog{
+    margin-left:10px;
+  }
+  .modal-body select{
+    padding:9px;
+    border-radius: 7px;
+    font-size: 0.8em;
+  }
+  .modal-body input{
+    padding: 9px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    width: 28rem;
+    height: 2.5rem;
+  }
+  .profil-reinscription img{
+    width: 55px;
+    height: 55px;
+    margin-top: 0;
+    margin-left: 5rem;
+  }
+  .fichierImage_mTop{
+    margin-top: 28px;
+  width: 24rem;
+  }
+
+
+
+  .btnI-r i{
+    font-size: 1em;
+    color: #FF3877;
+}
+ .btnI-v i{
+    font-size: 1em;
+    /* margin-right: 5px; */
+    color: #2ecc71;
+}
+
+.btn-sm-r {
+padding: 0px 0px;
+background-color: inherit;
+
+}
+.btn-sm-v {
+font-size: 11px;
+padding: 0px 0px;
+background-color: inherit;
+
+}
+  /* .btnI i{
+    font-size: 10px;
+    margin-top: 8px;
+  }
+
+  .btn-sm {
+    border-radius: 5px;
+    padding: 3px 10px;
+  } */
+  .selectIns select, input{
+    padding: 10px;
+    font-size: 0.7em;
+    width: 14.3em;
+    height: 2rem;
+    line-height: 1;
+}
+
+.selectIns .btn{
+  margin-top: 0.6rem;
+  font-size: 0.9em;
+  height: 2rem;
+  width: 5rem;
+
+}
+.btn-rouge, .btn-vert {
+
+  margin-left: 0px;
+}
+
+  .title{
+      font-size: 1.3rem;
+  }
+  .w-sm{
+      /* margin-left: 8px; */
+      width: 100%;
+    }
+}
+
+@media  (max-width: 500px) {
+
+   .w-sm{
+      width: 95%;
+   }
+
+  .title{
+      font-size: 0.9rem;
+  }
+
+}
+
+/*  Fin Style */

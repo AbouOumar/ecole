@@ -1,0 +1,113 @@
+<div class="pag-container">
+  <div class="container transformY">
+          <div class="title pt-3">Situation des recettes et cas de reduction </div>
+         <div class="row mt-4  selectIns ">
+                <div class="col-6 col-md-4">
+                  <select [(ngModel)]="textRechercheAnnee"  id="annee"  class="form-select " name="textRechercheAnnee">
+                    <option value=""> Choisir l'année</option>
+                    <option   value={{annee.id}} *ngFor="let annee of annees" >{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</option>
+                    <option value="2"> 2023-2024 </option>
+                  </select>
+                </div>
+                <div class="col-6 col-md-8 pl-5 ">
+                  <div class="title pt-3 float-end">Année Scolaire <strong class="title"> 2024-2025</strong></div>
+                </div>
+          </div>
+
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="me-2 flex js mt-4">
+
+              <nav aria-label="...">
+                <ul class="pagination pagination-md-lg">
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">1</span>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                </ul>
+              </nav>
+              <div class="col-6 col-md-4">
+                <select  [(ngModel)]="textRechercheMois" name="mois" id="annee" class="form-select mb-ms-2">
+                  <option value="">Choisir le mois</option>
+                  <option value="Octobre">Octobre</option>
+                  <option value="Novembre">Novembre</option>
+                  <option value="Décembre">Décembre</option>
+                  <option value="Janvier">Janvier</option>
+                  <option value="Février">Février</option>
+                  <option value="Mars">Mars</option>
+                  <option value="Avril">Avril</option>
+                  <option value="Main">Main</option>
+                  <option value="Juin">Juin</option>
+                  <option value="Juillet">Juillet</option>
+                  </select>
+                </div>
+            </div>
+
+            <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+            <div class="table-responsive mt text-center mt-">
+              <table class="table  text-center">
+                <thead>
+                <tr>
+                  <th scope="col"
+                    >
+                    Mois
+                  </th>
+                    <th scope="col" >
+                    Recette Mensuel En Banque
+                  </th>
+                  <th scope="col" >
+                    Rectette Global A Presenté Par Mois
+                  </th>
+                  <th scope="col" >
+                    Total Reduction De L'année
+                  </th>
+                  <th scope="col" >
+                    Solde De Reduction
+                  </th>
+                    <!-- <th>Action</th> -->
+                     <!-- style="min-width: 20rem;" -->
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let recetteCasReductionListe of listRecetteCasReduction|filtreRecetteCasReducton:textRechercheAnnee:textRechercheMois ">
+                      <td style="text-transform: uppercase; font-weight: bold;">{{recetteCasReductionListe.mois}}</td>
+                      <td>{{recetteCasReductionListe.recetteMensuelEnBanque | number:'1.2-2' }} FG</td>
+                      <td>{{ recetteCasReductionListe.recetteGlobalApresenter | number:'1.2-2' }} FG</td>
+                      <td>{{recetteCasReductionListe.totalReductionAnnee | number:'1.2-2'}} FG</td>
+                      <td>{{recetteCasReductionListe.soldeReduction | number:'1.2-2'}} FG</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td width="165"><span style="font-weight: 600; text-transform:uppercase; color: #FF3877;">Total par année</span></td>
+                  <td style="color: #2ecc71;">{{recette_MensuelEnBanque | number:'1.2-2'}} FG</td>
+                  <th style="color: #FF3877;">{{recette_GlobalApresente | number:'1.2-2'}} FG</th>
+                  <th style="color: #2ecc71;">{{total_ReductionAnnee | number:'1.2-2'}} FG</th>
+                  <th style="color: #FF3877;">{{solde_Reduction | number:'1.2-2'}} FG</th>
+                </tr>
+                </tfoot>
+            </table>
+                <div class="flex jen">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination paginattion-md-lg justify-content-center">
+                      <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+

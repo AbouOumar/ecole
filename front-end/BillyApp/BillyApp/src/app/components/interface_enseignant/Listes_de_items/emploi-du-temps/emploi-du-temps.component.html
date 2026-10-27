@@ -1,0 +1,30 @@
+<div class="container bg-light">
+
+        <!-- Empois du temps -->
+
+        <div class="mtop">
+          <span>Votre Emploi du temps M./Mme <strong class="text-uppercase mt-5">{{infoEnseignant?.nom_personnel + " " + infoEnseignant?.prenom_personnel}}</strong></span>
+          <table class="table table-bordered mt-4" *ngIf="emploiEnseignant.length >0">
+            <thead class="">
+              <tr>
+                <th>Jour</th>
+                <th>Horaire</th>
+                <th>Matière</th>
+                <th>Classe</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let emploi of emploiEnseignant; let i=index">
+                <th scope="row">{{emploi?.jour}}</th>
+                <td>{{emploi?.heure_debut}} - {{emploi?.heure_fin}}</td>
+                <td>{{emploi?.matiere.libelle_matiere}}</td>
+                <td>{{emploi?.classe.nom_classe}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+
+<!-- Fin Empois du temps -->
+</div>

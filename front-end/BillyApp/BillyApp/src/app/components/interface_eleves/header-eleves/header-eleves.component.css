@@ -1,0 +1,217 @@
+body{
+    font-family: Montserrat;
+    border-radius: 15px;
+}
+header{
+    width: 100%;
+    position: sticky;
+    top: 0;
+    height: 11%;
+    z-index: 100;
+    position: fixed;
+
+    /* border-top-left-radius: 5px; */
+    /* border-top-right-radius: 5px; */
+    /* background: linear-gradient(135deg, #ff6347, #ffd700, #90ee90); */
+}
+.img-logo {
+    display: flex;
+    align-items: center; /* Centre verticalement */
+    gap: 15px; /* Espace entre logo et texte */
+  }
+.img-logo .message-souhait img{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 0.1px solid #27ae60;
+}
+.message-souhait span{
+    /* margin: 5px; */
+}
+  .img-logo .menu-bar{
+    /* padding: 2px; */
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.1s;
+    /* display: none; */
+
+}
+.img-logo .menu-bar:hover{
+    border-radius: 30%;
+}
+
+ .nav-bar ul{
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+}
+
+.nav-bar li {
+    display: inline-block;
+  }
+nav a{
+   text-decoration: none;
+   padding:10px 20px;
+   color: white;
+   font-weight: 600;
+   font-size: 1.2rem;
+   text-align: center;
+   border-radius: 30px;
+   /* margin: 5px; */
+}
+nav a.active{
+    background-color:#27ae60;
+
+}
+nav a:hover{
+    background-color:#27ae60;
+
+    transform: scale(1.07);
+    line-height: normal;
+}
+
+
+  .btn-outline-success:hover {
+    background-color: #db1d5a !important;
+    /* border-color: #FF3877 !important; */
+    color: #fff !important;
+    transform: scale(1.05);
+
+  }
+
+/* Respnsive mobile */
+@media screen and (max-width: 1370px) {
+    header .nav-bar ul{
+        /* display: none; */
+    }
+
+    nav a{
+
+        font-size: 1rem;
+
+     }
+    .img-logo .menu-bar{
+        /* display: block; */
+    }
+    .img-logo {
+        gap:50px
+    }
+}
+@media screen and (max-width: 1150px) {
+    header .nav-bar ul{
+        /* display: none; */
+    }
+    .img-logo .menu-bar{
+        display: block;
+    }
+    .img-logo {
+        gap:50px
+    }
+}
+@media screen and (max-width: 1200px) {
+    header .nav-bar ul{
+        display: none;
+    }
+    .img-logo .menu-bar{
+        display: block;
+    }
+    .img-logo {
+        gap:50px
+    }
+}
+@media screen and (max-width: 1100px) {
+    header .nav-bar ul{
+        display: none;
+    }
+    .img-logo .menu-bar{
+        display: block;
+    }
+    .img-logo {
+        gap:50px
+    }
+}
+@media screen and (max-width: 1080px) {
+    header .nav-bar ul{
+        display: none;
+    }
+    .img-logo .menu-bar{
+        display: block;
+    }
+    .img-logo {
+        gap:50px
+    }
+}
+@media screen and (max-width: 990px) {
+    header .nav-bar ul{
+        display: none;
+    }
+    .img-logo .menu-bar{
+        display: block;
+    }
+    .btn{
+        font-size: 8px;
+        font-weight: bold;
+        /* text-transform: uppercase; */
+    }
+     .img-logo {
+        gap:20px
+    }
+}
+@media screen and (max-width: 896px) {
+    header .nav-bar ul{
+        display: none;
+    }
+    .img-logo .menu-bar{
+        display: block;
+    }
+    .img-logo .message-souhait span{
+        /* display: none; */
+    }
+    .btn{
+        font-size: 0.8rem;
+        font-weight: bold;
+        /* text-transform: uppercase; */
+    }
+     .img-logo {
+        gap:20px
+    }
+}
+@media screen and (max-width: 768px) {
+    /* .btn{
+        width: 105px;
+        height: 40px;
+    } */
+    header{
+        /* height: 5rem; */
+    }
+}
+@media screen and (max-width: 500px) {
+    header .nav-bar ul{
+        display: none;
+    }
+    .img-logo .menu-bar{
+        display: block;
+    }
+    .img-logo .message-souhait span{
+        /* display: none; */
+        font-size: 0.5rem;
+    }
+    .menu-bar img{
+        width: 30px;
+        height: 30px;
+    }
+    .img-logo .message-souhait img{
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        border: 0.1px solid #27ae60;
+    }
+
+
+     .img-logo {
+        gap:20px
+    }
+}

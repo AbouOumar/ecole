@@ -1,0 +1,132 @@
+
+
+<div class="pag-container bg-light bg-body-vertTP">
+  <ng-container >
+    <!-- <app-loading *ngIf="isloading"></app-loading> -->
+    <div class="container" >
+      <div class="row mt-3">
+        <div class="col-12 col-md-4 transformY mx-auto">
+          <!-- style="border: 1px solid red;" -->
+          <div class="card  h-100 box-shadow border-0 rounded-4" id="bg-verteV" >
+            <div class="card-body text-start">
+              <div class="flex js">
+                <span class="title1 text-vert">Total Elèves</span>
+                <i class="fa fa-users"></i>
+              </div>
+              <div class="title2">{{tataux?.effectif}}</div>
+              <div class="flex gap-4 mt-1">
+                <span class="title3s pt-1">Inscrit {{tataux?.inscription}}</span>
+                <small class="title4s">Réinscrit {{tataux?.reinscription}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 transformY">
+          <div class="card  h-100 box-shadow border-0 rounded-4" id="bg-verteV" >
+            <div class="card-body">
+              <div class="flex js gap-4">
+                <span class="title1">Total Enseignant</span>
+                <i class="fa fa-user-check "></i>
+              </div>
+              <div class="flex gap-4">
+                <div class="title2">{{tataux?.nbEnseignant}}</div>
+              </div>
+              <div class="flex gap-4 mt-1 pb-1">
+                <small class="title4d">Matiere </small>
+                <div class="title2">{{tataux?.nbMatiere}}</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 transformY">
+          <div class="card  h-100 box-shadow border-0 rounded-4" id="bg-verteV" >
+            <div class="card-body">
+              <div class="flex js gap-4">
+                <span class="title1">Total chefs services</span>
+                <i class="fa fa-user-check "></i>
+              </div>
+              <div class="flex gap-4">
+                <div class="title2">{{tataux?.nbEnseignant}}</div>
+              </div>
+              <div class="flex gap-4 mt-1 pb-1">
+                <small class="title4d">Nombre élève</small>
+                <div class="title2">{{tataux?.nbEleve}}</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row mt-3 ">
+        <div class="col-12 col-md-4 transformY">
+          <div class="card  h-100 box-shadow border-0 rounded-4" id="bg-verteV" >
+            <div class="card-body">
+              <div class="flex js gap-4">
+                <span class="title1">% Présence</span>
+                <i class="fa fa-user-check "></i>
+              </div>
+              <div class="flex gap-4">
+                <div class="title2">{{tataux?.effectifEnClasse}}%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 transformY">
+          <div class="card  h-100 box-shadow border-0 rounded-4" id="bg-verteV" >
+            <div class="card-body">
+              <div class="flex js">
+                <!-- style="color: #fff; font-weight: bold;" -->
+                <span class="title1" >Total Classes</span>
+                <!-- style="color: #FF3877; background-color: #ffffffc3; font-size: 11px;" -->
+                <i class="fa fa-users fa-1xc text-primaryc " ></i>
+              </div>
+              <!-- style="color: #FF3877;" -->
+              <div class="title2" >{{tataux?.nbClasse}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 transformY">
+          <div class="card  h-100 box-shadow border-0 rounded-4" id="bg-verteV" >
+            <div class="card-body">
+              <div class="flex js">
+                <span class="title1">Nombre d'élève en classe</span>
+                <i class="fa fa-users newStyle " ></i>
+              </div>
+              <div class="title2">{{tataux?.enclasse}}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+
+
+    <div class="row  mt-4  bg-light" >
+      <!-- Histogramme Recette / Dépense -->
+        <div class="col-5 col-md-5 col-xl-6 box-shadow rounded-5 ms-md-4 ms-sm border border-1 border-success transformY ">
+          <canvas class="chart-container mt-4" baseChart
+                  [data]="barChartData"
+                  [options]="barChartOptions"
+                  [type]="'bar'">
+          </canvas>
+        </div>
+         <!-- Diagramme en cercle Répartition par matière -->
+        <div class="col-5  col-md-5 col-xl-6 box-shadow rounded-5 ms-md-3 ms-sm border border-1 border-success transformY ">
+          <canvas class="chart-container mt-1co" baseChart
+                  [data]="pieChartData"
+                  [options]="pieChartOptions"
+                  [type]="'pie'">
+          </canvas>
+        </div>
+    </div>
+
+    <div class="bar" *ngIf="!isloading && !donnees.length && !donneesTotaux.length && !tataux.length">
+      Désolé, aucune donnée n'est disponible pour le moment.
+  </div>
+  </ng-container>
+
+
+<div class="mb-3"></div>

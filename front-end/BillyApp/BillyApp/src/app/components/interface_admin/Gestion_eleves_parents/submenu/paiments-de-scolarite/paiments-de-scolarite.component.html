@@ -1,0 +1,42 @@
+<div class="pag-container">
+<div class="container mt-3">
+      <ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#payement" data-bs-toggle="tab">Payement
+        <!-- <i class="ms-2 fa fa-arrow-down"></i> -->
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#listeDesPayement" data-bs-toggle="tab">Liste des payement</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#listeImpaye" data-bs-toggle="tab">Liste des impayé</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#statitisques" data-bs-toggle="tab">Les statistique</a>
+    </li>
+  </ul>
+
+ <div class="container">
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="payement">
+      <!-- <h3>Payement</h3> -->
+     <app-payement-sco></app-payement-sco>
+    </div>
+    <div class="tab-pane fade" id="listeDesPayement">
+      <!-- <h3>Liste des payement</h3> -->
+      <app-liste-des-payement-scolarite></app-liste-des-payement-scolarite>
+    </div>
+    <div class="tab-pane fade" id="listeImpaye">
+      <!-- <h3>Liste des impayé</h3> -->
+      <app-liste-des-impaye></app-liste-des-impaye>
+    </div>
+    <div class="tab-pane fade" id="statitisques">
+      <!-- <h3>Les statistiques</h3> -->
+      <app-statistiques-soclarite></app-statistiques-soclarite>
+    </div>
+  </div>
+ </div>
+</div>
+
+</div>

@@ -1,0 +1,72 @@
+<section class="">
+  <div class="container  shadows borderc roundedc border-2c w-smc">
+    <small class="" style="color: #2ecc71;">Information de l'élève avec ses parent</small>
+
+
+    <div class="row gap">
+      <div class="col-11 col-md-6 flex">
+        <img [src]="adresseIp+':8000/storage/images/profile/' + (eleve?.photo)   || adresseIp+':8000/storage/images/profile/avatar.png'" alt="Photo de l'élève" class="student-photo" />
+        <div class="info-container">
+          <h2 class="text-rouge">Information de l'élève</h2>
+          <p><strong>Matricule :</strong> {{eleve?.matricule_eleve}}</p>
+          <p><strong>Prénom et Nom :</strong> {{eleve?.prenom_eleve}} {{eleve?.nom_eleve}}</p>
+          <p><strong>Genre :</strong> {{eleve?.genre_eleve}}</p>
+          <p><strong>Né le :</strong> {{eleve?.Date_naiss}}</p>
+          <p><strong>Téléphone :</strong> {{eleve?.tel_eleve || "Pas de téléphone" }}</p>
+          <p><strong>Classe :</strong> {{ eleve?.classe?.nom_classe || "Non inscrit"}} <strong>Statut :</strong> {{eleve?.statut_scolaire || "Pas de statue"}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 ">
+        <img src="/assets/images/affiche.jpg" alt="affiche" class="student-affiche d-none d-md-block" />
+      </div>
+    </div>
+
+    <!-- Carte des info parents -->
+
+
+   <div class="container-fluid">
+    <div class="row  mt-5 gap-2">
+      <div class="card-section" *ngFor="let parent of parents" class="card-section col-11 col-md-5 ms-md-5 transformY ">
+      <img src="#" alt="Pas de photo" class="no-photo" />
+      <div class="info-container" >
+        <h2>Information du {{parent.pivot?.lien_parente}}</h2>
+        <p class="mt-4"><strong>Prénom et Nom :</strong> {{parent.prenom_parent +" "+parent.nom_parent}}</p>
+        <p><strong>Profession :</strong> {{parent.profession}}</p>
+        <p><strong>Téléphone :</strong> {{parent.telephone_parent || "Non spécifie"}}</p>
+        <p><strong>Ville/Quartier :</strong> {{parent.adresse_parent}}</p>
+        <p><strong>Email :</strong> {{parent.Email_parent}}</p>
+      </div>
+    </div>
+
+    <div class="card-section" *ngFor="let personnel of personnels" class="card-section col-11 col-md-5 ms-md-5  transformY ">
+      <img src="#" alt="Pas de photo" class="no-photo" />
+      <div class="info-container" >
+        <h2>Information personnel {{personnel.pivot?.lien_parente}}</h2>
+        <p class="mt-4"><strong>Matricule personnel :</strong> {{personnel.matricule_personnel}}</p>
+        <p><strong>Prénom et Nom :</strong> {{personnel.prenom_personnel +" "+personnel.nom_personnel}}</p>
+        <p><strong>Profession :</strong> {{personnel.profession}}</p>
+        <p><strong>Téléphone :</strong> {{personnel.tel_personnel || "Non spécifie"}}</p>
+        <p><strong>Ville/Quartier :</strong> {{personnel.adresse_personnel}}</p>
+        <p><strong>Email :</strong> {{personnel.mail_personnel}}</p>
+      </div>
+    </div>
+    </div>
+   </div>
+
+    <!-- <div class="row gap"> -->
+       <!-- Carte des info personnel parents -->
+
+    <!-- </div> -->
+
+
+    <div class="separateur mt-2"></div>
+
+
+
+
+
+
+</div>
+</section>
+

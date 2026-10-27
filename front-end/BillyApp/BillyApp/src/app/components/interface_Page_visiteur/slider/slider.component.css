@@ -1,0 +1,270 @@
+body {
+  font-family: 'Raleway', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+
+
+
+
+/* --- BOUTONS --- */
+.btn.scrolled {
+  color: #fff;
+}
+.btn {
+  color: #fff;
+  /* border-color: inherit !important; */
+}
+
+.btn1 {
+  background: linear-gradient(135deg, #2ecc71);
+  width: 15rem !important; line-height: 1.6rem; font-size: 1rem;
+}
+.btn2 {
+  background: linear-gradient(135deg, #fff);
+  width: 15rem !important; line-height: 1.6rem; font-size: 1rem;
+  color: #2ecc71;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+}
+
+.btn1:hover{
+  background: linear-gradient(135deg, #04642c);
+
+
+}
+.btn2:hover{
+  background: linear-gradient(#04642c);
+
+
+}
+
+.btn-outline-success:hover {
+  /* background-color: #FF3877 !important; */
+  /* border-color: #FF3877 !important; */
+  color: #fff !important;
+}
+
+/* --- SECTION HERO --- */
+
+
+/* Ajustement du carousel pour qu'il prenne toute la section hero */
+.hero {
+  height: 100vh;
+  min-height: 700px;
+  position: relative;
+  overflow: hidden;
+}
+
+.subtitle {
+  font-family: Raleway;
+  color: #f1f1f1;
+  font-weight: 200;
+  font-size: clamp(16px, 2vw, 20px) ;
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+.subtitle.active {
+  opacity: 1;
+}
+
+ h1 {
+  font-size: clamp(54rem, 22vw, 80rem) ;
+  display: inline-block;
+  font-weight: 800;
+  /* color: #f0f0f0; */
+  color: #3de483;
+  text-transform: uppercase;
+  background-image: linear-gradient(to right, #3de483, #3de483);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
+}
+ h1::after {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 3px;
+  background: #FF3877;
+  right: -10px;
+  top: 0;
+  animation: carret 1s infinite;
+}
+
+@keyframes carret {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hero-push-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #f1f1f136;
+  background: #2ecc71;
+  position: absolute;
+  bottom: clamp(30px,7.5vw, 25px);
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+.hero-push-link.active {
+  opacity: 1;
+}
+.hero-push-link img {
+  width: 30%;
+  pointer-events: none;
+}
+
+.carousel,
+.carousel-inner,
+.carousel-item {
+  height: 100%;
+}
+
+/* Ajuster les images du carousel pour qu'elles remplissent bien l'espace */
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajuste l'image sans la déformer */
+}
+
+/* Garder l'overlay sombre au-dessus du carousel */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /*Overlay noir semi-transparent*/
+  z-index: 1;
+}
+
+/* S'assurer que le texte est bien visible */
+.hero-content {
+  position: absolute;
+  z-index: 2; /* Pour être au-dessus des images */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* --- MEDIA QUERIES (RESPONSIVE) --- */
+@media (min-width: 992px) {
+  .navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+
+  .nav-item {
+    text-align: center;
+  }
+}
+
+@media (max-width: 850px) {
+  body {
+    background-color: #2ecc703e;
+    border-radius: 0px 0px 10px 10px;
+  }
+
+
+  .navbar-brand {
+    /* color: #fff; */
+  }
+
+  .rounded-circle {
+    width: 40px;
+    height: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .hero-content{
+    margin-top: 1rem;
+  }
+  h1 {
+    font-size: clamp(44rem, 22vw, 50rem);
+    padding-top: 5rem;
+  }
+
+  .colum-sm{
+    flex-direction:column-reverse;
+    justify-content: center;
+
+  }
+  .btn1{
+    margin-bottom: 5rem;
+  }
+  .btn2{
+    margin-bottom: 2rem;
+ }
+
+
+  .hero-push-link{
+    /* display: none; */
+    margin-bottom: 6.6rem;
+  }
+
+  .navbar-brand {
+    /* color: #fff; */
+  }
+
+  .rounded-circle {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* --- STYLE DES CARTES --- */
+.card {
+  border-radius: 15px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}

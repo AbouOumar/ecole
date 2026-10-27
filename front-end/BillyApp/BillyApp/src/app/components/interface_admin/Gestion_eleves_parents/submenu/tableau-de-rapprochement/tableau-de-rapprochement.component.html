@@ -1,0 +1,158 @@
+<div class="pag-container bg-light">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="title">Tableau de rapprochememnt des effectifs</div>
+      <div class="col-4 col-md-6 mt-2">
+        <select [(ngModel)]="anneeFiltre" (change)="chargeStatistiqueRapprochementAnnee()"  id="anneeFiltre" class="form-select" name="anneeFiltre">
+          <option value=""> Choisir l'année {{anneeFiltre}} </option>
+          <option value={{annee.id}} *ngFor="let annee of annees" >{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</option>
+          <option value="2"> 2023-2024 </option>
+        </select>
+      </div>
+        <div class="col-1 col-md-2">
+          <button type="Rechercher" class="btn btn-outline-success">Chercher</button>
+       </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12 col-md-3 transformY">
+        <div class="card box-shadow rounded-4" id="bg-vertP">
+          <div class="card-body">
+            <div class="flex js">
+              <span class="title1">Effectif total</span>
+              <i class="fa fa-users fa-1xc text-primaryc "></i>
+            </div>
+            <div class="title2">{{statis_annee?.totalEleveAnnee || '0'}}</div>
+            <div class="flex gap-3">
+              <span class="title3">Année scolaire</span>
+              <span class="title4">2024-2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3 transformY">
+        <div class="card box-shadow rounded-4" id="bg-rouge1P">
+          <div class="card-body">
+            <div class="flex js">
+              <span class="title1">Effectif Net</span>
+              <i class="fa fa-user-check "></i>
+            </div>
+            <div class="title2">{{(statis_annee?.totalEleveAnnee-statis_annee?.totalDepartAnnee) || '0'}}</div>
+            <div class="flex gap-3">
+              <span class="title3">Année scolaire</span>
+              <span class="title4">2024-2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3 transformY">
+        <div class="card box-shadow rounded-4" id="bg-vertP">
+          <div class="card-body">
+            <div class="flex js">
+              <span class="title1">Total Classes</span>
+              <i class="fa fa-school text-warninsg "></i>
+            </div>
+            <div class="title2">{{statis_annee?.totalEleveEnClasseAnnee || '0'}}</div>
+            <div class="flex gap-3">
+              <span class="title3">Année scolaire</span>
+              <span class="title4">2024-2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3 transformY">
+        <div class="card box-shadow rounded-4" id="bg-rouge1P">
+          <div class="card-body">
+            <div class="flex js">
+              <span class="title1">Total Diff</span>
+              <i class="fa fa-chart-bar f "></i>
+            </div>
+            <div class="title2">{{((statis_annee?.totalEleveAnnee-statis_annee?.totalDepartAnnee)-statis_annee?.totalEleveEnClasseAnnee) || '0'}}</div>
+            <div class="flex gap-3">
+              <span class="title3">Année scolaire</span>
+              <span class="title4">2024-2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="flex retourAl">
+        <div class="col-12 col-md-3">
+          <div class="title3 mt- titleT" style="color:green; text-transform: uppercase;">Tableau de rapprochememnt pour le mois de Nombre</div>
+
+        </div>
+        <div class="col-4 col-md-3">
+          <select [(ngModel)]="textRechercheAnnee"  id="annee"  class="form-select " name="textRechercheAnnee">
+            <option value=""> Choisir l'année</option>
+            <option   value={{annee.id}} *ngFor="let annee of annees" >{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</option>
+            <option value="2"> 2023-2024 </option>
+          </select>
+        </div>
+      <div class="col-4 col-md-3">
+        <select  [(ngModel)]="textRechercheClasse"  id="classe" class="form-select ms-2"   name="textRechercheClasse">
+        <option value=""> Choisir la classe  </option>
+        <option value={{classe.id}} *ngFor="let classe of classes">{{classe.nom_classe}}</option>
+        </select>
+      </div>
+
+      <div class="col-4 col-md-3 ">
+          <select  [(ngModel)]="textRechercheMois" id="maListe" class="form-select ms-3" name="textRechercheMois">
+            <option value="">Sélectionnez un mois</option>
+            <option value="Octobre">Octobre</option>
+            <option value="Novembre">Novembre</option>
+            <option value="Décembre">Décembre</option>
+            <option value="Janvier">Janvier</option>
+            <option value="Février">Février</option>
+            <option value="Mars">Mars</option>
+            <option value="Avril">Avril</option>
+            <option value="Main">Main</option>
+            <option value="Juin">Juin</option>
+            <option value="Juillet">Juillet</option>
+        </select>
+      </div>
+      </div>
+    </div>
+
+   <div class="table-responsive mt text-center mt-4">
+      <table class="table">
+          <thead>
+          <tr>
+              <th scope="col">Classe</th>
+              <th scope="col">Effectif Total</th>
+              <th scope="col">Total Graçier</th>
+              <th scope="col">Total Net</th>
+              <th scope="col">Effectif En Classe</th>
+              <th scope="col">Diff</th>
+
+
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr *ngFor="let stati_eleve of statis_eleve|statistiqueRapproche:textRechercheAnnee:textRechercheClasse||0:anneEncoursId:textRechercheMois:moisEncours:1;">
+              <td>{{stati_eleve.nom_classe}}</td>
+              <td>{{stati_eleve.effectif_total}}</td>
+              <td style="color: orange;">{{stati_eleve.nbDepart}}</td>
+              <td style="color: green;">{{stati_eleve.effectif_total-stati_eleve.nbDepart}}</td>
+              <td >{{stati_eleve.total_eleveEnClasse}}</td>
+              <td style="color: red;">{{(stati_eleve.effectif_total-stati_eleve.nbDepart )-stati_eleve.total_eleveEnClasse}}</td>
+          </tr>
+
+       </tbody>
+       <!-- <tfoot>
+
+        <td>Total par mois</td>
+        <td>{{total_effectif_total}}</td>
+        <td style="color: orange;">{{total_nbDepart}}</td>
+        <td style="color: green;">{{total_eff_net}}</td>
+        <td >{{total_eleveEnClasse}}</td>
+        <td style="color: red;">10</td>
+       </tfoot> -->
+      </table>
+
+  </div>
+  </div>
+  <div style="height: 1rem;"></div>
+</div>
+

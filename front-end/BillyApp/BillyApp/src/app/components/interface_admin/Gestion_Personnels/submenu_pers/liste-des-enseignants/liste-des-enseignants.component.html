@@ -1,0 +1,136 @@
+<div class="pag-container">
+
+  <div class="container transformY  bordere roundede border-2e w-sm">
+  <div class="flex js mt-2">
+    <div class="h5 pt-3 text-vert">Liste des Enseignants</div>
+    <!-- <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div> -->
+  </div>
+ <form action="" class="selectIns mt-3">
+  <!-- <div class="mt-4 flex ms-2 mt-2"> -->
+      <div class="row mt-2">
+        <div class="col-4 col-md-3">
+          <select   id="annee"  class="form-select">
+            <option value=""> Choisir l'année</option>
+            <option   value={{annee.id}} *ngFor="let annee of annees" >{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</option>
+            <option value="2"> 2023-2024 </option>
+          </select>
+          </div>
+        <div class="col-4 col-md-3">
+          <select [(ngModel)]="matiereChoisi" (change)="personnelsMatiere()"  name="matiere" id="matiere" class="form-select">
+            <option value="">-- Choissir matière --</option>
+            <option  value={{matiere.id}} *ngFor="let matiere of matieres">{{matiere.libelle_matiere}}</option>
+            </select>
+          </div>
+          <div class="col-1 col-md-1">
+             <button type="search" class="btn btn-outline-success">Search</button>
+          </div>
+      </div>
+  <!-- </div> -->
+ </form>
+  <div class="flex jend mt-4">
+    <nav aria-label="...">
+      <ul class="pagination pagination-md-lg">
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">1</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <div class="row">
+      <div class="col-12 col-lg-12 ">
+          <div class="me-2 flex jen">
+            <div class="title ms-5  mt-3">Rechercher</div>
+
+              <!-- <button type="search" class="ms-4 btn">Imprimer</button> -->
+              <form action="" class="row g-3">
+                <div class="col-12 col-md-12">
+                  <div class="form-group">
+                    <input type="search" class="form-control ms-2" placeholder="Entrer un matricule"
+                    style="border-radius: 15px;"
+                    >
+                  </div>
+                 </div>
+              </form>
+          </div>
+
+          <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+          <div class="table-responsive mt text-center mt-2">
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th scope="col">N°</th>
+                      <th scope="col">Matricule</th>
+                      <th scope="col">Nom et Prénom</th>
+                      <th scope="col">Téléphone</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Ville/Quartier</th>
+                      <th scope="col">Taux horaire</th>
+                      <th scope="col">Image</th>
+                  </tr>
+                  </thead>
+                  <tbody *ngIf="personelsMatieres ==null">
+                      <tr *ngFor="let personnel of personnels; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{personnel.matricule_personnel}}</td>
+                        <td>M. {{personnel.nom_personnel}} {{personnel.prenom_personnel}}</td>
+                        <td>{{personnel.tel_personnel}}</td>
+                        <td>{{personnel.mail_personnel}}</td>
+                        <td>{{personnel.adresse_personnel}}</td>
+                        <td>{{personnel.taux_horaire}}</td>
+                        <td>
+                          <div  class="profil-reinscriptionT ">
+                            <img [src]="adresseIp+':8000/storage/images/profile/' + personnel.photo   || adresseIp+':8000/storage/images/profile/avatar.png'"
+                            class="mt-1 border rounded-circle mx-auto d-block  " alt="Image élève" width="30">
+                          </div>
+                          </td>
+                    </tr>
+
+                  </tbody>
+                  <tbody *ngIf="personelsMatieres !=null">
+                  <tr *ngFor="let personnel of personelsMatieres;let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{personnel.matricule_personnel}}</td>
+                    <td>M. {{personnel.nom_personnel}} {{personnel.prenom_personnel}}</td>
+                    <td>{{personnel.tel_personnel}}</td>
+                    <td>{{personnel.mail_personnel}}</td>
+                    <td>{{personnel.adresse_personnel}}</td>
+                    <td>{{personnel.taux_horaire}}</td>
+
+                    <td>
+                      <div  class="profil-reinscriptionT ">
+                        <img [src]="adresseIp+':8000/storage/images/profile/' + personnel.photo   || adresseIp+':8000/storage/images/profile/avatar.png'"
+                        class="mt-1 border rounded-circle mx-auto d-block  " alt="Image élève" width="30">
+                      </div>
+                      </td>
+                </tr>
+                  </tbody>
+              </table>
+
+          </div>
+          <div class="flex jen">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination paginattion-md-lg justify-content-center">
+                <li class="page-item disabled">
+                  <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+      </div>
+  </div>
+  </div>
+
+
+</div>
+
+

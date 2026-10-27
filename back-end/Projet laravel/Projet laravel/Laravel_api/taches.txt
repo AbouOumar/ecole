@@ -1,0 +1,3 @@
+J'ai créer la majeur partie des model, migration, request et controleur lié à l'éleve mais les autres pas encore
+j'ai fais les configuration pour pouvoir créer les route api en plus j'ai créer quelques routes(CRUD) pour le model eleve
+

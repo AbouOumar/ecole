@@ -1,0 +1,104 @@
+
+  <div class="container shadow rounded-4  transformY  bordere roundede border-2e w-sm">
+ <form action="" class="selectIns mt-4">
+  <!-- <div class="mt-4 flex ms-2 mt-2"> -->
+      <div class="row">
+        <div class="col-4 col-md-4">
+          <div class="form-group">
+            <input type="search" class="form-control mt-3" placeholder="Entrer un matricule"
+            [(ngModel)]="textRecherche" name="textRecherche">
+          </div>
+         </div>
+        <div class="col-4 col-md-3">
+          <select [(ngModel)]="textRechercheAnnee"  id="annee"  class="form-select mt-3" name="textRechercheAnnee">
+            <option value=""> Choisir l'année</option>
+            <option   value={{annee.id}} *ngFor="let annee of annees" >{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</option>
+            <option value="2"> 2023-2024 </option>
+          </select>
+          </div>
+          <div class="col-4 col-md-3">
+            <select  [(ngModel)]="textRechercheClasse" name="class" id="classe" class="form-select mt-3"  name="textRechercheClasse">
+              <option value=""> Choisir la classe </option>
+              <option value={{classe.id}} *ngFor="let classe of classes">{{classe.nom_classe}}</option>
+              </select>
+          </div>
+          <div class="col-1 col-md-1">
+             <button type="search" class="btn btn-outline-success mt-3">Chercher</button>
+          </div>
+      </div>
+  <!-- </div> -->
+ </form>
+  <div class="flex jend mt-4">
+    <nav aria-label="...">
+      <ul class="pagination pagination-md-lg">
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">1</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <div class="row">
+      <div class="col-12 col-lg-12">
+          <div class="table-responsive mt text-center">
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th scope="col">N°</th>
+                      <th scope="col" style="min-width: 145px;">Matricule</th>
+                      <th scope="col"  style="min-width: 145px;">Prénom et Nom</th>
+                      <th scope="col">Classe</th>
+                      <th scope="col"  style="min-width: 135px;">Contact Parent</th>
+                      <th scope="col" style="min-width: 160px;">Scolarité Annuelle</th>
+                      <th scope="col">Réduction</th>
+                      <th scope="col">Total payer</th>
+                      <th scope="col">Reste à payer</th>
+                      <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr *ngFor="let payementDetails of listePaiement|filtrePayement:textRecherche:textRechercheAnnee:textRechercheClasse||0:anneEncoursId; let i = index; ">
+                      <th scope="row">{{i+1}}</th>
+                      <td style="line-height: 1;">{{payementDetails.matricule_eleve}}</td>
+                      <td style="min-width: 12rem; line-height: 1;">{{payementDetails.nom_complet_eleve}}</td>
+                      <td style="min-width: 5rem; line-height: 1;">{{payementDetails.nom_classe}}</td>
+                      <th style="line-height: 1;">{{payementDetails.parent_contact}}</th>
+                      <th class="" style="line-height: 1;">{{payementDetails.fraisScolariteAnnuel}} FG</th>
+                      <td class="" style="min-width: 8rem; line-height: 1;">{{payementDetails.total_reduction}}  </td>
+                      <td style="min-width: 10rem; line-height: 1;">{{payementDetails.total_paiement}} FG</td>
+                      <td style="min-width: 10rem; line-height: 1;">{{payementDetails.netResteAPayer}} FG</td>
+                      <td style="min-width: 8rem;">
+                          <button type="button" class="btnI-v  btn-vert btn-sm-v me-2" role="button" (click)="chargeParentsEleveId(payementDetails.eleve_id)"
+
+                             data-bs-toggle="modal" data-bs-target="#modal_modifier_eleve">
+                            <i class="fa fa-edit" title="Modifier"></i>
+                          </button>
+                      </td>
+                  </tr>
+
+               </tbody>
+              </table>
+
+          </div>
+           <div class="flex jen mt-3">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination paginattion-md-lg justify-content-center">
+                    <li class="page-item disabled">
+                      <a class="page-link">Précédent</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Suivant</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+      </div>
+  </div>
+  </div>

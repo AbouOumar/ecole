@@ -1,0 +1,151 @@
+.emploiDuTemp_container{
+    height: 60rem;
+    z-index: 70;
+}
+
+
+
+@media screen and (max-width: 900px){
+    .content{
+        width: 95%;
+        /* min-height:70%; */
+
+    }
+
+  }
+
+
+  /* style statistique */
+  .liste-box-static{
+    text-align: center;
+    border-radius: 6px;
+    border-top: 5px solid green;
+    transition: 0.3s;
+}
+
+.liste-box-static:hover{
+    transform: translateY(-5px);
+}
+
+img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+@media (max-width: 500px) {
+    .title-v, .title-5{
+        /* font-size: 0.6rem; */
+    }
+}
+  /* End style statistique */
+
+
+  /* style filtre */
+  .title {
+    font-size: 1.5rem;
+    color: #2ecc71;
+    font-weight: 500;
+}
+
+.transformY{
+    transition: 0.3s;
+}
+.transformY:hover{
+    transform: translateY(-10px);
+}
+
+
+.formStyle {
+  border-radius: 60px;
+  padding: 10px;
+
+}
+.btn{
+    width: 7rem;
+    height: 2.4rem;
+    border-radius: 60px;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    line-height: normal;
+    font-weight: bold;
+    background: linear-gradient(135deg, #2ecc71, #09724A);
+
+    cursor: pointer;
+    box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+}
+.btn:hover {
+    background: linear-gradient(135deg,  #2ecc71,  #2ecc71);
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+
+@media screen and (max-width: 1200px){
+
+    .btn{
+        width: 15rem;
+        height: 2.5rem;
+        font-size: 1.5rem;
+        padding: 2px;
+    }
+
+    }
+
+@media screen and (max-width: 1080px){
+
+    .btn{
+        width: 15rem;
+        height: 2.5rem;
+        font-size: 1rem;
+        padding: 2px;
+    }
+
+
+  }
+  @media screen and (max-width: 980px){
+
+    .btn{
+        width: 15rem;
+        height: 2.5rem;
+        font-size: 1.3rem;
+        padding: 2px;
+    }
+
+    }
+
+
+  @media screen and (max-width: 900px){
+    .btn{
+        width: 8rem;
+        height: 2.4rem;
+        font-size: 1rem;
+        line-height: normal;
+    }
+    }
+
+
+  @media  (max-width: 500px){
+
+    .ms-sm{
+        width: 95%;
+      }
+      .titleF{
+        display: none;
+      }
+
+      .btn{
+        width: 5rem;
+        height: 2rem;
+        font-size: 0.7em;
+    }
+    .fs-sm{
+      font-size: 0.8em;
+    }
+    .mb-sm{
+      margin-bottom: 1rem;
+    }
+  }
+
+  /* End style filtre */

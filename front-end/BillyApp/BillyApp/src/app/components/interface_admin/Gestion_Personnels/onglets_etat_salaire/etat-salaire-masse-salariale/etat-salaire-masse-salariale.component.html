@@ -1,0 +1,56 @@
+
+
+<div class="mt-3">
+  <small>Année scolaire</small>
+  <strong class="ms-4 title">2024-2025</strong>
+  <div class="float-end">
+    <!-- <div class="row"> -->
+      <!-- <div class="col-4 col-md-6"> -->
+        <select name="" id="" class="form-select text-mudet">
+          <option value="">Choisir Année scolaire</option>
+          <option value="">2024-2025</option>
+          <option value="">2023-2024</option>
+        </select>
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+
+</div>
+
+<div class="table-responsive mt-3 col-12">
+  <div class="title">Etat de salaire</div>
+  <table class="table  text-center">
+      <thead>
+      <tr>
+        <th scope="col"style="background-color: #111111be; color: #fff;">
+          Mois
+        </th>
+          <th scope="col" style="background-color: #2ecc71; color: #fff;">
+          Masse Salariale Global Brute
+        </th>
+        <th scope="col" style="background-color: #2ecc71; color: #fff;">
+          Prime
+        </th>
+        <th scope="col" style="background-color: #2ecc71; color: #fff;">
+          Ecolage
+        </th>
+        <th scope="col" style="background-color: #2ecc71; color: #fff;">
+          Masse Salariale Global Nete
+        </th>
+          <!-- <th>Action</th> -->
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let salaireGlobal of salaireGlobals">
+            <td><strong>{{salaireGlobal.mois}}</strong></td>
+            <td>{{salaireGlobal.salaire_brutTotal}} FG</td>
+            <td>{{salaireGlobal.primeTotal}} FG</td>
+            <th>{{salaireGlobal.ecolageTotal}} FG</th>
+            <th>{{salaireGlobal.salaire_netTotal}} FG</th>
+        </tr>
+      </tbody>
+
+  </table>
+</div>
+
+

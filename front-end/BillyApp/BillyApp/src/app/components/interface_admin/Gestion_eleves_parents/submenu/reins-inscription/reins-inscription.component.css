@@ -1,0 +1,31 @@
+
+
+
+ .nav-pills .nav-link.active
+{
+
+  background-color: #2ecc706c;
+  border-color: #2ecc71;
+  color:#111;
+
+}
+
+.nav-pills .nav-link {
+border-radius: 0;
+transition: backgroud-color 0.3s ease;
+color:#111;
+  /* border-radius: 10px 10px 0 0; */
+  border: none;
+
+}
+
+
+
+@media (max-width: 768px) {
+  h3{
+    font-size: 1em;
+  }
+}
+
+
+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affectation Enseignant</title>
+
+
+</head>
+<body class="bg-lights">
+    <div class="container mt-4">
+        <div class="row gy-3 align-items-center">
+            <!-- Sélection de l'enseignant -->
+            <div class="col-12 col-md-7">
+                <div class="card shadow-sm">
+                    <div class="card-header header-bg-successe">Sélectionner l'enseignant</div>
+                    <div class="card-body ">
+                        <input type="search" [(ngModel)]="textRecherche
+                        " class="form-control mb-2" placeholder="Rechercher par matricule">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Matricule</th>
+                                    <th>Prénom et Nom</th>
+                                    <th>Fonction</th>
+                                    <th>Téléphone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr  *ngFor="let personnel of personnels|affectation:textRecherche" (click)="selectionnerEnseignant(personnel)"
+                                    [class.selected]="enseignantSelectionne?.id == personnel.id"
+                                    >
+                                    <td>{{personnel.matricule_personnel}}</td>
+                                    <td>{{personnel.prenom_personnel+" "+personnel.nom_personnel}}</td>
+                                    <td>Enseignant</td>
+                                    <td>{{personnel.tel_personnel}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flèche -->
+            <div class="col-md-1 d-none d-md-block">
+                <div class="arrow">&rarr;</div>
+            </div>
+
+            <!-- Sélection du cours -->
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-header header-bg-dangere">Choisir le cours</div>
+                    <div class="card-body">
+                        <ul *ngIf="matiereEnseignes.length>0" class="list-group" >
+                            <li  (click)="selectionnerMatiere(matiere)" [class.selected]="matiereSelectionne?.id == matiere.id" *ngFor="let matiere of matiereEnseignes" class="list-group-item">{{matiere.libelle_matiere}} <span class="badge bg-danger float-end">Spécialité</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row gy-3 mt-4">
+            <!-- Sélection des classes -->
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header header-bg-dangere">Sélectionner les classes</div>
+                    <div class="card-body">
+                        <div *ngFor="let classe of classes" class="form-check">
+                          <!-- separe la case et le nom de la classe -->
+                           <div class="flex js">
+                            <!-- case à cocher -->
+                            <div>
+                              <input [value]="classe.id" (change)="selectionnerClasse(classe.id, $event)" class="form-check-input" type="checkbox" id="class1">
+                            <label class="form-check-label" for="class1">{{classe.nom_classe}}</label>
+                            </div>
+                            <!-- Nome classe -->
+                            <span style="color: #2ecc71;">{{classe.niveau}}ème Année</span>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sélection de l'année scolaire et actions -->
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header header-bg-successe">Choisir l'année scolaire</div>
+                    <div class="card-body">
+                        <select  [(ngModel)]="anneScolaireId" class="form-select mb-3">
+                            <option value=""> Choisir l'année </option>
+                            <option    value={{annee.id}} *ngFor="let annee of annees">{{annee.dateDebut|date:'yyyy'}} - {{annee.DateFin|date:'yyyy'}}</option>
+                            <!-- <option value=2>2023-2024</option> -->
+                            </select>
+                            <small *ngIf="messageErreurAnnee != ''" class="text-danger">
+                              {{messageErreurAnnee}}
+                            </small>
+                        <form (ngSubmit)="onSubmit()">
+                          <button type="submit" class="btn1 btn- w-100">Affecter</button>
+                          <button class="btn2 btn-danger w-100 mt-2">Annuler les opérations</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <span class="p-3 text-rouge" *ngIf="messageAffecter">{{messageAffecter}}</span>
+        </div>
+    </div>
+    <div style="height: 1rem;"></div>
+</body>
+</html>

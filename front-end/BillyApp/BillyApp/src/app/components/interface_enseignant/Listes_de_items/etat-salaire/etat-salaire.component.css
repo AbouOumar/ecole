@@ -1,0 +1,20 @@
+*{
+
+    box-sizing: border-box;
+}
+
+html,body{
+    font-family: Montserrat,sans-serif;
+    color:#111;
+    width: 100%;
+    overflow-x: hidden;
+
+}
+
+.pag-container{
+  margin-left: -16.9rem;
+}
+
+
+
+

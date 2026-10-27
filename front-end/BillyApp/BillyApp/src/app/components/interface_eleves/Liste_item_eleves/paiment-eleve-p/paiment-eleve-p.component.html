@@ -1,0 +1,110 @@
+<div class="container shado">
+  <h3 class="text-rouge">Paiement effectué</h3>
+        <!-- paiments effectué -->
+        <div *ngIf="paiement_eleve_sco?.matricule_eleve" class="masquer">
+          <div class="flex  mt-3 profil-reinscription">
+            <div class="mb-2 mt-4">Prénom et Nom : <strong> {{paiement_eleve_sco?.prenom_eleve}} {{paiement_eleve_sco?.nom_eleve}} </strong> Classe <strong> {{paiement_eleve_sco?.classe?.nom_classe}}</strong></div>
+           </div>
+
+           <div class="table-responsive mt text-center mt-4">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Tranches</th>
+                    <th scope="col">Tranche 1</th>
+                    <th scope="col">Tranche 2</th>
+                    <th scope="col">Transche 3</th>
+                    <th>Reduction</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td style="font-weight: bold;">A payer</td>
+                    <td>{{paiement_scolariteTranche?.apayerTranche1}} FG</td>
+                    <td>{{paiement_scolariteTranche?.apayerTranche2}} FG</td>
+                    <td>{{paiement_scolariteTranche?.apayerTranche3}} FG</td>
+                    <td class="text-center" rowspan="3">{{paiement_scolariteTranche?.totalRecuction}} FG</td>
+
+
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: orange;">Payer</td>
+                    <td style="color: orange;">{{paiement_scolariteTranche?.tranche1}} FG</td>
+                    <td style="color: orange;">{{paiement_scolariteTranche?.tranche2}} FG </td>
+                    <td style="color: orange;">{{paiement_scolariteTranche?.tranche3}} FG</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: red;">Reste à payer</td>
+                    <td style="color: red;">{{paiement_scolariteTranche?.resteTranche1}} FG</td>
+                    <td style="color: red;">{{paiement_scolariteTranche?.resteTranche2}} FG</td>
+                    <td style="color: red;">{{paiement_scolariteTranche?.resteTranche3}} FG</td>
+                </tr>
+
+            </table>
+
+          </div>
+          </div>
+        <!-- End paiments effectué -->
+    <!-- Liste des action -->
+<div class="row">
+  <div class="col-md-12   mx-auto bordere border-roundede border-ligthe bshadow" style="background-color: white;">
+    <div class="mt- flex js">
+      <span class="" style="color: #2ecc71;">Liste des actions</span>
+
+    </div>
+    <!-- Liste des actions eleve -->
+        <div class="row">
+            <div class="col-12 col-lg-12">
+                <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+                <div class="table-responsive mt-3">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">N°</th>
+                            <th scope="col">Classe</th>
+                            <th scope="col">Evenement</th>
+                            <th scope="col">Tranche</th>
+                            <th scope="col">Montant</th>
+                            <th scope="col">Date</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr *ngFor="let action of actions; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{action.classe }}</td>
+                            <td>{{action.evenement }}</td>
+                            <td>{{action.tranche || "N/A" }}</td>
+                            <td>{{action.montant | number }} FG</td>
+                            <td>{{action.date }}</td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="flex jen">
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination paginattion-md-lg justify-content-center">
+                          <li class="page-item disabled">
+                            <a class="page-link">Previous</a>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+     <!-- Fin -->
+  </div>
+</div>
+</div>

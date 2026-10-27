@@ -1,0 +1,154 @@
+<div class="pag-container">
+  <div class="container transformY  bordere roundede border-2e w-sm">
+    <div class="flex js mt-2">
+      <div class="h5 pt-3" style="color: #FF3877;">Les niveaux et frais de scolarité</div>
+      <div class="title pt-3">Année Scolaire <strong class="title"> 2024-2025</strong></div>
+    </div>
+        <div class="row mt-2 selectInsF ">
+          <div class="col-6 col-md-3">
+            <select name="sexe" id="annee" class="form-select">
+              <option value="">-- choisir l'année --</option>
+              <option value="25">2024-2025</option>
+              <option value="24">2023-2024</option>
+              </select>
+            </div>
+        </div>
+
+    <div class="flex jend mt-4">
+      <nav aria-label="...">
+        <ul class="pagination pagination-md-lg">
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">1</span>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </ul>
+      </nav>
+    </div>
+
+
+    <div class="row">
+        <div class="table-container table-responsive mt-md-3 ">
+          <table class="table table-bordered text-center">
+              <thead>
+                  <tr>
+                      <th scope="col">N°</th>
+                      <th>Niveau</th>
+                      <th>Inscription</th>
+                      <th>Réinscription</th>
+                      <th>Tranche 1</th>
+                      <th>Tranche 2</th>
+                      <th>Tranche 3</th>
+                      <td>Action</td>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let frai of frais; let i=index">
+                      <td>{{i+1}}</td>
+                      <td>
+                        <span *ngIf="frai.niveau !=13">{{frai.niveau}}ème Année</span>
+                        <span *ngIf="frai.niveau==13">Terminal</span>
+                      </td>
+                      <td>
+                        {{frai.frais_inscription}}                      
+                      </td>
+                      <td>
+                        {{frai.frais_reinscription}}                      
+                      </td>
+                      <td>
+                        {{frai.tranche1}} 
+                      </td>
+                      <td>
+                        {{frai.tranche2}}                       
+                      </td>
+                      <td>
+                        {{frai.tranche3}}                      
+                      </td>
+                      <td>
+                        <button type="button" class="btnI-v  btn-vert btn-sm-v me-2"
+                          data-bs-toggle="modal" data-bs-target="#modal_ModifierNouvelleFrais" (click)="ouvreModal(frai.id)">
+                          <i class="fa fa-edit" title="Modifier"></i>
+                        </button>
+                        </td>
+                   </tr>
+              </tbody>
+          </table>
+
+      </div>
+      <div class="flex jen mt-md-3">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination paginattion-md-lg justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modifier un frais de scolarité -->
+  <div class="modal" tabindex="-1"  id="modal_ModifierNouvelleFrais">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="text-center" style="color: #2ecc71;">Modifiaction des frais</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="UpdateFraisForm" (ngSubmit)="onSubmitUpdate()">
+          <div class="modal-body">
+                <div class="mb-3">
+                    <label for="frais_inscription" class="form-label d-none d-md-block ">Frais d'inscription</label>
+                    <input formControlName="frais_inscription" name="frais_inscription" id="frais_inscription"  type="number" appNoSpecialChars class="form-control" id="nomMatiere" placeholder="Entrer une matière...">
+                    <small class="text-danger" *ngIf="UpdateFraisForm.controls['frais_inscription'].invalid && UpdateFraisForm.controls['frais_inscription'].touched">
+                        Frais d'Inscription est obligatoire.
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="frais_reinscription" class="form-label d-none d-md-block ">Frais Reinscription</label>
+                    <input formControlName="frais_reinscription" name="frais_reinscription" id="frais_reinscription"  type="number" appNoSpecialChars class="form-control" id="nomMatiere" placeholder="Entrer une matière...">
+                    <small class="text-danger" *ngIf="UpdateFraisForm.controls['frais_reinscription'].invalid && UpdateFraisForm.controls['frais_reinscription'].touched">
+                        Frais de Reinscription est obligatoire.
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="tranche1" class="form-label d-none d-md-block ">Frais tranche1</label>
+                    <input formControlName="tranche1" name="tranche1" id="tranche1"  type="number" appNoSpecialChars class="form-control" id="nomMatiere" placeholder="Entrer une matière...">
+                    <small class="text-danger" *ngIf="UpdateFraisForm.controls['tranche1'].invalid && UpdateFraisForm.controls['tranche1'].touched">
+                        Frais de la tranche1 est obligatoire.
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="tranche2" class="form-label d-none d-md-block ">Frais tranche2</label>
+                    <input formControlName="tranche2" name="tranche2" id="tranche2"  type="number" appNoSpecialChars class="form-control" id="nomMatiere" placeholder="Entrer une matière...">
+                    <small class="text-danger" *ngIf="UpdateFraisForm.controls['tranche2'].invalid && UpdateFraisForm.controls['tranche2'].touched">
+                        Frais de la tranche2 est obligatoire.
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="tranche3" class="form-label d-none d-md-block ">Frais tranche3</label>
+                    <input formControlName="tranche3" name="tranche3" id="tranche3"  type="number" appNoSpecialChars class="form-control" id="nomMatiere" placeholder="Entrer une matière...">
+                    <small class="text-danger" *ngIf="UpdateFraisForm.controls['tranche3'].invalid && UpdateFraisForm.controls['tranche3'].touched">
+                        Frais de la tranche3 est obligatoire.
+                    </small>
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-outline-success">Modifier</button>
+            <button type="button" class="btn btn-outline-danger">Annuler</button>
+          </div>
+        </form>
+        <span *ngIf="messageUpdate" class="text-vert">{{messageUpdate}}</span>
+        <span *ngIf="messaged" class="text-rouge">{{messaged}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+

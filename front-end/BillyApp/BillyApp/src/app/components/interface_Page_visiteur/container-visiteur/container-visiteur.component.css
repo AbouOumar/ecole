@@ -1,0 +1,384 @@
+.title-double-line {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.title-double-line::before,
+.title-double-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1px;
+  background-color: black;
+}
+
+.title-double-line::before {
+  width: 90px;      /* plus court */
+  bottom: 6px;
+}
+
+.title-double-line::after {
+  width: 98px;     /* plus long */
+  bottom: 0;
+}
+
+/* style renseignement */
+table th, table td { vertical-align: middle; text-align: center;
+ }
+ h2 { font-weight: bold;
+}
+ .card-header { font-size: 1.25rem;
+ }
+/* End style renseignement */
+
+/* style events ecole edud */
+.benefit-online {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 100px auto; */
+  gap: 10px;
+}
+
+
+
+.images-section {
+  position: relative;
+  width: 50%;
+}
+
+.teacher-img {
+  width: 60%;
+  height: 22rem;
+  border-radius: 20px;
+  object-fit: cover;
+  border: 3px solid #00a933;
+
+  /* left: -50px; */
+}
+
+.classe-img{
+  margin-left: 9rem;
+  height: 25rem;
+  border-radius: 50px;
+}
+.classe-img1{
+  /* margin-left: 9rem; */
+  height: 25rem;
+  width: 80%;
+  /* border-radius: 50px; */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0px 60px 0px 60px;
+  border-left: 3px solid #fff;
+  border-top: 5px solid #00a933;
+}
+.classe-img1-1{
+  /* margin-left: 9rem; */
+  height: 25rem;
+  width: 80%;
+  /* border-radius: 50px; */
+  box-shadow: 0 4px 20px white;
+  border-radius: 0px 30px 0px 30px;
+  border-left: 3px solid #fff;
+  border-top: 5px solid #00a933;
+}
+
+.student-img {
+  position: absolute;
+  top: 12rem;
+  right: 3rem;
+  width: 45%;
+  height: 18rem;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0px 20px 0px 20px;
+  border-left: 3px solid #fff;
+  border-top: 5px solid #fff;
+  background: grey;
+}
+
+.text-section {
+  width: 50%;
+  text-align: left !important;
+  right: 20px;
+}
+
+.w-frais .text-section{
+
+  box-shadow: 0 4px 20px white !important;
+  color: #111;
+}
+.w-frais .text-section p{
+  color: #111 !important;
+
+}
+
+.text-section h3 {
+  font-size: 32px;
+  color: #0A0A2A;
+}
+
+.text-section h2 span {
+  font-weight: bold;
+}
+
+.text-section p {
+  margin: 20px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.features-list li {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.check-icon {
+  /* color: #2ecc71; */
+  margin-right: 8px;
+}
+
+.learn-more-btn {
+  margin-top: 30px;
+  padding: 7px 45px;
+  border: 2px solid #00a933;
+  background: transparent;
+  color: #00a933;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.learn-more-btn:hover {
+  background: #00a933;
+  color: #fff;
+}
+
+/* End style events ecole edud */
+
+
+
+
+.card {
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-body img{
+  border-color: red !important;
+  background-image: green;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* limite à 1 ligne */
+  -webkit-box-orient: vertical;
+  min-height: 1.2em; /* même hauteur pour tous */
+}
+
+.card-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* limite à 3 lignes */
+  -webkit-box-orient: vertical;
+  min-height: 3.6em; /* fixe une hauteur pour garder les cartes égales */
+}
+
+
+.event-card {
+  transition: transform 0.3s ease;
+}
+.event-card:hover {
+  transform: scale(1.02);
+  background-color: #dfffe7; /* Un peu plus clair au hover */
+}
+
+
+/* Style form contact */
+.contact-container {
+  background-color: #dff8e5;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1100px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-form {
+  flex: 1;
+  min-width: 300px;
+}
+
+.contact-form h1 {
+  font-size: 40px;
+  color: #00c43b;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.contact-form p {
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.terms {
+  display: flex;
+  /* align-items: center; */
+  gap: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.terms a {
+  color: #000;
+  text-decoration: underline;
+}
+
+.contact-form button {
+  background-color: #00c43b;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: #00a933;
+}
+
+.contact-image {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.contact-image img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* End Style form contact */
+
+
+
+
+
+/* Responsive */
+
+@media screen and (max-width: 768px) {
+  .benefit-online{
+    flex-direction:column;
+    overflow: hidden;
+
+  }
+
+  .teacher-img {
+    width: 140%;
+    height: 150%;
+
+
+    /* left: -50px; */
+  }
+
+  .classe-img{
+    margin-left: -9rem;
+    height: 250%;
+    width: 250%;
+    border-radius: 15px;
+    border: none;
+  }
+  .classe-img1{
+
+    width: 120%;
+
+  }
+  .classe-img1-1{
+
+    width: 120%;
+
+  }
+  .w-frais .text-section, p{
+    width: 100%;
+    margin-left: 0px
+
+  }
+
+  .student-img {
+    position: absolute;
+    top: 8rem;
+    right: 7rem;
+    width: 90%;
+    height: 100%;
+
+  }
+
+
+
+  .text-section{
+    width: 90%;
+    /* margin-top: 7rem; */
+  }
+   .mt-sm{
+    margin-top: 7rem;
+  }
+
+}

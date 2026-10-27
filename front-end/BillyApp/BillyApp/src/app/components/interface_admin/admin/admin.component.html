@@ -1,0 +1,23 @@
+
+
+<app-header></app-header>
+     <app-aside></app-aside>
+
+
+
+<div *ngIf="isTableauBord(); else showRouterOulet">
+  <app-tableau-de-bord 
+  routerLinkActive="active-link"
+  [routerLinkActiveOptions]="{ exact: true }">
+</app-tableau-de-bord > <!-- Tableau de bord affiché par défaut -->
+</div>
+
+<ng-template #showRouterOulet>
+  <router-outlet></router-outlet>  <!-- Contenu de la route cliquée -->
+</ng-template>
+
+
+
+
+
+

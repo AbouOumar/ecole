@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-6  col-md-5 d-none d-md-block text-vert"><h5>Emploi du temps</h5></div>
+</div>
+<div class="container bg-light">
+          <div class="row mt-3  ">
+              <div class="col-1 col-md-2 mt-3 ">
+                <nav aria-label="...">
+                  <ul class="pagination pagination-md-lg">
+                    <li class="page-item active" aria-current="page">
+                      <span class="page-link">1</span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="col-md-6">
+                <div class="text-rouge mt-2 me-1 d-none text-center d-md-block mt-4" style="text-decoration: underline;">Fitrage par:</div>
+              </div>
+                <div class="col-12 col-md-4">
+                 <input type="search" class="form-control formStyle mt-3  fs-sm " placeholder="Searche">
+              </div>
+          </div>
+          <div class="table-responsive text-center mt-3">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">N°</th>
+                    <th scope="col">Matricule</th>
+                    <th scope="col" class="minW-sm-10">Nom et Prénom</th>
+                    <th scope="col" class="minW-sm">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let emploi of listeEmplois; let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{emploi?.personnel.matricule_personnel}}</td>
+                    <td class="minW-sm">M. {{emploi?.personnel.nom_personnel}} {{emploi?.personnel.prenom_personnel}}</td>
+                    <td>
+                      <button type="button" class="btn btn-sm  btnI-v  btn-vert btn-sm-v me-2"
+                      data-bs-toggle="modal" data-bs-target="#voirEmploi" (click)="ouvreModal(emploi.personnel.id)">
+                        <i class="fa fa-eye" title="Voir"> </i> Voir
+                      </button>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" style="background-color: #fff;">&laquo;</a>
+                    </li>
+                    <li class="page-item" style="background-color: #2ecc71;">
+                        <a class="page-link" style="background-color: #fff;">1</a>
+                    </li>
+                    <li class="page-item active" style="background-color: #2ecc71;">
+                        <a class="page-link" style="background-color: #2ecc71;">2</a>
+                    </li>
+                    <li class="page-item" style="background-color: #fff;">
+                        <a class="page-link" style="background-color: #fff;">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" style="background-color: #fff;">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+          </div>
+
+
+          <!-- modifier une eva -->
+          <div class="modal" tafandex="-1"  id="voirEmploi">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title title" style="color: #2ecc71;">Emploi du temps de M. {{emploiEnseignant[0]?.personnel.nom_personnel+" "+emploiEnseignant[0]?.personnel.prenom_personnel || 'chargement ...'}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form >
+              <div class="modal-body">
+
+                <table class="table table-bordered mt-4">
+                  <thead class="">
+                    <tr>
+                      <th>Jour</th>
+                      <th>Horaire</th>
+                      <th>Matière</th>
+                      <th>Classe</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let emploi of emploiEnseignant; let i=index">
+                      <th scope="row">{{emploi?.jour}}</th>
+                      <td>{{emploi?.heure_debut}} - {{emploi?.heure_fin}}</td>
+                      <td>{{emploi?.matiere.libelle_matiere}}</td>
+                      <td>{{emploi?.classe.nom_classe}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+              <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
+            </div>
+            </form>
+            <!-- <span class="text-primary p-3" *ngIf="messageUpdate">{{messageUpdate}}</span> -->
+            </div>
+            </div>
+            </div>
+            <!-- End modifiere eva -->
+
+</div>
+

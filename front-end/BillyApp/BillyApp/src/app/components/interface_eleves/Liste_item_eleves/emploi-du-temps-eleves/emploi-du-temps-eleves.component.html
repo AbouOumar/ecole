@@ -1,0 +1,8 @@
+<div class="container">
+  <div *ngIf="user?.Droit=='parent'" style="margin-top: 5rem;">
+    <app-emploi-parents-enfant [user]="user"></app-emploi-parents-enfant>
+  </div>
+  <div *ngIf="user?.Droit=='eleve'" style="margin-top:5rem ;">
+    <app-emploi-eleve-p [user]="user"></app-emploi-eleve-p>
+  </div>
+</div>

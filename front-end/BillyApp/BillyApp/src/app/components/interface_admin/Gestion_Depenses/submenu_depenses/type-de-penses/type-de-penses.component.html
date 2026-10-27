@@ -1,0 +1,158 @@
+<div class="pag-container">
+  <div class="container">
+    <div class="flex js mt-3">
+      <div class="title">Formulaire d'enregistrement</div>
+      <button class="btn btn-outline-success"
+        type="button" data-bs-toggle="collapse" data-bs-target="#formAjoutDepenses"
+        aria-expanded="false" aria-controls="formAjoutDepenses"
+      >
+      <i class="fa fa-arrow-down rotate-icon"></i>
+      </button>
+    </div>
+    <form [formGroup]="typeDepenseForm" (ngSubmit)="onSubmit()">
+      <div class="collapse" id="formAjoutDepenses">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <label for="libelle" class="text-medut d-none d-md-block">Libéllé du type</label>
+            <input formControlName="libelle"  type="text" appNoSpecialChars name="libelle" id="libelle" class="form-control" placeholder="Entre le libellé">
+            <small class="text-danger" *ngIf="typeDepenseForm.controls['libelle'].invalid && typeDepenseForm.controls['libelle'].touched">
+              Le libellé est obligatoire.
+            </small>
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="description" class="text-medut d-none d-md-block">Déscription Du type</label>
+            <textarea formControlName="description"  type="text" appNoSpecialChars name="description" id="description" class="form-control" placeholder="Entre la description"></textarea>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+            <button class="btn btn-success me-md-2" type="submit">Enregistrer</button>
+            <button class="btn btn-danger" type="button">Annuler</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+    <span *ngIf="message" >{{message}}</span>
+
+    <div class="flex jend mt-2">
+      <nav aria-label="...">
+        <ul class="pagination pagination-md-lg">
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">1</span>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+         <tr>
+          <th scope="col">N°</th>
+          <th scope="col">Libelle</th>
+          <th scope="col">Déscription</th>
+          <th>Action</th>
+         </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let typeDepense of typeDepenses; let i= index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{typeDepense.libelle}}</td>
+            <td> {{typeDepense.description || " "}}</td>
+            <td width="105">
+
+              <button type="button" class="btnI-v  btn-vert btn-sm-v me-2"
+                data-bs-toggle="modal" data-bs-target="#modifierTypeDepence" (click)="ouvreModal(typeDepense.id)">
+                <i class="fa fa-edit" title="Modifier"></i>
+              </button>
+              <button type="button" class="btnI-v  btn-vert btn-sm-v me-2  " style="color: red;"
+              data-bs-toggle="modal" data-bs-target="#supprimerTypeDepence" (click)="ouvreModal(typeDepense.id)">
+              <i class="fa fa-trash" title="Supprimer"></i>
+            </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" style="background-color: #fff;">&laquo;</a>
+                    </li>
+                    <li class="page-item" style="background-color: #2ecc71;">
+                        <a class="page-link" style="background-color: #fff;">1</a>
+                    </li>
+                    <li class="page-item active" style="background-color: #2ecc71;">
+                        <a class="page-link" style="background-color: #2ecc71;">2</a>
+                    </li>
+                    <li class="page-item" style="background-color: #fff;">
+                        <a class="page-link" style="background-color: #fff;">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" style="background-color: #fff;">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+    </div>
+  </div>
+
+
+    <!-- modifier un typeDepense -->
+    <div class="modal" tabindex="-1"  id="modifierTypeDepence">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title title" style="color: #2ecc71;">Modification d'un type de depence</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form [formGroup]="UpdateTypeForm" (ngSubmit)="onSubmitUpdate()">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 col-md-12">
+                  <label for="libelle" class="text-medut d-none d-md-block">Libéllé du type</label>
+                  <input formControlName="libelle"   type="text" appNoSpecialChars name="libelle" id="libelle" class="form-control" placeholder="Entre le libellé">
+                  <small class="text-danger" *ngIf="UpdateTypeForm.controls['libelle'].invalid && UpdateTypeForm.controls['libelle'].touched">
+                    Le libellé est obligatoire.
+                  </small>
+                </div>
+                <div class="col-12 col-md-12 mt-3">
+                  <label for="description" class="text-medut d-none d-md-block">Déscription Du type</label>
+                  <input formControlName="description"   type="text" appNoSpecialChars name="description" id="description" class="form-control" placeholder="Entre la description">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-edit"></i> Modifier</button>
+            <button type="button" class="btn btn-danger"><i class="fa fa-times-circle"></i> Annuler</button>
+          </div>
+          </form>
+          <span class="text-primary p-3" *ngIf="messageUpdate">{{messageUpdate}}</span>
+          <div style="height: 1rem;"></div>
+        </div>
+      </div>
+    </div>
+    <!-- End modifier typedepense -->
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="supprimerTypeDepence" tabindex="-1" aria-labelledby="supprimerTypeDepenceLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="supprimerTypeDepenceLabel">Voulez-vous vraiment supprimer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <input class="d-none" [(ngModel)]="idSelected" type="number">
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" (click)="deleteTypeDepense(idSelected)" class="btn btn-sm btn-primary">Supprimer</button>
+      </div>
+      <span class="text-primary p-3" *ngIf="messaged">{{messaged}}</span>
+    </div>
+  </div>
+</div>
+     <!-- En suppression -->
+</div>

@@ -1,0 +1,124 @@
+/* Style classe */
+body {
+  background-color: #f8f9fa;
+}
+
+
+.selectInsF select, input{
+  padding: 10px;
+  border-radius: 60px;
+}
+
+thead th{
+  /* background-color: #2ecc71; */
+  /* color: #fff; */
+  font-size: 1rem;
+}
+
+tbody tr td{
+  line-height: 1;
+  line-height: normal;
+  font-size: 0.9rem;
+}
+
+  .title , strong, input, select, .selectInsF, span{
+    font-size: 1em;
+  }
+
+.transformY{
+  transition: 0.1s;
+}
+.transformY:hover{
+  transform: translateY(-3px);
+}
+
+.paginattion .page-link{
+  background: #27ae60;
+}
+.paginattion .page-link .active{
+  background: #27ae60;
+}
+
+/* Fin  */
+
+
+
+
+@media  (max-width: 768px) {
+   thead{
+      font-size: 0.9rem;
+
+  }
+  input, select{
+    margin-top: 1rem;
+  }
+  tbody{
+      font-size: 0.8rem;
+  }
+  .title , strong, input, select, .selectInsF, span{
+    font-size: 0.9em;
+  }
+
+
+
+  .selectInsF select, input{
+    padding: 10px;
+    font-size: 0.9em;
+    height: 2.5rem;
+    line-height: normal;
+}
+
+.btn{
+  margin-top: 1rem;
+}
+.mb-sm-2, input{
+  margin-bottom: 1rem;
+  height: 2.3rem;
+}
+
+  .title{
+      font-size: 1.3rem;
+  }
+}
+
+@media  (max-width: 500px) {
+
+   .w-sm{
+      width: 95%;
+   }
+
+  .title{
+      font-size: 0.9rem;
+  }
+
+}
+
+/*  Fin Style */
+
+
+/* sytle table */
+
+.table-container {
+  max-height: 400px; /* Ajuste la hauteur selon ton besoin */
+  overflow-y: auto;
+  position: relative;
+}
+.table thead tr {
+  position: sticky;
+  top: 0;
+  color: white;
+  z-index: 2;
+}
+.table tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+.table tbody tr:hover {
+  background-color: #d1e7dd;
+}
+
+
+
+
+
+
+

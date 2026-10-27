@@ -1,0 +1,300 @@
+ <!-- Liste des action -->
+ <section class="mt-2">
+  <div class="mt-2">
+    <span class=" mt-2" style="color: #2ecc71;">Liste des transactions</span>
+
+  </div>
+  <div class="mt-4 flex ms-2 mt-2">
+
+      <select name="mois" id="maListee" class="m-1 wDateS form-select">
+          <option value="">-- Choisir un enfant --</option>
+          <option value="L">Mamadou Condé</option>
+          <option value="M">Michel Kolié</option>
+      </select>
+      <div class="btnf ms-3">
+      <button type="search" class="btn">Search</button>
+  </div>
+  </div>
+
+  <!-- <div class="content1f bvc mb-3">
+  </div> -->
+  <div class="row">
+      <div class="col-12 col-lg-12">
+          <div class="flex js mt-4">
+            <nav aria-label="...">
+              <ul class="pagination ">
+                <li class="page-item active" aria-current="page">
+                  <span class="page-link">1</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+              </ul>
+            </nav>
+
+              <button class="print-button btn-xs" (click)="onPrint()">
+                <i class="fa fa-print "></i> Imprimer
+              </button>
+
+          </div>
+
+          <!-- <div class="flex jend mt-4">
+
+          </div> -->
+          <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+          <div class="table-responsive mt-3">
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th scope="col">N°</th>
+                      <th scope="col">Niveau</th>
+                      <th scope="col">Evenement</th>
+                      <th scope="col">Tranche</th>
+                      <th scope="col">Montant</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Methode</th>
+                      <th scope="col">Statut</th>
+                      <th>Impression</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr>
+                      <th scope="row">1</th>
+                      <td>7ème</td>
+                      <td>Inscription</td>
+                      <td></td>
+                      <td>30,000 FG</td>
+                      <td>2014-2015</td>
+                      <td>Espèce</td>
+                      <td style="color: red;">Partiel</td>
+                      <!-- <td><a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                              <i class="fa fa-eye" title="Voir"></i>
+                          </a>
+                      </td> -->
+                       <td width="125">
+                         <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                <i class="fa fa-eye" title="Voir"></i>
+                              </a>
+                          <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()">
+                          <i class="fa fa-print"></i>
+                          </button>
+                        </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">2</th>
+                      <td>7ème</td>
+                      <td>Réinscription</td>
+                      <td></td>
+                      <td>30,000 FG</td>
+                      <td>2014-2015</td>
+                      <td>Espèce</td>
+                      <td>Complet</td>
+                      <!-- <td><a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                              <i class="fa fa-eye" title="Voir"></i>
+                          </a>
+                      </td> -->
+                       <td width="125">
+                         <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                <i class="fa fa-eye" title="Voir"></i>
+                              </a>
+                          <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()">
+                          <i class="fa fa-print"></i>
+                          </button>
+                        </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">4</th>
+                      <td>7ème</td>
+                      <td>Paiement de scolarité</td>
+                      <td>1ère tranche</td>
+                      <td>900,000 FG</td>
+                      <td>2014-2015</td>
+                      <td>Espèce</td>
+                      <td>Complet</td>
+                      <!-- <td><a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                <i class="fa fa-eye" title="Voir"></i>
+                              </a>
+                      </td> -->
+                       <td width="125">
+                              <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                <i class="fa fa-eye" title="Voir"></i>
+                              </a>
+                              <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()">
+                                <i class="fa fa-print"></i>
+                              </button>
+                        </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">8</th>
+                      <td>7ème</td>
+                      <td>Paiement de scolarité</td>
+                      <td>2ère tranche</td>
+                      <td>500,000 FG</td>
+                      <td>2014-2015</td>
+                      <td>Espèce</td>
+                      <td>Complet</td>
+                      <!-- <td><a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                              <i class="fa fa-eye" title="Voir"></i>
+                          </a>
+                      </td> -->
+                       <td width="125">
+                             <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                <i class="fa fa-eye" title="Voir"></i>
+                              </a>
+                              <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()"(click)="onPrint()">
+                                <i class="fa fa-print"></i>
+                              </button>
+                        </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">6</th>
+                      <td>7ème</td>
+                      <td>Paiement de scolarité</td>
+                      <td>3ère tranche</td>
+                      <td>300,000 FG</td>
+                      <td>2014-2015</td>
+                      <td>Espèce</td>
+                      <td style="color: red;">Partiel</td>
+                      <!-- <td><a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                              <i class="fa fa-eye" title="Voir"></i>
+                          </a>
+                      </td> -->
+                       <td width="125">
+                             <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                <i class="fa fa-eye" title="Voir"></i>
+                              </a>
+                          <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()">
+                                 <i class="fa fa-print"></i>
+                          </button>
+                        </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">7</th>
+                      <td>8ème</td>
+                      <td>Inscription</td>
+                      <td></td>
+                      <td>30,000 FG</td>
+                      <td>2016-2017</td>
+                      <td>Espèce</td>
+                      <td>Complet</td>
+                      <td width="125">
+                        <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                               <i class="fa fa-eye" title="Voir"></i>
+                             </a>
+                         <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()">
+                         <i class="fa fa-print"></i>
+                         </button>
+                       </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">3</th>
+                      <td>8ème</td>
+                      <td>Réinscription</td>
+                      <td></td>
+                      <td>30,000 FG</td>
+                      <td>2016-2017</td>
+                      <td>Espèce</td>
+                      <td>Complet</td>
+                      <!-- <td><a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                              <i class="fa fa-eye" title="Voir"></i>
+                          </a>
+                      </td> -->
+                       <td width="125">
+                         <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                <i class="fa fa-eye" title="Voir"></i>
+                              </a>
+                          <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()">
+                          <i class="fa fa-print"></i>
+                          </button>
+                        </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">4</th>
+                      <td>8ème</td>
+                      <td>Paiement de scolarité</td>
+                      <td>1ère tranche</td>
+                      <td>900,000 FG</td>
+                      <td>2015-2016</td>
+                      <td>Espèce</td>
+                      <td>Complet</td>
+                      <!-- <td><a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                              <i class="fa fa-eye" title="Voir"></i>
+                          </a>
+                      </td> -->
+                       <td width="125">
+                         <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                <i class="fa fa-eye" title="Voir"></i>
+                              </a>
+                          <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()">
+                          <i class="fa fa-print"></i>
+                          </button>
+                        </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">5</th>
+                      <td>8ème</td>
+                      <td>Paiement de scolarité</td>
+                      <td>2ère tranche</td>
+                      <td>500,000 FG</td>
+                      <td>2015-2016</td>
+                      <td>Espèce</td>
+                      <td>Complet</td>
+                      <!-- <td><a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                              <i class="fa fa-eye" title="Voir"></i>
+                          </a>
+                      </td> -->
+                       <td width="125">
+                         <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                <i class="fa fa-eye" title="Voir"></i>
+                              </a>
+                          <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()">
+                          <i class="fa fa-print"></i>
+                          </button>
+                        </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">6</th>
+                      <td>8ème</td>
+                      <td>Paiement de scolarité</td>
+                      <td>3ère tranche</td>
+                      <td>300,000 FG</td>
+                      <td>2015-2016</td>
+                      <td>Espèce</td>
+                      <td>Complet</td>
+                      <!-- <td><a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                              <i class="fa fa-eye" title="Voir"></i>
+                          </a>
+                      </td> -->
+                       <td width="125">
+                         <a class="btnI-r  btn-rouge btn-sm-r me-2" href="">
+                                <i class="fa fa-eye" title="Voir"></i>
+                              </a>
+                          <button  class="btnI-v btn-vert btn-sm-v me-2" (click)="onPrint()">
+                          <i class="fa fa-print"></i>
+                          </button>
+                        </td>
+                  </tr>
+
+
+                  </tbody>
+              </table>
+              <div class="flex jen">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination paginattion-md-lg justify-content-center">
+                    <li class="page-item disabled">
+                      <a class="page-link">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+          </div>
+      </div>
+  </div>
+  </section>
+ <!-- Fin -->

@@ -1,0 +1,109 @@
+     <!--liste des élèves -->
+         
+<div class="mtop">
+
+   <div class="container transformY  bg-light shadow bordere roundede border-2e w-sm">
+   <div class="flex js mt-2">
+     <div class="title pt-3">Liste des élèves</div>
+     <div class="title d-none pt-3">Année Scolaire <strong style="color: #111;"> 2024-2025</strong></div>
+   </div>
+  <form action="" class="selectIns mt-3">
+   <!-- <div class="mt-4 flex ms-2 mt-2"> -->
+       <div class="row mt-2">
+         <div class="col-4 col-md-4">
+           <div class="form-group">
+             <input type="search" class="form-control" placeholder="Entrer un matricule"
+             [(ngModel)]="textRecherche" name="textRecherche"
+             >
+           </div>
+          </div>
+           <div class="col-4 col-md-3">
+             <select  [(ngModel)]="textRechercheClasse" name="class" id="classe" class="form-select"  name="textRechercheClasse">
+             <option value=""> Choisir la classe </option>
+             <option value={{classe.id}} *ngFor="let classe of classes">{{classe.classe.nom_classe}}</option>
+             </select>
+           </div>
+           <div class="col-1 col-md-1">
+              <button type="search" class="btn d-none btn-outline-success">Search</button>
+           </div>
+       </div>
+   <!-- </div> -->
+  </form>
+   <div class="flex jend mt-4">
+     <nav aria-label="...">
+       <ul class="pagination pagination-md-lg">
+         <li class="page-item active" aria-current="page">
+           <span class="page-link">1</span>
+         </li>
+         <li class="page-item"><a class="page-link" href="#">2</a></li>
+         <li class="page-item"><a class="page-link" href="#">3</a></li>
+       </ul>
+     </nav>
+   </div>
+
+
+   <div class="row">
+       <div class="col-12 col-lg-12">
+           <!-- <div class="me-2 flex jen">
+               <button type="search" class="ms-4 btn">Imprimer</button>
+           </div> -->
+
+           <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+           <div class="table-responsive mt text-center">
+               <table class="table">
+                   <thead>
+                   <tr>
+                       <th scope="col">N°</th>
+                       <!-- <th scope="col">Niveau</th> -->
+                       <th scope="col">Matricule</th>
+                       <th scope="col">Nom</th>
+                       <th scope="col">Prénom</th>
+                       <th scope="col">Genre</th>
+                       <th scope="col">Classe</th>
+                       <th scope="col">Image</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+
+                   <tr *ngFor="let eleve of eleves; let i = index">
+                       <th scope="row">{{i+1}}</th>
+                       <td>{{eleve.matricule_eleve}}</td>
+                       <td>{{eleve.nom_eleve}}</td>
+                       <td>{{eleve.prenom_eleve}}</td>
+                       <td>{{eleve.genre_eleve}}</td>
+                       <td>{{eleve.nom_classe}}</td>
+                       <td>
+                         <div  class="profil-reinscriptionT ">
+                           <img [src]="adresseIp+':8000/storage/images/profile/' + eleve.photo   || adresseIp+':8000/storage/images/profile/avatar.png'"
+                            class="mt-1 border rounded-circle mx-auto d-block  " alt="Image élève" width="30">
+                          </div>
+                         </td>
+                   </tr>
+                   </tbody>
+               </table>
+
+           </div>
+           <div class="flex jen">
+             <nav aria-label="Page navigation example">
+               <ul class="pagination paginattion-md-lg justify-content-center">
+                 <li class="page-item disabled">
+                   <a class="page-link">Previous</a>
+                 </li>
+                 <li class="page-item"><a class="page-link" href="#">1</a></li>
+                 <li class="page-item"><a class="page-link" href="#">2</a></li>
+                 <li class="page-item"><a class="page-link" href="#">3</a></li>
+                 <li class="page-item">
+                   <a class="page-link" href="#">Next</a>
+                 </li>
+               </ul>
+             </nav>
+           </div>
+       </div>
+   </div>
+   </div>
+
+</div>
+
+
+<!-- liste des élèves -->
+

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="Mont">
+      <div class="container transformY shadowe borderee roundedee border-2ee w-sme" style="margin-top: 7rem;">
+
+
+        <!-- Historique -->
+          <h1 class="title pt-3">Historique des paiements</h1>
+          <div class="row">
+
+          <div class="col-md-12   mx-auto bordere border-roundedee border-ligthee bshadow" style="background-color: white;">
+
+          <section class="mt-2">
+          <div class="mt-4 flex  mt-2">
+            <div class="col-md-4">
+              <select [(ngModel)]="textRechercheEnfant" (change)="rechercheSco(textRechercheEnfant)" name="enfant" id="maListee" class="p-3 wDateS rounded-4 form-select">
+                <option value="">-- Choisir un enfant --</option>
+                <option value={{eleve.id}} *ngFor="let eleve of eleves">{{eleve.prenom_eleve+" "+eleve.nom_eleve}}</option>
+                </select>
+            </div>
+
+              <div class="btnf ms-3">
+              <!-- <button type="search" class="border rounded-5 " class="btn btn-outline-success">Rechercher</button> -->
+              </div>
+          </div>
+
+           <!-- paiments effectué -->
+        <div *ngIf="paiement_eleve_sco?.matricule_eleve" class="masquer">
+              <div class="card bg-rougeTP bg-light bg-whited shadow-sm mt-3 container border-0 rounded-4">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-sm-8 ">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <div class="avatar-lg">
+                                            <img id="imagePreview" [src]="adresseIp+':8000/storage/images/profile/' + paiement_eleve_sco?.photo   || adresseIp+':8000/storage/images/profile/avatar.png'"  class="" alt="Image élève" alt="" class="rounded-circle img-thumbnail" style="width: 100px; height: 100px;" >
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div>
+                                            <h6 class="mt-1 mb-1 text-vert fw-bold" style="font-size: 1.2em;">{{paiement_eleve_sco?.prenom_eleve}} {{paiement_eleve_sco?.nom_eleve}}</h6>
+                                            <p class="font-8 text-black-50" style="font-size: 0.9em;"> Classe {{paiement_eleve_sco?.classe?.nom_classe}}</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- end col-->
+
+
+
+                        </div> <!-- end row -->
+
+                    </div> <!-- end card-body/ profile-user-box-->
+              </div><!--end profile/ card -->
+
+           <div class="table-responsive mt text-center mt-4">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Tranches</th>
+                    <th scope="col">Tranche 1</th>
+                    <th scope="col">Tranche 2</th>
+                    <th scope="col">Transche 3</th>
+                    <th>Reduction</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td style="font-weight: bold;">A payer</td>
+                    <td>{{paiement_scolariteTranche?.apayerTranche1}} FG</td>
+                    <td>{{paiement_scolariteTranche?.apayerTranche2}} FG</td>
+                    <td>{{paiement_scolariteTranche?.apayerTranche3}} FG</td>
+                    <td class="text-center" rowspan="3">{{paiement_scolariteTranche?.totalRecuction}} FG</td>
+
+
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: orange;">Payer</td>
+                    <td style="color: orange;">{{paiement_scolariteTranche?.tranche1}} FG</td>
+                    <td style="color: orange;">{{paiement_scolariteTranche?.tranche2}} FG </td>
+                    <td style="color: orange;">{{paiement_scolariteTranche?.tranche3}} FG</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: red;">Reste à payer</td>
+                    <td style="color: red;">{{paiement_scolariteTranche?.resteTranche1}} FG</td>
+                    <td style="color: red;">{{paiement_scolariteTranche?.resteTranche2}} FG</td>
+                    <td style="color: red;">{{paiement_scolariteTranche?.resteTranche3}} FG</td>
+                </tr>
+
+            </table>
+
+          </div>
+          </div>
+        <!-- End paiments effectué -->
+
+
+
+          <div class="row">
+          <div class="col-12 col-lg-12">
+          <div class="flex js mt-4">
+          <nav aria-label="...">
+            <ul class="pagination d-none">
+              <li class="page-item active" aria-current="page">
+                <span class="page-link">1</span>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+            </ul>
+          </nav>
+
+
+
+          </div>
+
+
+          <!-- Ajout de la classe table-responsive pour rendre la table responsive -->
+          <div class="table-responsive mt-3">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">N°</th>
+                  <th scope="col" class="minW-sm-10">Nom complet</th>
+                    <th scope="col">Niveau</th>
+                    <th scope="col">Evenement</th>
+                    <th scope="col">Tranche</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Date</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor="let action of actions|filtreActionParent:textRechercheEnfant; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{action.nomComplet }}</td>
+                    <td>{{action.classe }}</td>
+                    <td>{{action.evenement }}</td>
+                    <td>{{action.tranche || "N/A" }}</td>
+                    <td>{{action.montant }} FG</td>
+                    <td>{{action.date }}</td>
+
+                </tr>
+
+                </tbody>
+            </table>
+            <div class="flex jen">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination paginattion-md-lg justify-content-center d-none">
+                  <li class="page-item disabled">
+                    <a class="page-link">Précé</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          </div>
+          </div>
+          </section>
+          <!-- Fin -->
+          </div>
+          </div>
+      </div>
+</body>
+</html>
+
+

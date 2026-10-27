@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Personnel</title>
+
+</head>
+<body>
+   <div class="pag-container">
+    <div class="container mt-4">
+      <div class="card p-4">
+          <h5 class="text-success">GESTION DES PERSONNELS >> Détail</h5>
+
+          <div class="row mb-3">
+              <div class="col-md-6">
+                  <label class="fw-bold">Matricule</label>
+                  <input type="text" class="form-control d-inline-block w-50" placeholder="2204133024">
+                  <button class="btn btn-dark">Rechercher</button>
+              </div>
+              <div class="col-md-6 text-end">
+                  <button class="btn btn-success">Imprimer ce dossier</button>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-8">
+                  <p><strong>Prénom et Nom :</strong> Sékou Ahmed Daffé <strong>Fonction :</strong> Enseignant</p>
+                  <p><strong>Ville/Quartier :</strong> Matoto <strong>Email :</strong> sadakaca880gmail.com</p>
+                  <p><strong>Salaire de Base :</strong> 2 500 000 FG <strong>Volume horaire :</strong> 26 000 FG</p>
+
+                  <h6 class="text-success">La liste des matières enseignées</h6>
+                  <ul class="list-group w-50">
+                      <li class="list-group-item active">Mathématique</li>
+                      <li class="list-group-item">Physique</li>
+                  </ul>
+
+                  <h6 class="text-success mt-3">Autres informations</h6>
+                  <p><strong>Contact d'urgence :</strong> 250000 FG</p>
+                  <p><a href="#" class="text-danger">Curriculum Vitae ouvrir</a> | <a href="#" class="text-danger">Les pièces jointes ouvrir</a></p>
+              </div>
+              <div class="col-md-4 text-center">
+                  <h6>Image</h6>
+                  <div class="border p-3 d-flex justify-content-center align-items-center" style="height: 150px;">
+                    <img id="imagePreview" src="/assets/images/photoEn.jpg" class="mt-1" alt="Image élève"  width="100">
+                  </div>
+              </div>
+          </div>
+
+          <h6 class="text-success mt-4">L'historique des événements</h6>
+          <table class="table table-bordered text-center">
+              <thead class="table-success">
+                  <tr>
+                      <th>N°</th>
+                      <th>Événement</th>
+                      <th>Classe</th>
+                      <th>Matière</th>
+                      <th>Période</th>
+                      <th>Option</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>1</td>
+                      <td>Enseignant</td>
+                      <td>8ème C</td>
+                      <td>Mathématique</td>
+                      <td>22/10/2024-22/10/2024</td>
+                      <td><button class="btn btn-success">Imprimer</button></td>
+                  </tr>
+                  <tr>
+                      <td>2</td>
+                      <td>Enseignant</td>
+                      <td>---</td>
+                      <td>Mathématique</td>
+                      <td>22/10/2024-22/10/2024</td>
+                      <td><button class="btn btn-success">Imprimer</button></td>
+                  </tr>
+                  <tr>
+                      <td>3</td>
+                      <td>Proviseur</td>
+                      <td>---</td>
+                      <td>---</td>
+                      <td>22/10/2024-22/10/2024</td>
+                      <td><button class="btn btn-success">Imprimer</button></td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+   </div>
+</body>
+</html>

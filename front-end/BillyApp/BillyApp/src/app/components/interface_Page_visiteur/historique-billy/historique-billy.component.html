@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- header -->
+
+  <main class="container-fluid bg-vertT" >
+    <app-header-visiteur></app-header-visiteur> <!-- Pagination haut -->
+
+    <!-- container content -->
+  <section class="historique-section bg-light rounded-5x" id="historiquefally" style="">
+  <div class="historique-container container-fluid">
+  <div class="historique-text">
+  <h2>A Propos De <span>Billy-Ecole</span></h2>
+  <p>
+    Billy-École a été fondée le 25 septembre 1993 par El Hadj Fodé Diabaté, en hommage à son défunt père...
+    <br><br>
+    À ses débuts, l'école comptait trois classes et environ 135 élèves. En 1996, fally-École accueille ses premiers élèves...
+    <br><br>
+    fally-École poursuit des objectifs pédagogiques clairs et amfatieux : offrir une éducation de qualité, favoriser le développement intégral des élèves...
+  </p>
+  </div>
+
+  <div class="historique-image">
+  <img src="/assets/images/bg-billy-2-1.jpg" alt="Bâtiment de fally-Ecole">
+  </div>
+  </div>
+
+
+  <div class="container my-md-5">
+    <h2 class="fw-bold" style="color: #2ecc71;">Notre Equipe</h2>
+    <p class="mb-5">
+      Notre équipe enseignante, passionnée et experte, œuvre chaque jour pour offrir un enseignement de qualité,
+      soutenant chaque élève dans son parcours éducatif.
+    </p>
+
+    <div class="row">
+      <div *ngFor="let e of enseignantsAffiches" class="col-md-4 mb-4">
+        <div class="text-start">
+          <img [src]="e.photo" class="rounded-circle mb-2" width="80" height="80" alt="Photo de {{ e.nom }}">
+          <h6 class="fw-bold">{{ e.nom }}</h6>
+          <p class="mb-1">{{ e.matiere }}</p>
+          <p class="small">{{ e.description }}</p>
+          <div class="icons">
+            <i class="fa-brands fa-linkedin"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+            <i class="fa-brands fa-dribbble"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <button *ngFor="let page of [].constructor(totalPages()); let i = index"
+              class="btn btn-outline-success btn-sm mx-1"
+              [class.active]="pageActuelle === i + 1"
+              (click)="changerPage(i + 1)">
+        {{ i + 1 }}
+      </button>
+    </div>
+  </div>
+  <div class="row gap-5 mt-sm flex-direction-column">
+      <div class="col-12 col-md-4 mt-5 ms-4">
+        <h3 class="fw-bold mb-3" style="color: #2ecc71;">Notre<span> Emplacements</span></h3>
+      <div class="mb-3">
+          <span class="check-icon badge bg-rouge text-white text-rouge">✔ </span> Guinée Conakry
+          <small></small>
+      </div>
+      <div class="mb-3">
+          <span class="check-icon badge bg-rouge text-white text-rouge">✔ </span> Bamêto
+          <small></small>
+      </div>
+      <div class="mb-3">
+          <span class="check-icon badge bg-rouge text-white text-rouge">✔ </span> Camp Alpha yaya
+          <small></small>
+      </div>
+      </div>
+
+      <div class="col-12 col-md-7">
+        <div class=contact-image>
+        <img src="/assets/images/coordonneBilly1.jpg" alt="Bâtiment de fally-Ecole">
+        </div>
+      </div>
+  </div>
+  </section>
+
+
+  <!-- End container content -->
+
+  <app-footer-visiteur></app-footer-visiteur>
+
+  </main>
+
+
+
+</body>
+</html>

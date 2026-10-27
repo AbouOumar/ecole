@@ -1,0 +1,360 @@
+/* Button imprimer */
+.print-button {
+  background-color: #2ecc71; /* Couleur principale */
+  color: #fff; /* Couleur du texte */
+  border: none;
+  padding: 6px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.print-button:hover {
+  background-color: #FF3877    ; /* Couleur au survol */
+}
+
+.print-button i {
+  margin-right: 8px; /* Espacement entre l'icône et le texte */
+}
+
+/*  Fin Button imprimer */
+
+/* Style parent d'eleves */
+.selectIns select{
+  padding: 10px;
+  border-radius: 60px;
+
+}
+.selectIns input{
+  padding: 10px;
+  border-radius: 60px;
+}
+
+
+
+.title , strong, input,  .selectIns select, span, .btn{
+  font-size: 1.2em;
+}
+.profil-reinscriptionF img{
+  border-radius: 10px;
+  width: 55px;
+  height: 55px;
+  border: 0.1px solid #27ae60;
+  /* margin-left: 2rem; */
+
+}
+
+
+/* .btn-sm-r {
+  padding: 3px 10px;
+  border-radius: 5px;
+  background-color: #FF3877;
+  opacity: 0.8;
+
+} */
+.btn-sm-v {
+  font-size: 14px;
+  padding: 3px 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #2ecc71;
+  opacity: 0.8;
+
+}
+
+.btn-rouge, .btn-vert {
+
+  margin-left: 5px;
+}
+
+.btn-vert:hover, .btn-rouge:hover {
+  opacity: 100;
+}
+
+.btnI i{
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.btn-sm {
+  border-radius: 5px;
+  padding: 7px 10px;
+}
+.btn-vert {
+  background: linear-gradient(45deg, #ff6f61, #FF3877);
+  color: white;
+  border-color: #FF3877;
+  opacity: 0.9;
+}
+
+
+
+
+
+.btn-vert:hover, .btn-rouge:hover {
+  opacity: 100;
+}
+.selectIns .btn{
+  /* padding: 17px 15px; */
+  width: 6rem;
+  height: 2.5rem;
+  border-radius: 60px;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: bold;
+  /* background: linear-gradient(135deg,  #FFD700, #FF6347, #008000); */
+  /* background: linear-gradient(135deg,  #27ae60,  #19e919,  #FF6347); */
+  background: linear-gradient(135deg, #2ecc71, #09724A);
+
+  cursor: pointer;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+}
+.selectIns .btn:hover {
+  /* background: #2ecc71; */
+  background: linear-gradient(135deg,  #2ecc71,  #2ecc71);
+  color: #fff;
+  transform: scale(1.05);
+  /* border: 1px solid rgb(245, 83, 83); */
+}
+/* fin */
+/* Les tableau */
+
+.mtopp{
+  margin-top: 20px;
+}
+thead th{
+  color: white;
+  background-color: #2ecc71;
+  text-align: center;
+}
+tbody tr:nth-child(odd):hover{
+  background-color: #2ecc701b; /* Couleur jaune pâle pour l'exemple */
+  color: #111; /* Couleur du texte noir pour contraste */
+  /* opacity: 40%; */
+}
+tr, td, th{
+  line-height: normal;
+  border: 0.1px solid #ccc;
+  line-height: normal;
+}
+ thead{
+      font-size: 1rem;
+
+  }
+  tbody{
+      font-size: 0.9rem;
+  }
+  .title , strong, input, select, .selectIns, span{
+    font-size: 0.9em;
+  }
+
+.transformY{
+  transition: 0.1s;
+}
+.transformY:hover{
+  transform: translateY(-3px);
+}
+
+.paginattion .page-link{
+  background: #27ae60;
+}
+.paginattion .page-link .active{
+  background: #27ae60;
+}
+
+/* Fin  */
+
+/* autre style icone */
+/* .btnI-r i{
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  line-height: 1;
+
+}
+.btnI-v i{
+
+  color: white;
+  text-align: center;
+  line-height: 1;
+}
+
+.btn-sm-r {
+  padding: 6px 10px;
+  border-radius: 5px;
+  background-color: #FF3877;
+  opacity: 0.8;
+
+}
+.btn-sm-v {
+  font-size: 14px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #2ecc71;
+  opacity: 0.8;
+
+}
+
+.btn-rouge, .btn-vert {
+
+  margin-left: 5px;
+}
+
+.btn-vert:hover, .btn-rouge:hover {
+  opacity: 100;
+} */
+/* Fin */
+
+
+@media screen and (max-width: 1200px) {
+  .btnI{
+      width: 100%;
+      font-size: 10px;
+      padding: 6px 1px
+   }
+}
+
+
+
+@media  (max-width: 768px) {
+   thead{
+      font-size: 0.9rem;
+
+  }
+  input, select{
+    margin-top: 1rem;
+  }
+  tbody{
+      font-size: 0.9rem;
+  }
+  .title , strong, input, select, .selectIns, span{
+    font-size: 0.8em;
+  }
+
+
+
+
+
+
+  .btnI i{
+    font-size: 10px;
+    margin-top: 8px;
+  }
+
+  .btn-sm {
+    border-radius: 5px;
+    padding: 3px 10px;
+  }
+   .selectIns select{
+    padding: 10px;
+    /* font-size: 0.8em; */
+    width: 21rem;
+    height: 2.3rem;
+    line-height: 1;
+}
+   /* .selectIns input{
+    padding: 10px;
+    font-size: 0.7em;
+    width: 31em;
+    height: 2.3rem;
+    line-height: 1;
+} */
+.print-button{
+  margin-top: 1rem;
+}
+
+.selectIns .btn{
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  height: 2.2rem;
+  width: 6rem;
+  margin-top: 1rem;
+}
+.btn-rouge, .btn-vert {
+
+  margin-left: 0px;
+}
+
+  .title{
+      font-size: 1.3rem;
+  }
+  .w-sm{
+      /* margin-left: 8px; */
+      width: 100%;
+    }
+}
+@media  (max-width: 360px) {
+   thead{
+      font-size: 0.8rem;
+
+  }
+  input, select{
+    margin-top: 1rem;
+  }
+  tbody{
+      font-size: 0.8rem;
+  }
+  .title , strong, input, select, .selectIns, span{
+    font-size: 0.8em;
+  }
+
+
+
+
+
+
+  .btnI i{
+    font-size: 10px;
+    margin-top: 8px;
+  }
+
+  .btn-sm {
+    border-radius: 5px;
+    padding: 3px 10px;
+  }
+   .selectIns select, input{
+    padding: 10px;
+    /* font-size: 0.8em; */
+    width: 16rem;
+    height: 2.3rem;
+    line-height: 1;
+}
+.ifrais{
+  width: 21rem;
+}
+
+.print-button{
+  margin-top: 1rem;
+  width: 16rem;
+}
+
+.selectIns .btn{
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  height: 2rem;
+  width: 4.5rem;
+  margin-top: 1rem;
+}
+.btn-rouge, .btn-vert {
+
+  margin-left: 0px;
+}
+
+  .title{
+      font-size: 1.3rem;
+  }
+  .w-sm{
+      /* margin-left: 8px; */
+      width: 100%;
+    }
+}
+
+
+
+/*  Fin Style */
