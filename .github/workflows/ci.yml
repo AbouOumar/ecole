@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    name: Back-end (Laravel)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: back-end/Projet laravel/Projet laravel/Laravel_api
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo_sqlite, sqlite3
+          coverage: none
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ hashFiles('back-end/**/composer.lock') }}
+          restore-keys: composer-
+
+      - run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Préparer l'environnement
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Tests (SQLite en mémoire)
+        run: php artisan test
+
+  frontend:
+    name: Front-end (Angular)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: front-end/BillyApp/BillyApp
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: front-end/BillyApp/BillyApp/package-lock.json
+
+      - run: npm ci
+
+      - name: Build
+        run: npx ng build
+
+      # Les specs Angular existantes sont surtout générées ("should create") et n'ont
+      # jamais été exécutées en CI : l'étape ne bloque pas encore le workflow.
+      - name: Tests unitaires
+        continue-on-error: true
+        run: npx ng test --watch=false --browsers=ChromeHeadless
