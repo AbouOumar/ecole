@@ -121,4 +121,16 @@ class PayementControllerTest extends TestCase
 
         $this->assertDatabaseHas('payements', ['id' => $payement->id]);
     }
+
+    public function test_le_solde_du_compte_suit_creation_modification_et_suppression(): void
+    {
+        $id = $this->postJson('/api/create-payement', $this->payload())->json('id');
+        $this->assertSame(50000.0, (float) \DB::table('comptes')->where('id', $this->ids['compte'])->value('solde'));
+
+        $this->postJson("/api/update-payement/{$id}", $this->payload(['montant_payement' => 80000]))->assertOk();
+        $this->assertSame(80000.0, (float) \DB::table('comptes')->where('id', $this->ids['compte'])->value('solde'));
+
+        $this->deleteJson("/api/delete-payement/{$id}")->assertOk();
+        $this->assertSame(0.0, (float) \DB::table('comptes')->where('id', $this->ids['compte'])->value('solde'));
+    }
 }

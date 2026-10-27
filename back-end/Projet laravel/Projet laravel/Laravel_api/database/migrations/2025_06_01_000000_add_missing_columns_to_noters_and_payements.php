@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Aligne les tables `noters` et `payements` sur le schéma réellement utilisé
+ * Aligne les tables `noters`, `payements` et `users` sur le schéma réellement utilisé
  * par l'application (voir dbgestionbilly.sql). Chaque colonne n'est ajoutée
  * que si elle est absente : sans effet sur une base déjà à jour.
  */
@@ -31,6 +31,23 @@ return new class extends Migration
             }
             if (!Schema::hasColumn('noters', 'mois')) {
                 $table->string('mois')->nullable();
+            }
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            foreach (['prenomUser', 'nomUser', 'Droit', 'email', 'role', 'photosUser', 'matricule'] as $colonne) {
+                if (!Schema::hasColumn('users', $colonne)) {
+                    $table->string($colonne)->nullable();
+                }
+            }
+            if (!Schema::hasColumn('users', 'telephoneUser')) {
+                $table->string('telephoneUser', 20)->nullable();
+            }
+            if (!Schema::hasColumn('users', 'idDroit')) {
+                $table->unsignedBigInteger('idDroit')->nullable();
+            }
+            if (!Schema::hasColumn('users', 'statut')) {
+                $table->string('statut')->default('actif');
             }
         });
 

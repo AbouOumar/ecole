@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
 
+    /** Valeurs acceptées pour `Droit` et `role` (voir EnsureDroit). */
+    public const DROITS = ['admin', 'DG', 'DE', 'Censeur', 'Comptable', 'Enseignant', 'eleve', 'parent'];
+    public const ROLES = ['admin', 'enseignant', 'eleve'];
+
     /**
      * The attributes that are mass assignable.
      *

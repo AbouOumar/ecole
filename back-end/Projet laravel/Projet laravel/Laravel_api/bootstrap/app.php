@@ -18,7 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     
     ->withMiddleware(function (Middleware $middleware) {
-
+        $middleware->alias([
+            'droit' => \App\Http\Middleware\EnsureDroit::class,
+        ]);
     })
     ->withBindings([
         ExceptionHandler::class => Handler::class

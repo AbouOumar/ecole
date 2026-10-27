@@ -44,14 +44,14 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 
 Route::controller(LoginController::class)->group(function(){
-    Route::post('/login','login_store')->name('login');
+    Route::post('/login','login_store')->middleware('throttle:5,1')->name('login');
 });
 Route::middleware('auth:sanctum')->post('/logout',[LoginController::class,'logout'])->name('logout');
-Route::middleware('auth:sanctum')->post('/createUser',[LoginController::class,'inscription_store'])->name('createUser');
-Route::middleware('auth:sanctum')->get('/updateUserStatut/{id}',[LoginController::class,'updateUserStatut'])->name('updateUserStatut');
+Route::middleware(['auth:sanctum','droit:tout,admin,DG'])->post('/createUser',[LoginController::class,'inscription_store'])->name('createUser');
+Route::middleware(['auth:sanctum','droit:tout,admin,DG'])->get('/updateUserStatut/{id}',[LoginController::class,'updateUserStatut'])->name('updateUserStatut');
 Route::middleware('auth:sanctum')->post('/updateUser/{id}',[LoginController::class,'updateUser'])->name('updateUser');
 
-Route::middleware('auth:sanctum')->get('/listeUser',[LoginController::class,'listeUser'])->name('listeUser');
+Route::middleware(['auth:sanctum','droit:tout,admin,DG'])->get('/listeUser',[LoginController::class,'listeUser'])->name('listeUser');
 
 Route::middleware('auth:sanctum')->get('/voir-fichier/{filename}',[LoginController::class,'showFile'])
 ->where('filename','.*')
@@ -60,7 +60,7 @@ Route::middleware('auth:sanctum')->get('/voir-fichier/{filename}',[LoginControll
 Route::middleware([
     EnsureFrontendRequestsAreStateful::class,
     'auth:sanctum'])->group(function(){
-    Route::controller(EleveController::class)->group(function(){
+    Route::controller(EleveController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-eleve','liste')->name('list-eleve');
         Route::get('eleveId/{id}','show')->name('eleveId');
         Route::get('showMatricule/{matricule}','showMatricule')->name('showMatricule');
@@ -75,7 +75,7 @@ Route::middleware([
         Route::get('actionEleveId/{id}','getactionEleveId')->name('actionEleveId');
     });
 
-    Route::controller(InsReinsController::class)->group(function(){
+    Route::controller(InsReinsController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-ins_reins','liste')->name('list-ins_reins');
         Route::get('ins_reinsId/{id}','show')->name('ins_reinsId');
         Route::post('create-ins_reins',  'create')->name('create-ins_reins');
@@ -87,7 +87,7 @@ Route::middleware([
 
     });
 
-    Route::controller(AnneeScolaireController::class)->group(function(){
+    Route::controller(AnneeScolaireController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-anneeScolaire','liste')->name('list-anneeScolaire');
         Route::get('list-semestreAnnee','semestreAnnee')->name('list-semestreAnnee');
         Route::get('anneeScolaireId/{id}','show')->name('anneeScolaireId');
@@ -96,13 +96,13 @@ Route::middleware([
         Route::delete('delete-anneeScolaire/{id}','delete')->name('delete-anneeScolaire');
     });
 
-    Route::controller(AbsenceController::class)->group(function(){
+    Route::controller(AbsenceController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable,Enseignant')->group(function(){
         Route::get('list-absence','liste')->name('list-absence');
         Route::post('create-absence','create')->name('create-absence');
         Route::delete('delete-absence/{id}','delete')->name('delete-absence');
     });
 
-    Route::controller(CoefficientController::class)->group(function(){
+    Route::controller(CoefficientController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-coefficient','liste')->name('list-coefficient');
         Route::get('list-semestreAnnee','semestreAnnee')->name('list-semestreAnnee');
         Route::get('coefficientId/{id}','show')->name('coefficientId');
@@ -111,7 +111,7 @@ Route::middleware([
         Route::delete('delete-coefficient/{id}','delete')->name('delete-coefficient');
     });
 
-    Route::controller(ClasseController::class)->group(function(){
+    Route::controller(ClasseController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-classe','liste')->name('list-classe');
         Route::get('list-classeDroit/{droit}','classeDroit')->name('list-classeDroit');
         Route::get('personnel/{id}/classes','getClasseParPersonnelId')->name('personnel/{id}/classes');
@@ -124,7 +124,7 @@ Route::middleware([
         Route::get('fraisParClasseId/{id}','fraisParClasse')->name('fraisParClasseId');
     });
 
-    Route::controller(ParentController::class)->group(function(){
+    Route::controller(ParentController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-parent','liste')->name('list-parent');
         Route::get('parentId/{id}','show')->name('parentId');
         Route::get('parentTelephone/{telephone}','showTelephone')->name('parentTelephone');
@@ -139,7 +139,7 @@ Route::middleware([
         Route::get('showTelephoneP/{telephone}','showTelephoneP')->name('showTelephoneP');
     });
 
-    Route::controller(ParentEleveController::class)->group(function(){
+    Route::controller(ParentEleveController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-parentEleve','liste')->name('list-parentEleve');
         Route::get('parentEleveId/{id}','show')->name('parentEleveId');
         Route::post('create-parentEleve',  'create')->name('create-parentEleve');
@@ -147,7 +147,7 @@ Route::middleware([
         Route::delete('delete-parentEleve/{id}','delete')->name('delete-parentEleve');
     });
 
-    Route::controller(PersonnelEleveController::class)->group(function(){
+    Route::controller(PersonnelEleveController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-personnelEleve','liste')->name('list-personnelEleve');
         Route::get('personnelEleveId/{id}','show')->name('personnelEleveId');
         Route::post('create-personnelEleve',  'create')->name('create-personnelEleve');
@@ -155,7 +155,7 @@ Route::middleware([
         Route::delete('delete-personnelEleve/{id}','delete')->name('delete-personnelEleve');
     });
 
-    Route::controller(AccueillitController::class)->group(function(){
+    Route::controller(AccueillitController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-accueillit','liste')->name('list-accueillit');
         Route::get('accueillitId/{id}','show')->name('accueillitId');
         Route::post('create-accueillit',  'create')->name('create-accueillit');
@@ -163,7 +163,7 @@ Route::middleware([
         Route::delete('delete-accueillit/{id}','delete')->name('delete-accueillit');
     });
 
-    Route::controller(ControllerDepart::class)->group(function(){
+    Route::controller(ControllerDepart::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-depart','liste')->name('list-depart');
         Route::get('departId/{id}','show')->name('departId');
         Route::post('create-depart',  'create')->name('create-depart');
@@ -171,7 +171,7 @@ Route::middleware([
         Route::delete('delete-depart/{id}','delete')->name('delete-depart');
     });
 
-    Route::controller(CompteController::class)->group(function(){
+    Route::controller(CompteController::class)->middleware('droit:ecriture,admin,DG,Comptable')->group(function(){
         Route::get('list-compte','liste')->name('list-compte');
         Route::get('compteId/{id}','show')->name('compteId');
         Route::post('create-compte',  'create')->name('create-compte');
@@ -182,7 +182,7 @@ Route::middleware([
         Route::get('liste-balance','liste_balance')->name('list-balance');
     });
 
-    Route::controller(PayementController::class)->group(function(){
+    Route::controller(PayementController::class)->middleware('droit:ecriture,admin,DG,Comptable')->group(function(){
         Route::get('list-payement','liste')->name('list-payement');
         Route::get('payementId/{id}','show')->name('payementId');
         Route::post('create-payement',  'create')->name('create-payement');
@@ -197,7 +197,7 @@ Route::middleware([
 
     });
 
-    Route::controller(RecuPayementController::class)->group(function(){
+    Route::controller(RecuPayementController::class)->middleware('droit:ecriture,admin,DG,Comptable')->group(function(){
         Route::get('list-recu_payement','liste')->name('list-recu_payement');
         Route::get('recu_payementId/{id}','show')->name('recu_payementId');
         Route::post('create-recu_payement',  'create')->name('create-recu_payement');
@@ -205,7 +205,7 @@ Route::middleware([
         Route::delete('delete-recu_payement/{id}','delete')->name('delete-recu_payement');
     });
 
-    Route::controller(ReductionController::class)->group(function(){
+    Route::controller(ReductionController::class)->middleware('droit:ecriture,admin,DG,Comptable')->group(function(){
         Route::get('list-reduction','liste')->name('list-reduction');
         Route::get('reductionId/{id}','show')->name('reductionId');
         Route::post('create-reduction',  'create')->name('create-reduction');
@@ -215,14 +215,14 @@ Route::middleware([
         Route::get('reductionEleveId/{id}','reductionEleveId')->name('reductionEleveId');
     });
 
-    Route::controller(EffectifClasseController::class)->group(function(){
+    Route::controller(EffectifClasseController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-effectifClasse','liste')->name('list-effectifClasse');
         Route::get('effectifClasseId/{id}','show')->name('effectifClasseId');
         Route::post('create-effectifClasse',  'create')->name('create-effectifClasse');
         Route::put('update-effectifClasse/{id}','update')->name('update-effectifClasse');
         Route::delete('delete-effectifClasse/{id}','delete')->name('delete-effectifClasse');
     });
-    Route::controller(PayementSalaireController::class)->group(function(){
+    Route::controller(PayementSalaireController::class)->middleware('droit:ecriture,admin,DG,Comptable')->group(function(){
         Route::get('list-payement_salaire','liste')->name('list-payement_salaire');
         Route::get('payement_salaireId/{id}','show')->name('payement_salaireId');
         Route::post('create-payement_salaire',  'create')->name('create-payement_salaire');
@@ -231,7 +231,7 @@ Route::middleware([
 
     });
     //--------------------
-    Route::controller(PersonnelController::class)->group(function(){
+    Route::controller(PersonnelController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('personnel/{id}/matieres','getMatiereParPersonnelId')->name('personnel/{id}/matieres');
         Route::get('personnel/matieres','getMatiereParPersonnel')->name('personnel/matieres');
         Route::get('list-personnel','liste')->name('list-personnel');
@@ -247,7 +247,7 @@ Route::middleware([
         Route::get('eleve_personnelId/{id}','getElevePersonnelId')->name('eleve_personnelId');
     });
 
-    Route::controller(VolumeHoraireController::class)->group(function(){
+    Route::controller(VolumeHoraireController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-volume_horaire','liste')->name('list-volume_horaire');
         Route::get('volume_horaireId/{id}','show')->name('volume_horaireId');
         Route::post('create-volume_horaire','create')->name('create-volume_horaire');
@@ -255,7 +255,7 @@ Route::middleware([
         Route::delete('delete-volume_horaire/{id}','delete')->name('delete-volume_horaire');
     });
 
-    Route::controller(ActionPersonnelController::class)->group(function(){
+    Route::controller(ActionPersonnelController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-action','liste')->name('list-action');
         Route::get('actionId/{id}','show')->name('actionId');
         Route::post('create-action','create')->name('create-action');
@@ -263,7 +263,7 @@ Route::middleware([
         Route::delete('delete-action/{id}','delete')->name('delete-action');
     });
 
-    Route::controller(MatiereController::class)->group(function(){
+    Route::controller(MatiereController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-matiere','liste')->name('list-matiere');
         Route::get('matiereDroit/{droit}','matiereDroit')->name('matiereDroit');
         Route::get('matiereId/{id}','show')->name('matiereId');
@@ -273,7 +273,7 @@ Route::middleware([
 
         Route::get('getPersonnelMatiere/{id}','getPersonnelMatiere')->name('getPersonnelMatiere');
     });
-    Route::controller(EnseignerController::class)->group(function(){
+    Route::controller(EnseignerController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-enseigner','liste')->name('list-enseigner');
         Route::get('enseignerId/{id}','show')->name('enseignerId');
         Route::post('create-enseigner','create')->name('create-enseigner');
@@ -281,14 +281,14 @@ Route::middleware([
         Route::delete('delete-enseigner/{id}','delete')->name('delete-enseigner');
     });
 
-    Route::controller(AffectationController::class)->group(function(){
+    Route::controller(AffectationController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-affecter','liste')->name('list-affecter');
         Route::get('affecterId/{id}','show')->name('affecterId');
         Route::post('create-affecter','create')->name('create-affecter');
         Route::put('update-affecter/{id}','update')->name('update-affecter');
         Route::delete('delete-affecter/{id}','delete')->name('delete-affecter');
     });
-    Route::controller(NoterController::class)->group(function(){
+    Route::controller(NoterController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable,Enseignant')->group(function(){
         Route::get('list-noter','liste')->name('list-noter');
         Route::get('list-bulletinsDisponibles','bulletinsDisponibles')->name('list-bulletinsDisponibles');
         Route::get('list-bulletinsDisoEleve/{id}','bulletinsDisoEleve')->name('list-bulletinsDisoEleve');
@@ -303,7 +303,7 @@ Route::middleware([
         Route::put('update-noter/{id}','update')->name('update-noter');
         Route::delete('delete-noter/{id}','delete')->name('delete-noter');
     });
-    Route::controller(EmploiTempsController::class)->group(function(){
+    Route::controller(EmploiTempsController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-emploi_temps','liste')->name('list-emploi_temps');
         Route::get('list-emploi_tempsPerson','listeEmploiPerson')->name('list-emploi_tempsPerson');
         Route::get('emploi_tempsId/{id}','showEnploiClasse')->name('emploi_tempsId');
@@ -318,7 +318,7 @@ Route::middleware([
         Route::get('matiereProf_droit/{droit}','matiereProf_droit')->name('matiereProf_droit');
     });
 
-    Route::controller(SalaireController::class)->group(function(){
+    Route::controller(SalaireController::class)->middleware('droit:ecriture,admin,DG,Comptable')->group(function(){
         Route::get('list-salaire','liste')->name('list-salaire');
         Route::get('salaireId/{id}','show')->name('salaireId');
         Route::post('create-salaire','create')->name('create-salaire');
@@ -329,14 +329,14 @@ Route::middleware([
         Route::get('getEtatSalaireGlobal','getEtatSalaireGlobal')->name('getEtatSalaireGlobal');
 
     });
-    Route::controller(FonctionController::class)->group(function(){
+    Route::controller(FonctionController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-fonction','liste')->name('list-fonction');
         Route::get('fonctionId/{id}','show')->name('fonctionId');
         Route::post('create-fonction','create')->name('create-fonction');
         Route::put('update-fonction/{id}','update')->name('update-fonction');
         Route::delete('delete-fonction/{id}','delete')->name('delete-fonction');
     });
-    Route::controller(FonctionPersonnelController::class)->group(function(){
+    Route::controller(FonctionPersonnelController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-fonction_personnel','liste')->name('list-fonction_personnel');
         Route::get('show-fonction_personnel/{matricule}','showMatricule')->name('show-fonction_personnel');
         Route::get('fonction_personnelId/{id}','show')->name('fonction_personnelId');
@@ -344,7 +344,7 @@ Route::middleware([
         Route::post('update-fonction_personnel/{id}','update')->name('update-fonction_personnel');
         Route::delete('delete-fonction_personnel/{id}','delete')->name('delete-fonction_personnel');
     });
-    Route::controller(DepenseController::class)->group(function(){
+    Route::controller(DepenseController::class)->middleware('droit:ecriture,admin,DG,Comptable')->group(function(){
         Route::get('list-depense','liste')->name('list-depense');
         Route::get('list-recette','recette')->name('list-recette');
         Route::get('depenseId/{id}','show')->name('depenseId');
@@ -357,7 +357,7 @@ Route::middleware([
         Route::get('list-comparaisonDepense/{annee}','comparaisonDepense')->name('list-comparaisonDepense');
     });
 
-    Route::controller(TypeDepenseController::class)->group(function(){
+    Route::controller(TypeDepenseController::class)->middleware('droit:ecriture,admin,DG,Comptable')->group(function(){
         Route::get('list-type_depense','liste')->name('list-type_depense');
         Route::get('list-type_recette','listeTypeRecette')->name('list-type_recette');
         Route::get('type_depenseId/{id}','show')->name('type_depenseId');
@@ -367,7 +367,7 @@ Route::middleware([
     });
 
 
-    Route::controller(ficheRenseignementController::class)->group(function(){
+    Route::controller(ficheRenseignementController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-ficheRenseignement','liste')->name('list-ficheRenseignement');
         Route::get('ficheRenseignementId/{id}','show')->name('ficheRenseignementId');
         Route::post('create-ficheRenseignement','create')->name('create-ficheRenseignement');

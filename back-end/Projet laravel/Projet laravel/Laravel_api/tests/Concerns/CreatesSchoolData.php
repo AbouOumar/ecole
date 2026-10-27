@@ -11,9 +11,9 @@ use Laravel\Sanctum\Sanctum;
  */
 trait CreatesSchoolData
 {
-    protected function authenticate(): void
+    protected function authenticate(string $droit = 'DG', int $id = 1): void
     {
-        Sanctum::actingAs((new User())->forceFill(['id' => 1]));
+        Sanctum::actingAs((new User())->forceFill(['id' => $id, 'Droit' => $droit]));
     }
 
     /** @return array{annee:int, classe:int, eleve:int, matiere:int, compte:int} */

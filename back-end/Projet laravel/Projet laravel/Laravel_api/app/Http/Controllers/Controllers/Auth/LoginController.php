@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -19,11 +20,11 @@ class LoginController extends Controller
             'prenomUser'=>'required',
             'nomUser'=>'required',
             'telephoneUser'=>'required',
-            'Droit'=>'required',
+            'Droit'=>['required', Rule::in(User::DROITS)],
             'idDroit'=>'required',
             'password'=>'required',
             'email'=>'required',
-            'role'=>'required',
+            'role'=>['required', Rule::in(User::ROLES)],
             'photosUser'=>'required',
             'matricule',
             'statut',
@@ -67,6 +68,13 @@ class LoginController extends Controller
         ]);
 
         $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message' => 'cet utilisateur n existe pas'], 404);
+        }
+        $acteur = $request->user();
+        if ((int) $acteur->id !== (int) $user->id && !in_array($acteur->Droit, ['admin', 'DG'], true)) {
+            return response()->json(['message' => 'Accès non autorisé'], 403);
+        }
         // 🔹 Vérifier si une nouvelle image a été envoyée
         if ($request->hasFile('photosUser')) {
             // Supprimer l'ancienne photosUser si elle existe
