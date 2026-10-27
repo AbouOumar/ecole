@@ -20,7 +20,6 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/login`, { email, password }).pipe(
       tap((res: any) => {
         localStorage.setItem('token', res.token);
-        console.log('token:'+localStorage.getItem('token'))
         localStorage.setItem('user', JSON.stringify(res.user));
         this.currentUser=res.user;
       })
@@ -66,7 +65,6 @@ getUser() {
 }
 
   getHeaders(): HttpHeaders {
-    console.log('token:'+localStorage.getItem('token'))
     const token = localStorage.getItem('token') || '';
     return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
