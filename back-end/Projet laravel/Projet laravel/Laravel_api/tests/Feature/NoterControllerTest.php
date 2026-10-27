@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class NoterControllerTest extends TestCase
 {
-    use RefreshDatabase, CreatesSchoolData;
+    use CreatesSchoolData, RefreshDatabase;
 
     private array $ids;
 
@@ -123,7 +123,7 @@ class NoterControllerTest extends TestCase
     {
         foreach (app('router')->getRoutes() as $route) {
             if (str_ends_with($route->getActionName(), 'NoterController@enregistrerNote')) {
-                return '/' . ltrim($route->uri(), '/');
+                return '/'.ltrim($route->uri(), '/');
             }
         }
         $this->fail('Route enregistrerNote introuvable');

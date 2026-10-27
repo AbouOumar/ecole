@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class AutorisationTest extends TestCase
 {
-    use RefreshDatabase, CreatesSchoolData;
+    use CreatesSchoolData, RefreshDatabase;
 
     private function paiement(array $ids): array
     {
@@ -89,7 +89,7 @@ class AutorisationTest extends TestCase
         $this->getJson('/api/listeUser')->assertOk();
     }
 
-    public function test_createUser_refuse_un_droit_inconnu(): void
+    public function test_create_user_refuse_un_droit_inconnu(): void
     {
         $this->authenticate('DG');
 

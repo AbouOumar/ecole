@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\gestion_scolaire;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Concerns\PaginationOptionnelle;
 use App\Http\Requests\gestion_scolaire\NoterRequest;
 use App\Models\AnneeScolaire;
 use App\Models\Classe;
@@ -12,6 +13,7 @@ use App\Models\Eleve;
 use App\Models\ficheRenseignement;
 use App\Models\Ins_reins;
 use App\Models\Noter;
+use App\Services\NoterService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
@@ -19,9 +21,10 @@ use Illuminate\Support\Facades\DB;
 
 class NoterController extends Controller
 {
-    public function liste(){
-        $noters = Noter::with('eleve')->with('matiere')->get();
-        return response()->json($noters);
+    use PaginationOptionnelle;
+
+    public function liste(Request $request){
+        return $this->listeOuPage(Noter::with('eleve', 'matiere'), $request);
     }
 
     public function create(NoterRequest $request){
@@ -29,42 +32,9 @@ class NoterController extends Controller
         return response()->json(['message'=>'Enregistrement effectué avec succès']);
     }
 
-    public function enregistrerNote(Request $request) {
-        // return response()->json(['message' => 'Note enregistrée avec succès','note'=>$request->type_note]);
+    public function enregistrerNote(Request $request, NoterService $service) {
+        $note = $service->enregistrer($request->all());
 
-        
-        $note = Noter::where([
-            'eleve_id' => $request->eleve_id,
-            'classe_id' => $request->classe_id,
-            'matiere_id' => $request->matiere_id,
-            'annee_scolaire_id' => $request->annee_scolaire_id,
-            'semestre' => $request->semestre,
-            'mois' => $request->mois,
-            'type_note'=> $request->type_note,
-        ])->first();
-        
-        if ($note) {
-            // Met à jour uniquement les champs présents dans la requête
-            $note->update(array_filter([
-                'note_orale' => $request->note_orale,
-                'note_cours' => $request->note_cours,
-                'note_composition' => $request->note_composition,
-            ], fn($val) => !is_null($val)));
-        } else {
-            Noter::create([
-                'eleve_id' => $request->eleve_id,
-                'classe_id' => $request->classe_id,
-                'matiere_id' => $request->matiere_id,
-                'annee_scolaire_id' => $request->annee_scolaire_id,
-                'semestre' => $request->semestre,
-                'mois' => $request->mois,
-                'type_note'=> $request->type_note,
-                'note_orale' => $request->note_orale,
-                'note_cours' => $request->note_cours,
-                'note_composition' => $request->note_composition,
-            ]);
-        }
-    
         return response()->json(['message' => 'Note enregistrée avec succès','note'=>$note]);
     }
 

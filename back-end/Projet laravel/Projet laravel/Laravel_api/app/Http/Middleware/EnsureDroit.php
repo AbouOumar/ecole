@@ -34,7 +34,7 @@ class EnsureDroit
 
         $user = $request->user();
 
-        if (!$user || !in_array($user->Droit, $droits, true)) {
+        if (! $user || ! in_array($user->Droit, $droits, true)) {
             return response()->json(['message' => 'Accès non autorisé'], 403);
         }
 

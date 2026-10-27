@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\gestion_eleve;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Concerns\PaginationOptionnelle;
 use App\Http\Requests\gestion_eleve\PayementRequest;
 use App\Models\AnneeScolaire;
 use App\Models\Classe;
@@ -14,17 +15,19 @@ use App\Models\Ins_reins;
 use App\Models\Payement;
 use App\Models\PayementSalaire;
 use App\Models\Reduction;
+use App\Services\PayementService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PayementController extends Controller
 {
-    public function liste()
+    use PaginationOptionnelle;
+
+    public function liste(Request $request)
     {
         //methode pour voir la liste des payements
-        $payements = Payement::with('eleve')->with('classe')->with('compte')->orderBy('id','desc')->get();
-        return response()->json( $payements );
+        return $this->listeOuPage(Payement::with('eleve', 'classe', 'compte')->orderBy('id','desc'), $request);
     }
     public function listePayementDetail()
     {
@@ -127,25 +130,10 @@ class PayementController extends Controller
         return response()->json(['data'=>$result,'anneEncours'=>$idAnneeScolaire]);
     }
     
-    public function create(PayementRequest $request)
+    public function create(PayementRequest $request, PayementService $service)
     {
-        //methode pour enregistrer un payement
-        $idAnneeScolaire = AnneeScolaire::latest()->first();
-                $payement =  $request->validated();
-                $payement = Payement::create([
-                    'eleve_id'=>$payement['eleve_id'],
-                    'classe_id'=>$payement['classe_id'],
-                    'annee_scolaire_id'=>$idAnneeScolaire['id'],
-                    'compte_id'=>$payement['compte_id'],
-                    'tranche'=>$payement['tranche'],
-                    'montant_payement'=>$payement['montant_payement'],
-                    'id_action_ecolage'=>$payement['id_action_ecolage'],
-                ]);
-            $compte =Compte::find($payement['compte_id']);
-            if($compte){
-                $compte['solde']+=$payement['montant_payement'];
-            }
-            $compte->update([$compte]);
+        $payement = $service->enregistrer($request->validated());
+
         return response()->json(['message'=>'Enregistrement effectuer avec succès','id'=>$payement->id]);
     }
 
@@ -158,57 +146,36 @@ class PayementController extends Controller
         }
         return response()->json($payement);
     }
-    public function update(PayementRequest $request, string $id)
+
+    public function update(PayementRequest $request, string $id, PayementService $service)
     {
-           //methode pour modifier un payement
         $payement = Payement::find($id);
-        
+
         if (!$payement) {
             return response()->json(['message' => 'Ce payement n\'existe pas'], 201);
-        }elseif($payement->id_action_ecolage == 1){
+        }
+        if ($service->estEcolage($payement)) {
             return response()->json(['message' => 'Ce payement est un ecolage veillez supprimez l\'ecolage'], 201);
         }
 
-        $compte =Compte::find($payement['compte_id']);
-        $compteN =Compte::find($request['compte_id']);
-        if($compte){
+        $service->modifier($payement, $request->validated());
 
-            if($payement['compte_id']==$request['compte_id']){
-                $compteN['solde']+=$request['montant_payement']-$payement['montant_payement'];
-            }else{
-                $compteN['solde']+=$request['montant_payement'];
-                $compte['solde']-=$payement['montant_payement'];
-            }
-
-            $compte->update([$compte]);
-            $compteN->update([$compteN]);
-        }
-
-        $payement->update($request->validated());
-    
         return response()->json(['message' => 'Modification effectué avec succès']);
     }
 
- 
-    public function delete(string $id)
+    public function delete(string $id, PayementService $service)
     {
-        //methode pour supprimer un payement
         $payement = Payement::find($id);
-    
+
         if (!$payement) {
             return response()->json(['message' => 'Ce payement n\'existe pas'], 201);
-        }elseif($payement->id_action_ecolage == 1){
+        }
+        if ($service->estEcolage($payement)) {
             return response()->json(['message' => 'Ce payement est un ecolage veillez supprimez l\'ecolage'], 201);
         }
 
-            $compte =Compte::find($payement['compte_id']);
-            if($compte){
-                $compte['solde']-=$payement['montant_payement'];
-            }
-            $compte->update([$compte]);
-    
-        $payement->delete();
-    
+        $service->supprimer($payement);
+
         return response()->json(['message' => 'Suppression effectué avec succès']);
     }
 

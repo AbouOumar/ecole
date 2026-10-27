@@ -8,6 +8,7 @@ use App\Models\Compte;
 use App\Models\PayementSalaire;
 use App\Models\Salaire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PayementSalaireController extends Controller
 {
@@ -28,14 +29,15 @@ class PayementSalaireController extends Controller
         
 
         
-        $payement_salaire = PayementSalaire::create($request->validated());
-        if($payement_salaire){
+        DB::transaction(function () use ($request) {
+            PayementSalaire::create($request->validated());
+
             $compte=Compte::find($request['compte_id']);
             if($compte){
                 $compte['solde']-=$request['montant'];
-                $compte->update([$compte]);
+                $compte->save();
             }
-        }
+        });
         return response()->json(['message'=>'Enregistrement effectuer avec succès']);
     }
 
@@ -72,15 +74,17 @@ class PayementSalaireController extends Controller
         }
         $salaire= Salaire::find($payement_salaire['salaire_id']);
         if($salaire){
-            $salaire->statut="non payé";
-            $salaire->update();
+            DB::transaction(function () use ($salaire, $payement_salaire) {
+                $salaire->statut="non payé";
+                $salaire->save();
 
-            $compte=Compte::find($payement_salaire['compte_id']);
-            if($compte){
-                $compte['solde']+=$payement_salaire['montant'];
-                $compte->update([$compte]);
-            }
-            $payement_salaire->delete();
+                $compte=Compte::find($payement_salaire['compte_id']);
+                if($compte){
+                    $compte['solde']+=$payement_salaire['montant'];
+                    $compte->save();
+                }
+                $payement_salaire->delete();
+            });
         }
         return response()->json(['message' => 'Annulation effectué avec succès']);
     }

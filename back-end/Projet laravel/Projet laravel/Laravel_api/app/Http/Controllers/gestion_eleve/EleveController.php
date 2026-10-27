@@ -4,6 +4,7 @@ namespace App\Http\Controllers\gestion_eleve;
 
 use App\ClassesTransfereData\ActionsEleves;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Concerns\PaginationOptionnelle;
 use App\Http\Requests\gestion_eleve\EleveRequest;
 use App\Http\Requests\gestion_eleve\LienParenteRequest;
 use App\Http\Requests\gestion_eleve\ParentEleveRequest;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Validator;
 
 class EleveController extends Controller
 {
+    use PaginationOptionnelle;
+
 
 
     public function enregistrer(EleveRequest $requesteleve,ParentRequest $requestparent,LienParenteRequest $requestlien){
@@ -131,12 +134,10 @@ class EleveController extends Controller
         return response()->json([$eleve]);
     }
 
-    public function liste()
+    public function liste(Request $request)
     {
         //methode pour voir la liste des eleves
-        $eleves=Eleve::with('classe')->get();
-
-        return response()->json($eleves);
+        return $this->listeOuPage(Eleve::with('classe'), $request);
     }
 
     public function EleveClasse($droit)

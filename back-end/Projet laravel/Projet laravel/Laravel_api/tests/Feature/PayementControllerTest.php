@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class PayementControllerTest extends TestCase
 {
-    use RefreshDatabase, CreatesSchoolData;
+    use CreatesSchoolData, RefreshDatabase;
 
     private array $ids;
 
@@ -132,5 +132,21 @@ class PayementControllerTest extends TestCase
 
         $this->deleteJson("/api/delete-payement/{$id}")->assertOk();
         $this->assertSame(0.0, (float) \DB::table('comptes')->where('id', $this->ids['compte'])->value('solde'));
+    }
+
+    public function test_la_liste_est_paginee_seulement_sur_demande(): void
+    {
+        foreach (range(1, 3) as $i) {
+            $this->creerPayement();
+        }
+
+        // par défaut : tableau complet (format attendu par le front)
+        $this->getJson('/api/list-payement')->assertOk()->assertJsonCount(3);
+
+        $this->getJson('/api/list-payement?per_page=2')
+            ->assertOk()
+            ->assertJsonPath('total', 3)
+            ->assertJsonPath('per_page', 2)
+            ->assertJsonCount(2, 'data');
     }
 }
