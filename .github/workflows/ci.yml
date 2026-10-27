@@ -35,6 +35,10 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
+      # Le code historique n'est pas encore formaté : le lint ne porte que sur le code récent.
+      - name: Lint (Pint) — code récent
+        run: vendor/bin/pint --test app/Services app/Http/Middleware app/Http/Controllers/Concerns tests
+
       - name: Tests (SQLite en mémoire)
         run: php artisan test
 
