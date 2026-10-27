@@ -92,7 +92,24 @@ BillyApp/src/
 
 Quatre espaces selon le profil : **administrateur**, **enseignant**, **élève** et **visiteur**.
 
-## Installation
+## Lancement rapide avec Docker
+
+```bash
+docker compose up
+```
+
+Démarre MySQL (la base `dbgestionbilly` est importée depuis `dbgestionbilly.sql`), l'API sur http://localhost:8000/api et le front sur http://localhost:4200.
+
+## Tests et intégration continue
+
+```bash
+cd "back-end/Projet laravel/Projet laravel/Laravel_api"
+php artisan test        # SQLite en mémoire, aucune base MySQL requise
+```
+
+Le workflow `.github/workflows/ci.yml` exécute à chaque push : les tests Laravel (PHP 8.2) et le build Angular (Node 20).
+
+## Installation manuelle
 
 ### Prérequis
 

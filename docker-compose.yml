@@ -1,0 +1,58 @@
+# Lancement complet du projet : docker compose up
+#   Front-end : http://localhost:4200
+#   API       : http://localhost:8000/api
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: dbgestionbilly
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+      # Importé automatiquement au premier démarrage
+      - "./back-end/Projet laravel/Projet laravel/dbgestionbilly.sql:/docker-entrypoint-initdb.d/dbgestionbilly.sql:ro"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+    working_dir: /var/www/html
+    volumes:
+      - "./back-end/Projet laravel/Projet laravel/Laravel_api:/var/www/html"
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: dbgestionbilly
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "composer install --no-interaction &&
+             ([ -f .env ] || cp .env.example .env) &&
+             (grep -q '^APP_KEY=.\+' .env || php artisan key:generate) &&
+             php artisan config:clear &&
+             php artisan serve --host=0.0.0.0 --port=8000"
+
+  front:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - "./front-end/BillyApp/BillyApp:/app"
+      - front_node_modules:/app/node_modules
+    ports:
+      - "4200:4200"
+    command: sh -c "npm ci && npx ng serve --host 0.0.0.0 --port 4200"
+
+volumes:
+  db_data:
+  front_node_modules:
