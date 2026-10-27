@@ -46,10 +46,10 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 Route::controller(LoginController::class)->group(function(){
     Route::post('/login','login_store')->middleware('throttle:5,1')->name('login');
 });
-Route::middleware('auth:sanctum')->post('/logout',[LoginController::class,'logout'])->name('logout');
+Route::middleware(['auth:sanctum','acces'])->post('/logout',[LoginController::class,'logout'])->name('logout');
 Route::middleware(['auth:sanctum','droit:tout,admin,DG'])->post('/createUser',[LoginController::class,'inscription_store'])->name('createUser');
 Route::middleware(['auth:sanctum','droit:tout,admin,DG'])->get('/updateUserStatut/{id}',[LoginController::class,'updateUserStatut'])->name('updateUserStatut');
-Route::middleware('auth:sanctum')->post('/updateUser/{id}',[LoginController::class,'updateUser'])->name('updateUser');
+Route::middleware(['auth:sanctum','acces'])->post('/updateUser/{id}',[LoginController::class,'updateUser'])->name('updateUser');
 
 Route::middleware(['auth:sanctum','droit:tout,admin,DG'])->get('/listeUser',[LoginController::class,'listeUser'])->name('listeUser');
 
@@ -59,7 +59,8 @@ Route::middleware('auth:sanctum')->get('/voir-fichier/{filename}',[LoginControll
 //Routes proteger par sanctum
 Route::middleware([
     EnsureFrontendRequestsAreStateful::class,
-    'auth:sanctum'])->group(function(){
+    'auth:sanctum',
+    'acces'])->group(function(){
     Route::controller(EleveController::class)->middleware('droit:ecriture,admin,DG,DE,Censeur,Comptable')->group(function(){
         Route::get('list-eleve','liste')->name('list-eleve');
         Route::get('eleveId/{id}','show')->name('eleveId');

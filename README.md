@@ -113,6 +113,7 @@ Le workflow `.github/workflows/ci.yml` exécute à chaque push : le lint Pint (c
 
 - Authentification par jeton Sanctum (expiration : `SANCTUM_EXPIRATION`, 720 min par défaut) ; `/login` est limité à 5 tentatives par minute.
 - Le middleware `droit` (`app/Http/Middleware/EnsureDroit.php`) contrôle le rôle (`users.Droit`) côté serveur : finances réservées à `admin, DG, Comptable` ; élèves, personnel et configuration à l'administration ; notes et absences à l'administration et aux enseignants ; gestion des utilisateurs à `admin` et `DG`. La lecture reste ouverte à tout utilisateur connecté.
+- Les comptes `eleve` et `parent` sont limités à leurs propres données (middleware `acces`, `EnsureAccesPersonnel.php`) : élève = `users.idDroit`, parent = ses enfants via `parent_eleves`. Toute route absente de la liste blanche leur renvoie 403.
 - La logique des paiements et des notes est dans `app/Services/` ; les mouvements d'argent sont en transaction.
 - Les listes `list-eleve`, `list-payement` et `list-noter` acceptent `?per_page=N` (réponse paginée) ; sans ce paramètre, elles renvoient la liste complète.
 - Après modification des routes, vider le cache : `php artisan route:clear`.

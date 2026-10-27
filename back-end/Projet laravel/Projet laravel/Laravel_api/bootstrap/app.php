@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'droit' => \App\Http\Middleware\EnsureDroit::class,
+            'acces' => \App\Http\Middleware\EnsureAccesPersonnel::class,
         ]);
     })
     ->withBindings([

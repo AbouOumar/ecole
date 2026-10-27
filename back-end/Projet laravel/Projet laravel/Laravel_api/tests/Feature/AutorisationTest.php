@@ -26,12 +26,12 @@ class AutorisationTest extends TestCase
         $this->postJson('/api/create-payement', [])->assertStatus(401);
     }
 
-    public function test_un_eleve_peut_lire_mais_pas_ecrire_les_finances(): void
+    public function test_un_eleve_n_accede_ni_en_lecture_ni_en_ecriture_aux_finances(): void
     {
         $ids = $this->seedSchool();
         $this->authenticate('eleve');
 
-        $this->getJson('/api/list-payement')->assertOk();
+        $this->getJson('/api/list-payement')->assertStatus(403);
         $this->postJson('/api/create-payement', $this->paiement($ids))->assertStatus(403);
         $this->assertDatabaseCount('payements', 0);
     }
@@ -60,10 +60,11 @@ class AutorisationTest extends TestCase
 
     public function test_les_lectures_en_post_restent_ouvertes_a_un_eleve(): void
     {
-        $this->seedSchool();
+        $ids = $this->seedSchool();
         $this->authenticate('eleve');
+        \Laravel\Sanctum\Sanctum::actingAs((new User)->forceFill(['id' => 1, 'Droit' => 'eleve', 'idDroit' => $ids['eleve']]));
 
-        $this->assertNotSame(403, $this->postJson('/api/bulletin_eleve', [])->getStatusCode());
+        $this->assertNotSame(403, $this->postJson('/api/bulletin_eleve', ['eleve_id' => $ids['eleve']])->getStatusCode());
     }
 
     public function test_le_comptable_encaisse(): void

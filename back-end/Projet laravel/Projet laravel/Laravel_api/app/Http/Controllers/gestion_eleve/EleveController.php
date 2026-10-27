@@ -305,7 +305,7 @@ class EleveController extends Controller
     {
         //afficher les actions d'un eleve dans la base de donnée
 
-        $eleve = Eleve::find($id)->first();
+        $eleve = Eleve::find($id);
         if (!$eleve) {
             return response()->json(['message' => 'Cet élève n\'existe pas'], 201);
         }
